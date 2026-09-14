@@ -140,7 +140,17 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="uppgift1_hasardspel.cpp" />
+    <ClCompile Include="Blackjack.cpp" />
+    <ClCompile Include="DiceGame.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="OddOrEven.cpp" />
+    <ClCompile Include="Shared.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Blackjack.h" />
+    <ClInclude Include="DiceGame.h" />
+    <ClInclude Include="OddOrEven.h" />
+    <ClInclude Include="Shared.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
