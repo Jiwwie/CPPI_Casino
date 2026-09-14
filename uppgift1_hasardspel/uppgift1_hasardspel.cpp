@@ -5,37 +5,30 @@
 std::random_device seed;
 std::mt19937 rndEngine(seed());
 
+struct Dice
+{
+    int one;
+    int two;
+};
+
 void ShowMainMenu();
-void ShowGameIntro(int anIntroKey, int aPlayerWallet);
+void ShowGameIntro(int anIntroKey, int aPlayerWallet, int aRewardMult);
 void ClearInputBuffer();
 void UpdatePlayerWallet(int aBetAmount, int aMultiplier, char anOperator, int& aPlayerWallet);
-void UpdateStatistics(int aStat);
+void UpdateStatistics(int aStat, int someStats[]);
 int GetPlayerNum(int aPlayerNum, int aMax, int aMin);
 int GetPlayerBet(int aPlayerNum, int aMax, int aMin);
-int GetGameMenu(int aGameNum, int aTotalEarnings, int aPlayerWallet);
+int GetGameMenu(int aGameNum, int aTotalEarnings, int aPlayerWallet, int aRewardMult);
 int CheckIfBanned(int aTotalEarnings);
 void TotalEarningsMessage(int aTotalEarnings);
-void WriteStat(int aPlace);
-void RollDice();
+void WriteStat(int aPlace, int someStats[]);
+void RollDice(Dice& aDie);
 int DrawCard();
-void PlayDiceGame(bool& aGameRunning, int& aPlayerWallet);
-void PlayOddOrEven(bool& aGameRunning, int& aPlayerWallet);
-void PlayBlackjack(bool& aGameRunning, int& aPlayerWallet);
-void ShowStatistics();
+void PlayDiceGame(bool& aGameRunning, int& aPlayerWallet, int aRewardMult, int aBetAmount, int someStats[]);
+void PlayOddOrEven(bool& aGameRunning, int& aPlayerWallet, int aRewardMult, int aBetAmount, int someStats[]);
+void PlayBlackjack(bool& aGameRunning, int& aPlayerWallet, int aRewardMult, int aBetAmount, int someStats[]);
+void ShowStatistics(int someStats[]);
 
-int globalBetAmount = 0;
-int globalRewardMult = 2;
-int globalDieOne = 0;
-int globalDieTwo = 0;
-
-int globalStats[5] =
-{
-   0,
-   0,
-   0,
-   0,
-   0
-};
 
 //MAIN_______________________________________________________________________________________________________
 int main()
@@ -49,9 +42,20 @@ int main()
 		ActiveGame_LeaveCasino = 5
     };
 
+    int stats[5] =
+    {
+       0,
+       0,
+       0,
+       0,
+       0
+    };
+
     int activeGame = 0;
     bool gameRunning = true;
     int playerWallet = 1000;
+    int rewardMult = 2;
+    int betAmount = 0;
 
     while (gameRunning)
     {
@@ -63,22 +67,22 @@ int main()
         {
             case ActiveGame_DiceGame:
             {
-                PlayDiceGame(gameRunning, playerWallet);
+                PlayDiceGame(gameRunning, playerWallet, rewardMult, betAmount, stats);
                 break;
             }
             case ActiveGame_OddOrEven:
             {
-                PlayOddOrEven(gameRunning, playerWallet);
+                PlayOddOrEven(gameRunning, playerWallet, rewardMult, betAmount, stats);
                 break;
             }
             case ActiveGame_Blackjack:
             {
-                PlayBlackjack(gameRunning, playerWallet);
+                PlayBlackjack(gameRunning, playerWallet, rewardMult, betAmount, stats);
                 break;
             }
             case ActiveGame_Statistics:
             {
-                ShowStatistics();
+                ShowStatistics(stats);
                 break;
             }
             case ActiveGame_LeaveCasino:
@@ -119,7 +123,7 @@ void ShowMainMenu()
     std::cout << "5. Leave Casino\n" << std::endl;
 }
 
-void ShowGameIntro(int anIntroKey, int aPlayerWallet)
+void ShowGameIntro(int anIntroKey, int aPlayerWallet, int aRewardMult)
 {
     system("cls");
     std::cout << " =======================\n";
@@ -127,7 +131,7 @@ void ShowGameIntro(int anIntroKey, int aPlayerWallet)
     std::cout << " =======================\n\n";
 
     std::cout << "You have " << aPlayerWallet << "kr \n";
-    std::cout << "Reward multiplier: X" << globalRewardMult << "\n\n";
+    std::cout << "Reward multiplier: X" << aRewardMult << "\n\n";
 
     switch (anIntroKey)
     {
@@ -192,13 +196,13 @@ void UpdatePlayerWallet(int aBetAmount, int aMultiplier, char anOperator, int& a
     }
 }
 
-void UpdateStatistics(int aStat)
+void UpdateStatistics(int aStat, int someStats[])
 {
     for (int i = 4; i > 0; i--)
     {
-        globalStats[i] = globalStats[i - 1];
+        someStats[i] = someStats[i - 1];
     }
-    globalStats[0] = aStat;
+    someStats[0] = aStat;
 }
 
 int GetPlayerNum(int aPlayerNum, int aMax, int aMin)
@@ -249,7 +253,7 @@ int GetPlayerBet(int aPlayerNum, int aMax, int aMin)
     return aPlayerNum;
 }
 
-int GetGameMenu(int aGameNum, int aTotalEarnings, int aPlayerWallet)
+int GetGameMenu(int aGameNum, int aTotalEarnings, int aPlayerWallet, int aRewardMult)
 {
     bool menu = true;
     int menuChoice = 0;
@@ -259,7 +263,7 @@ int GetGameMenu(int aGameNum, int aTotalEarnings, int aPlayerWallet)
     {
         system("cls");
         std::cout << "You have " << aPlayerWallet << "kr \n";
-        std::cout << "Reward multiplier: X" << globalRewardMult << "\n";
+        std::cout << "Reward multiplier: X" << aRewardMult << "\n";
         TotalEarningsMessage(aTotalEarnings);
 
         std::cout << "\n\nGAME MENU\n";
@@ -352,27 +356,28 @@ void TotalEarningsMessage(int aTotalEarnings)
     }
 }
 
-void WriteStat(int aPlace)
+void WriteStat(int aPlace, int someStats[])
 {
-    if (globalStats[aPlace] == 0)
+    if (someStats[aPlace] == 0)
     {
         std::cout << aPlace + 1 << ". " << "No stat" << std::endl;
     }
-    else if (globalStats[aPlace] == 1)
+    else if (someStats[aPlace] == 1)
     {
         std::cout << aPlace + 1 << ". " << "Win" << std::endl;
     }
-    else if (globalStats[aPlace] == 2)
+    else if (someStats[aPlace] == 2)
     {
         std::cout << aPlace + 1 << ". " << "Loss" << std::endl;
     }
 }
 
-void RollDice()
+void RollDice(Dice& aDie)
 {
     std::uniform_int_distribution<int> rndDist(1, 6);
-    globalDieOne = rndDist(rndEngine);
-    globalDieTwo = rndDist(rndEngine);
+
+    aDie.one = rndDist(rndEngine);
+    aDie.two = rndDist(rndEngine);
 }
 
 int DrawCard()
@@ -381,26 +386,27 @@ int DrawCard()
     return rndDist(rndEngine);
 }
 
-void ShowStatistics()
+void ShowStatistics(int someStats[])
 {
     system("cls");
     std::cout << "======================" << std::endl;
     std::cout << "Recent game logs:" << std::endl;
-    WriteStat(0);
-    WriteStat(1);
-    WriteStat(2);
-    WriteStat(3);
-    WriteStat(4);
+    WriteStat(0, someStats);
+    WriteStat(1, someStats);
+    WriteStat(2, someStats);
+    WriteStat(3, someStats);
+    WriteStat(4, someStats);
     std::cout << "======================" << std::endl;
     std::cout << "\n\n";
     system("pause");
 }
 
-void PlayDiceGame(bool& gameRunning, int& aPlayerWallet)
+void PlayDiceGame(bool& gameRunning, int& aPlayerWallet, int aRewardMult, int aBetAmount, int someStats[])
 {
     int playerGuess = 0;
     static signed int totalEarnings = 0;
     bool diceGame = true;
+	Dice die = {};
 
     while (diceGame)
     {
@@ -411,58 +417,58 @@ void PlayDiceGame(bool& gameRunning, int& aPlayerWallet)
             system("pause");
             break;
         }
-        else if (!(diceGame = GetGameMenu(3, totalEarnings, aPlayerWallet)))
+        else if (!(diceGame = GetGameMenu(3, totalEarnings, aPlayerWallet, aRewardMult)))
         {
             break;
         }
 
-        globalRewardMult = 2;
+        aRewardMult = 2;
 
-        ShowGameIntro(1, aPlayerWallet);
+        ShowGameIntro(1, aPlayerWallet, aRewardMult);
         TotalEarningsMessage(totalEarnings);
 
-        globalBetAmount = GetPlayerBet(globalBetAmount, aPlayerWallet, 1);
+        aBetAmount = GetPlayerBet(aBetAmount, aPlayerWallet, 1);
 
         system("cls");
         std::cout << "\nThe figure accepts your offer. \n";
-        if (globalBetAmount == aPlayerWallet)
+        if (aBetAmount == aPlayerWallet)
         {
             std::cout << "\n***HIGH STAKES***\n";
             std::cout << "Betting your whole wallet increases your reward multiplier to X3.\n";
-            globalRewardMult = 3;
+            aRewardMult = 3;
         }
         std::cout << "_______________________________ \n";
 
 
         std::cout << "What is your guess? (2-12)  ";
         playerGuess = GetPlayerNum(playerGuess, 12, 2);
-        RollDice();
+        RollDice(die);
 
         system("cls");
         std::cout << "\nThe figure throws the dice dramatically...\n\n";
-        std::cout << "Die 1: " << globalDieOne << std::endl;
-        std::cout << "Die 2: " << globalDieTwo << std::endl;
-        std::cout << "Sum: " << globalDieOne + globalDieTwo << std::endl;
+        std::cout << "Die 1: " << die.one << std::endl;
+        std::cout << "Die 2: " << die.two << std::endl;
+        std::cout << "Sum: " << die.one + die.two << std::endl;
         std::cout << "Your guess: " << playerGuess << std::endl;
 
-        if (playerGuess == globalDieOne + globalDieTwo)
+        if (playerGuess == die.one + die.two)
         {
             std::cout << "\nThe figure winks and slips you something under the table.\n";
-            std::cout << globalBetAmount << "X" << globalRewardMult << "kr added to wallet.\n";
-            UpdatePlayerWallet(globalBetAmount, globalRewardMult, '+', aPlayerWallet);
-            UpdateStatistics(1);
-            totalEarnings += (globalBetAmount * globalRewardMult) - globalBetAmount;
+            std::cout << aBetAmount << "X" << aRewardMult << "kr added to wallet.\n";
+            UpdatePlayerWallet(aBetAmount, aRewardMult, '+', aPlayerWallet);
+            UpdateStatistics(1, someStats);
+            totalEarnings += (aBetAmount * aRewardMult) - aBetAmount;
             std::cout << "New balance: " << aPlayerWallet << "kr \n\n";
             std::cout << "You are filled with determination.\n\n";
             system("pause");
-            ShowStatistics();
+            ShowStatistics(someStats);
         }
         else
         {
-            UpdatePlayerWallet(globalBetAmount, globalRewardMult, '-', aPlayerWallet);
-            std::cout << "\nYou watch as your " << globalBetAmount << "kr dissappear under the table\n";
+            UpdatePlayerWallet(aBetAmount, aRewardMult, '-', aPlayerWallet);
+            std::cout << "\nYou watch as your " << aBetAmount << "kr dissappear under the table\n";
             std::cout << "New balance: " << aPlayerWallet << "kr \n\n";
-            totalEarnings -= globalBetAmount;
+            totalEarnings -= aBetAmount;
 
             if (aPlayerWallet <= 0)
             {
@@ -475,22 +481,23 @@ void PlayDiceGame(bool& gameRunning, int& aPlayerWallet)
             else
             {
                 std::cout << "\nYou're having a bad time... Stay determined.\n\n\n";
-                UpdateStatistics(2);
+                UpdateStatistics(2, someStats);
                 system("pause");
-                ShowStatistics();
+                ShowStatistics(someStats);
             }
         }
     }
 }
 
-void PlayOddOrEven(bool& gameRunning, int& aPlayerWallet)
+void PlayOddOrEven(bool& gameRunning, int& aPlayerWallet, int aRewardMult, int aBetAmount, int someStats[])
 {
     int playerGuess = 0;
     int rollResult = 0;
     static signed int totalEarnings = 0;
     bool oddOrEven = true;
+    Dice die = {};
     
-    globalRewardMult = 2;
+    aRewardMult = 2;
 
     while (oddOrEven)
     {
@@ -501,19 +508,19 @@ void PlayOddOrEven(bool& gameRunning, int& aPlayerWallet)
             system("pause");
             break;
         }
-        else if (!(oddOrEven = GetGameMenu(3, totalEarnings, aPlayerWallet)))
+        else if (!(oddOrEven = GetGameMenu(3, totalEarnings, aPlayerWallet, aRewardMult)))
         {
             break;
         }
 
-        ShowGameIntro(2, aPlayerWallet);
+        ShowGameIntro(2, aPlayerWallet, aRewardMult);
         TotalEarningsMessage(totalEarnings);
 
-        globalBetAmount = GetPlayerBet(globalBetAmount, aPlayerWallet, 1);
+        aBetAmount = GetPlayerBet(aBetAmount, aPlayerWallet, 1);
 
         system("cls");
         std::cout << "\nThe figure accepts your offer. \n";
-        if (globalBetAmount == aPlayerWallet)
+        if (aBetAmount == aPlayerWallet)
         {
             std::cout << "\n***HIGH STAKES***\n";
             std::cout << "Betting your whole wallet fills you with determination.\n";
@@ -526,13 +533,13 @@ void PlayOddOrEven(bool& gameRunning, int& aPlayerWallet)
         std::cout << "2. Even\n";
 
         playerGuess = GetPlayerNum(playerGuess, 2, 1);
-        RollDice();
+        RollDice(die);
         
-        if (globalDieOne % 2 == 0 && globalDieTwo % 2 == 0)
+        if (die.one % 2 == 0 && die.two % 2 == 0)
         {
             rollResult = 2;
         }
-        else if (globalDieOne % 2 != 0 && globalDieTwo % 2 != 0)
+        else if (die.one % 2 != 0 && die.two % 2 != 0)
         {
             rollResult = 1;
         }
@@ -544,8 +551,8 @@ void PlayOddOrEven(bool& gameRunning, int& aPlayerWallet)
         system("cls");
         std::cout << "\nThe figure throws the dice dramatically...\n\n";
 
-        std::cout << "Die 1: " << globalDieOne;
-        if (globalDieOne % 2 == 0)
+        std::cout << "Die 1: " << die.one;
+        if (die.one % 2 == 0)
         {
             std::cout << "  -> Even";
         }
@@ -554,8 +561,8 @@ void PlayOddOrEven(bool& gameRunning, int& aPlayerWallet)
             std::cout << "  -> Odd";
         }
 
-        std::cout << "\nDie 2: " << globalDieTwo ;
-        if (globalDieTwo % 2 == 0)
+        std::cout << "\nDie 2: " << die.two ;
+        if (die.two % 2 == 0)
         {
             std::cout << "  -> Even";
         }
@@ -577,24 +584,24 @@ void PlayOddOrEven(bool& gameRunning, int& aPlayerWallet)
         if (playerGuess == rollResult)
         {
             std::cout << "The figure nods slowly while handing over your reward.\n\n";
-            std::cout << globalBetAmount << "X" << globalRewardMult << "kr added to wallet.\n";
+            std::cout << aBetAmount << "X" << aRewardMult << "kr added to wallet.\n";
             std::cout << "Reward multiplier increased by 1.\n";
-            UpdatePlayerWallet(globalBetAmount, globalRewardMult, '+', aPlayerWallet);
-            UpdateStatistics(1);
-            totalEarnings += (globalBetAmount * globalRewardMult) - globalBetAmount;
-            globalRewardMult += 1;
+            UpdatePlayerWallet(aBetAmount, aRewardMult, '+', aPlayerWallet);
+            UpdateStatistics(1, someStats);
+            totalEarnings += (aBetAmount * aRewardMult) - aBetAmount;
+            aRewardMult += 1;
             std::cout << "New balance: " << aPlayerWallet << "kr \n\n";
             system("pause");
-            ShowStatistics();
+            ShowStatistics(someStats);
         }
         else
         {
-            UpdatePlayerWallet(globalBetAmount, globalRewardMult, '-', aPlayerWallet);
-            globalRewardMult = 2;
+            UpdatePlayerWallet(aBetAmount, aRewardMult, '-', aPlayerWallet);
+            aRewardMult = 2;
 
             if (aPlayerWallet <= 0)
             {
-                std::cout << "\nYou watch as your " << globalBetAmount << "kr slip away from you...\n";
+                std::cout << "\nYou watch as your " << aBetAmount << "kr slip away from you...\n";
                 std::cout << "New balance: " << aPlayerWallet << "kr \n\n";
                 std::cout << "\nJust as you gambled away your last kr, you were suddenly dragged out of the casino. \nDetermination won't help you this time\n\n\n";
                 system("pause");
@@ -604,19 +611,19 @@ void PlayOddOrEven(bool& gameRunning, int& aPlayerWallet)
             }
             else
             {
-                std::cout << "\nYou watch as your " << globalBetAmount << "kr dissappear under the table\n";
+                std::cout << "\nYou watch as your " << aBetAmount << "kr dissappear under the table\n";
                 std::cout << "New balance: " << aPlayerWallet << "kr \n\n";
-                UpdateStatistics(2);
-                totalEarnings -= globalBetAmount;
+                UpdateStatistics(2, someStats);
+                totalEarnings -= aBetAmount;
                 std::cout << "\nYou're having a bad time... Stay determined.\n\n";
                 system("pause");
-                ShowStatistics();
+                ShowStatistics(someStats);
             }
         }
     }
 }
 
-void PlayBlackjack(bool& gameRunning, int& aPlayerWallet)
+void PlayBlackjack(bool& gameRunning, int& aPlayerWallet, int aRewardMult, int aBetAmount, int someStats[])
 {
     int hitOrStand = 0;
     int drawnCard = 0;
@@ -635,7 +642,7 @@ void PlayBlackjack(bool& gameRunning, int& aPlayerWallet)
             system("pause");
             break;
         }
-        else if (!(blackjack = GetGameMenu(3, totalEarnings, aPlayerWallet)))
+        else if (!(blackjack = GetGameMenu(3, totalEarnings, aPlayerWallet, aRewardMult)))
         {
             break;
         }
@@ -644,16 +651,16 @@ void PlayBlackjack(bool& gameRunning, int& aPlayerWallet)
         cardCount = 1;
         cardSum = 0;
         drawingCards = true;
-        globalRewardMult = 1;
+        aRewardMult = 1;
 
-        ShowGameIntro(3, aPlayerWallet);
+        ShowGameIntro(3, aPlayerWallet, aRewardMult);
         TotalEarningsMessage(totalEarnings);
 
-        globalBetAmount = GetPlayerBet(globalBetAmount, aPlayerWallet, 1);
+        aBetAmount = GetPlayerBet(aBetAmount, aPlayerWallet, 1);
 
         system("cls");
         std::cout << "\nThe figure accepts your offer. \n";
-        if (globalBetAmount == aPlayerWallet)
+        if (aBetAmount == aPlayerWallet)
         {
             std::cout << "\n***HIGH STAKES***\n";
             std::cout << "Betting your whole wallet fills you with determination.\n";
@@ -670,7 +677,7 @@ void PlayBlackjack(bool& gameRunning, int& aPlayerWallet)
         system("cls");
         std::cout << "You drew: " << drawnCard << std::endl;
         std::cout << "Sum of cards: " << cardSum << std::endl;
-        std::cout << "\nReward mult: X" << globalRewardMult << std::endl;
+        std::cout << "\nReward mult: X" << aRewardMult << std::endl;
 
         while (drawingCards)
         {
@@ -696,9 +703,9 @@ void PlayBlackjack(bool& gameRunning, int& aPlayerWallet)
                     {
                         std::cout << "\n\nCard sum went over 21.\n";
                         std::cout << "You lose.\n";
-                        UpdatePlayerWallet(globalBetAmount, globalRewardMult, '-', aPlayerWallet);
-                        UpdateStatistics(2);
-                        totalEarnings -= globalBetAmount;
+                        UpdatePlayerWallet(aBetAmount, aRewardMult, '-', aPlayerWallet);
+                        UpdateStatistics(2, someStats);
+                        totalEarnings -= aBetAmount;
                         if (aPlayerWallet <= 0)
                         {
                             std::cout << "\nJust as you gambled away your last kr, you were suddenly dragged out of the casino. \nDetermination won't help you this time\n\n\n";
@@ -709,13 +716,13 @@ void PlayBlackjack(bool& gameRunning, int& aPlayerWallet)
                             break;
                         }
                         system("pause");
-                        ShowStatistics();
+                        ShowStatistics(someStats);
                         drawingCards = false;
                     }
 
                     if (cardCount > 3)
                     {
-                        globalRewardMult += 1;
+                        aRewardMult += 1;
                         std::cout << "\nReward multiplier increased by 1";
 
                     }
@@ -724,7 +731,7 @@ void PlayBlackjack(bool& gameRunning, int& aPlayerWallet)
                         std::cout << "\nReward multiplier will increase after 3 cards";
 
                     }
-                    std::cout << "\nReward mult: X" << globalRewardMult << std::endl;
+                    std::cout << "\nReward mult: X" << aRewardMult << std::endl;
 
                     break;
                 }
@@ -732,24 +739,24 @@ void PlayBlackjack(bool& gameRunning, int& aPlayerWallet)
                 {
                     system("cls");
                     std::cout << "Sum of cards: " << cardSum << std::endl;
-                    std::cout << "Reward mult: X" << globalRewardMult << std::endl;
+                    std::cout << "Reward mult: X" << aRewardMult << std::endl;
 
-                    if (globalBetAmount == (globalBetAmount * globalRewardMult))
+                    if (aBetAmount == (aBetAmount * aRewardMult))
                     {
                         std::cout << "\nYou chose to stand and got your kr back. (counts as win)" << std::endl;
                         std::cout << "Balance: " << aPlayerWallet << "kr \n\n";
-                        UpdateStatistics(1);
+                        UpdateStatistics(1, someStats);
                     }
                     else
                     {
-                        std::cout << "\nYou won " << globalBetAmount * globalRewardMult << "kr"  << std::endl;
-                        UpdatePlayerWallet(globalBetAmount, globalRewardMult, '+', aPlayerWallet);
+                        std::cout << "\nYou won " << aBetAmount * aRewardMult << "kr"  << std::endl;
+                        UpdatePlayerWallet(aBetAmount, aRewardMult, '+', aPlayerWallet);
                         std::cout << "New balance: " << aPlayerWallet << "kr \n\n";
-                        UpdateStatistics(1);
+                        UpdateStatistics(1, someStats);
                     }
-                    totalEarnings += (globalBetAmount * globalRewardMult) - globalBetAmount;
+                    totalEarnings += (aBetAmount * aRewardMult) - aBetAmount;
                     system("pause");
-                    ShowStatistics();
+                    ShowStatistics(someStats);
                     drawingCards = false;
                     break;
                 }
