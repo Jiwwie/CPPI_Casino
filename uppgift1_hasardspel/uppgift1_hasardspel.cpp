@@ -125,6 +125,13 @@ void ShowMainMenu()
 
 void ShowGameIntro(int anIntroKey, int aPlayerWallet, int aRewardMult)
 {
+    enum IntroKey
+    {
+		IntroKey_DiceGame = 1,
+		IntroKey_OddOrEven = 2,
+		IntroKey_Blackjack = 3
+    };
+
     system("cls");
     std::cout << " =======================\n";
     std::cout << "||       CASINO        ||\n";
@@ -135,7 +142,7 @@ void ShowGameIntro(int anIntroKey, int aPlayerWallet, int aRewardMult)
 
     switch (anIntroKey)
     {
-        case 1:
+        case IntroKey_DiceGame:
         {
             std::cout << "A mysterious figure steps forth and reveals a pair of dice.\n";
             std::cout << "\"If you can guess the sum of these when I throw them...\"\n";
@@ -144,7 +151,7 @@ void ShowGameIntro(int anIntroKey, int aPlayerWallet, int aRewardMult)
             std::cout << "You are filled with determination.\n\n";
             break;
         }
-        case 2:
+        case IntroKey_OddOrEven:
         {
             std::cout << "A mysterious figure steps forth and reveals a pair of dice.\n";
             std::cout << "\"If you can guess if these will roll odd or even\"\n";
@@ -153,7 +160,7 @@ void ShowGameIntro(int anIntroKey, int aPlayerWallet, int aRewardMult)
             std::cout << "You are filled with determination.\n\n";
             break;
         }
-        case 3:
+        case IntroKey_Blackjack:
         {
             std::cout << "A mysterious figure steps forth and reveals a stack of cards.\n";
             std::cout << "\"Your goal is to get as close to 21 as possible.\"\n";
@@ -198,7 +205,9 @@ void UpdatePlayerWallet(int aBetAmount, int aMultiplier, char anOperator, int& a
 
 void UpdateStatistics(int aStat, int someStats[])
 {
-    for (int i = 4; i > 0; i--)
+	const int statSize = 5;
+
+    for (int i = (statSize - 1); i > 0; i--)
     {
         someStats[i] = someStats[i - 1];
     }
@@ -255,12 +264,29 @@ int GetPlayerBet(int aPlayerNum, int aMax, int aMin)
 
 int GetGameMenu(int aGameNum, int aTotalEarnings, int aPlayerWallet, int aRewardMult)
 {
+	const int maxMenu = 3;
+	const int minMenu = 1;
+
     bool menu = true;
     int menuChoice = 0;
     bool startGame = false;
 
+    enum MenuChoice
+    {
+		MenuChoice_PlayGame = 1,
+		MenuChoice_ShowRules = 2,
+		MenuChoice_BackToMain = 3
+    };
+    enum Rules
+    {
+		Rules_DiceGame = 1,
+		Rules_OddOrEven = 2,
+		Rules_Blackjack = 3
+    };
+
     while (menu)
     {
+
         system("cls");
         std::cout << "You have " << aPlayerWallet << "kr \n";
         std::cout << "Reward multiplier: X" << aRewardMult << "\n";
@@ -273,34 +299,34 @@ int GetGameMenu(int aGameNum, int aTotalEarnings, int aPlayerWallet, int aReward
         std::cout << "===================================\n\n";
 
         std::cout << "What will you do? ";
-        menuChoice = GetPlayerNum(menuChoice, 3, 1);
+        menuChoice = GetPlayerNum(menuChoice, maxMenu, minMenu);
 
         switch (menuChoice)
         {
-            case 1:
+            case MenuChoice_PlayGame:
             {
                 startGame = true;
                 menu = false;
                 break;
             }
-            case 2:
+            case MenuChoice_ShowRules:
             {
                 system("cls");
                 std::cout << "RULES:\n";
-                if (aGameNum == 1)
+                if (aGameNum == Rules_DiceGame)
                 {
                     std::cout << "1. Guess any number between 2-12\n";
                     std::cout << "2. Two six-sided dice are rolled\n";
                     std::cout << "3. If you guessed the sum, you win\n\n";
                 }
-                else if (aGameNum == 2)
+                else if (aGameNum == Rules_OddOrEven)
                 {
                     std::cout << "1. Place your bet, odd or even\n";
                     std::cout << "2. Two six-sided dice are rolled\n";
                     std::cout << "3. If both sides show odd/even, you win\n";
                     std::cout << "3. Winning multiple times in a row will increase your reward multiplier\n\n\n";
                 }
-                else if (aGameNum == 3)
+                else if (aGameNum == Rules_Blackjack)
                 {
                     std::cout << "1. The deck contains cards with values 1-11.\n";
                     std::cout << "2. Hit to draw a card, stand to end round.\n";
@@ -311,7 +337,7 @@ int GetGameMenu(int aGameNum, int aTotalEarnings, int aPlayerWallet, int aReward
                 break;
 
             }
-            case 3:
+            case MenuChoice_BackToMain:
             {
                 menu = false;
                 break;
@@ -327,7 +353,9 @@ int GetGameMenu(int aGameNum, int aTotalEarnings, int aPlayerWallet, int aReward
 
 int CheckIfBanned(int aTotalEarnings)
 {
-    if (aTotalEarnings >= 5000)
+	const int maxEarnings = 5000;
+
+    if (aTotalEarnings >= maxEarnings)
     {
         return false;
     }
@@ -339,12 +367,15 @@ int CheckIfBanned(int aTotalEarnings)
 
 void TotalEarningsMessage(int aTotalEarnings)
 {
-    if (aTotalEarnings >= 1000)
+	const int winningBig = 1000;
+	const int losingBig = 0;
+
+    if (aTotalEarnings >= winningBig)
     {
         std::cout << "\nTOTAL EARNINGS: " << aTotalEarnings << "kr\n";
         std::cout << "On a roll!\n";
     }
-    else if (aTotalEarnings < 0)
+    else if (aTotalEarnings < losingBig)
     {
         std::cout << "\nTOTAL EARNINGS: " << aTotalEarnings << "kr\n";
         std::cout << "Sadge...\n";
@@ -358,15 +389,22 @@ void TotalEarningsMessage(int aTotalEarnings)
 
 void WriteStat(int aPlace, int someStats[])
 {
-    if (someStats[aPlace] == 0)
+    enum Stat
+    {
+		Stat_NoStat = 0,
+		Stat_Win = 1,
+		Stat_Loss = 2
+    };
+
+    if (someStats[aPlace] == Stat_NoStat)
     {
         std::cout << aPlace + 1 << ". " << "No stat" << std::endl;
     }
-    else if (someStats[aPlace] == 1)
+    else if (someStats[aPlace] == Stat_Win)
     {
         std::cout << aPlace + 1 << ". " << "Win" << std::endl;
     }
-    else if (someStats[aPlace] == 2)
+    else if (someStats[aPlace] == Stat_Loss)
     {
         std::cout << aPlace + 1 << ". " << "Loss" << std::endl;
     }
@@ -633,6 +671,12 @@ void PlayBlackjack(bool& gameRunning, int& aPlayerWallet, int aRewardMult, int a
     bool blackjack = true;
     bool drawingCards = true;
 
+    enum HitOrStand
+    {
+		HitOrStand_Hit = 1,
+		HitOrStand_Stand = 2
+    };
+
     while (blackjack)
     {
         if (!(blackjack = CheckIfBanned(totalEarnings)))
@@ -688,7 +732,7 @@ void PlayBlackjack(bool& gameRunning, int& aPlayerWallet, int aRewardMult, int a
 
             switch (hitOrStand)
             {
-                case 1:
+                case HitOrStand_Hit:
                 {
                     drawnCard = DrawCard();
                     cardSum += drawnCard;
@@ -735,7 +779,7 @@ void PlayBlackjack(bool& gameRunning, int& aPlayerWallet, int aRewardMult, int a
 
                     break;
                 }
-                case 2:
+                case HitOrStand_Stand:
                 {
                     system("cls");
                     std::cout << "Sum of cards: " << cardSum << std::endl;
