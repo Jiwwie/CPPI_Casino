@@ -2,5 +2,5 @@
 
 namespace Blackjack
 {
-	void PlayBlackjack(bool& aGameRunning, int& aPlayerWallet, int aRewardMult, int aBetAmount, int someStats[]);
+	void PlayBlackjack(bool aGameRunning, int& aPlayerWallet, int aRewardMult, int aBetAmount, int someStats[]);
 }

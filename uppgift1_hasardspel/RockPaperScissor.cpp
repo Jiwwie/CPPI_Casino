@@ -5,7 +5,7 @@
 /*
 namespace RockPaperScissor
 {
-	void PlayRPS(bool& aGameRunning, int& aPlayerWallet, int aRewardMult, int aBetAmount, int someStats[])
+	void PlayRPS(bool aGameRunning, int& aPlayerWallet, int aRewardMult, int aBetAmount, int someStats[])
 	{
 		const int maxGuess = 12;
 		const int minGuess = 2;

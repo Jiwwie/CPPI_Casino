@@ -5,7 +5,7 @@
 
 namespace DiceGame
 {
-    void PlayDiceGame(bool& gameRunning, int& aPlayerWallet, int aRewardMult, int aBetAmount, int someStats[])
+    void PlayDiceGame(bool gameRunning, int& aPlayerWallet, int aRewardMult, int aBetAmount, int someStats[])
     {
 		const int maxGuess = 12;
 		const int minGuess = 2;

@@ -5,7 +5,7 @@
 
 namespace Blackjack
 {
-    void PlayBlackjack(bool& gameRunning, int& aPlayerWallet, int aRewardMult, int aBetAmount, int someStats[])
+    void PlayBlackjack(bool gameRunning, int& aPlayerWallet, int aRewardMult, int aBetAmount, int someStats[])
     {
 		const int minBet = 1;
         int hitOrStand = 0;
@@ -31,7 +31,7 @@ namespace Blackjack
                 system("pause");
                 break;
             }
-            else if (!(blackjack = SharedFunctions::GetGameMenu(3, totalEarnings, aPlayerWallet, aRewardMult)))
+            else if (!(blackjack = SharedFunctions::GetGameMenu(Game_Blackjack, totalEarnings, aPlayerWallet, aRewardMult)))
             {
                 break;
             }

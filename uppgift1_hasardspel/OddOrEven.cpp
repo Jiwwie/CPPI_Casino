@@ -5,7 +5,7 @@
 
 namespace OddOrEven
 {
-    void PlayOddOrEven(bool& gameRunning, int& aPlayerWallet, int aRewardMult, int aBetAmount, int someStats[])
+    void PlayOddOrEven(bool gameRunning, int& aPlayerWallet, int aRewardMult, int aBetAmount, int someStats[])
     {
 		const int maxGuess = 2;
 		const int minGuess = 1;
