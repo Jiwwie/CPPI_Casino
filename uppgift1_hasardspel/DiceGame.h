@@ -2,5 +2,5 @@
 
 namespace DiceGame
 {
-	void PlayDiceGame(bool aGameRunning, int& aPlayerWallet, int aRewardMult, int aBetAmount, int someStats[]);
+	void PlayDiceGame(bool aGameRunning, int& aPlayerWallet, int aRewardMult, int aBetAmount, int someStats[], int& someTotalEarnings);
 }

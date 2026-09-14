@@ -34,6 +34,8 @@ int main()
     int rewardMult = 2;
     int betAmount = 0;
 
+	TotalEarnings earnings = {};
+
     while (gameRunning)
     {
         SharedFunctions::ShowMainMenu();
@@ -44,7 +46,7 @@ int main()
         {
             case MainMenu_DiceGame:
             {
-                DiceGame::PlayDiceGame(gameRunning, playerWallet, rewardMult, betAmount, stats);
+                DiceGame::PlayDiceGame(gameRunning, playerWallet, rewardMult, betAmount, stats, earnings.DiceGame);
                 break;
             }
             case MainMenu_OddOrEven:

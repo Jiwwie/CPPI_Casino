@@ -6,6 +6,12 @@ struct Dice
     int two;
 };
 
+struct TotalEarnings
+{
+	int DiceGame;
+	int OddOrEven;
+};
+
 enum GameResult
 {
 	GameResult_NoStat = 0,
