@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="uppgift1_hasardspel/uppgift1_hasardspel.vcxproj" Id="89054b2e-ef37-49e1-a207-502e2627e36a" />
+</Solution>
