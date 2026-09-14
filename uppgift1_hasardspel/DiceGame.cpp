@@ -7,6 +7,9 @@ namespace DiceGame
 {
     void PlayDiceGame(bool& gameRunning, int& aPlayerWallet, int aRewardMult, int aBetAmount, int someStats[])
     {
+		const int maxGuess = 12;
+		const int minGuess = 2;
+		const int minBet = 1;
         int playerGuess = 0;
         static signed int totalEarnings = 0;
         bool diceGame = true;
@@ -28,10 +31,10 @@ namespace DiceGame
 
             aRewardMult = 2;
 
-            SharedFunctions::ShowGameIntro(1, aPlayerWallet, aRewardMult);
+            SharedFunctions::ShowGameIntro(Game_DiceGame, aPlayerWallet, aRewardMult);
             SharedFunctions::TotalEarningsMessage(totalEarnings);
 
-            aBetAmount = SharedFunctions::GetPlayerBet(aBetAmount, aPlayerWallet, 1);
+            aBetAmount = SharedFunctions::GetPlayerBet(aBetAmount, aPlayerWallet, minBet);
 
             system("cls");
             std::cout << "\nThe figure accepts your offer. \n";
@@ -43,7 +46,7 @@ namespace DiceGame
             }
             std::cout << "_______________________________ \n";
             std::cout << "What is your guess? (2-12)  ";
-            playerGuess = SharedFunctions::GetPlayerNum(playerGuess, 12, 2);
+            playerGuess = SharedFunctions::GetPlayerNum(playerGuess, maxGuess, minGuess);
             SharedFunctions::RollDice(die);
 
             system("cls");
@@ -58,7 +61,7 @@ namespace DiceGame
                 std::cout << "\nThe figure winks and slips you something under the table.\n";
                 std::cout << aBetAmount << "X" << aRewardMult << "kr added to wallet.\n";
                 SharedFunctions::UpdatePlayerWallet(aBetAmount, aRewardMult, '+', aPlayerWallet);
-                SharedFunctions::UpdateStatistics(1, someStats);
+                SharedFunctions::UpdateStatistics(GameResult_Win, someStats);
                 totalEarnings += (aBetAmount * aRewardMult) - aBetAmount;
                 std::cout << "New balance: " << aPlayerWallet << "kr \n\n";
                 std::cout << "You are filled with determination.\n\n";
@@ -83,12 +86,11 @@ namespace DiceGame
                 else
                 {
                     std::cout << "\nYou're having a bad time... Stay determined.\n\n\n";
-                    SharedFunctions::UpdateStatistics(2, someStats);
+                    SharedFunctions::UpdateStatistics(GameResult_Loss, someStats);
                     system("pause");
                     SharedFunctions::ShowStatistics(someStats);
                 }
             }
         }
     }
-
 }

@@ -22,6 +22,9 @@
     <ClCompile Include="Blackjack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RockPaperScissor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DiceGame.h">
@@ -34,6 +37,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Blackjack.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RockPaperScissor.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

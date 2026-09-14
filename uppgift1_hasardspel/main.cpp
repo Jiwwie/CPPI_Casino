@@ -5,25 +5,27 @@
 #include "DiceGame.h"
 #include "OddOrEven.h"
 #include "Blackjack.h"
+#include "RockPaperScissor.h"
 
 int main()
 {
-    enum ActiveGame
+    enum MainMenu
     {
-		ActiveGame_DiceGame = 1,
-		ActiveGame_OddOrEven = 2,
-		ActiveGame_Blackjack = 3,
-		ActiveGame_Statistics = 4,
-		ActiveGame_LeaveCasino = 5
+        MainMenu_DiceGame = 1,
+        MainMenu_OddOrEven = 2,
+        MainMenu_Blackjack = 3,
+        MainMenu_RockPaperScissor = 4,
+        MainMenu_Statistics = 5,
+        MainMenu_LeaveCasino = 6
     };
 
     int stats[5] =
     {
-       0,
-       0,
-       0,
-       0,
-       0
+       GameResult_NoStat,
+       GameResult_NoStat,
+       GameResult_NoStat,
+       GameResult_NoStat,
+       GameResult_NoStat
     };
 
     int activeGame = 0;
@@ -40,27 +42,32 @@ int main()
 
         switch (activeGame)
         {
-            case ActiveGame_DiceGame:
+            case MainMenu_DiceGame:
             {
                 DiceGame::PlayDiceGame(gameRunning, playerWallet, rewardMult, betAmount, stats);
                 break;
             }
-            case ActiveGame_OddOrEven:
+            case MainMenu_OddOrEven:
             {
                 OddOrEven::PlayOddOrEven(gameRunning, playerWallet, rewardMult, betAmount, stats);
                 break;
             }
-            case ActiveGame_Blackjack:
+            case MainMenu_Blackjack:
             {
                 Blackjack::PlayBlackjack(gameRunning, playerWallet, rewardMult, betAmount, stats);
                 break;
             }
-            case ActiveGame_Statistics:
+			case MainMenu_RockPaperScissor:
+			{
+				//RockPaperScissor::PlayRPS(gameRunning, playerWallet, rewardMult, betAmount, stats);
+				break;
+			}
+            case MainMenu_Statistics:
             {
                 SharedFunctions::ShowStatistics(stats);
                 break;
             }
-            case ActiveGame_LeaveCasino:
+            case MainMenu_LeaveCasino:
             {
                 system("cls");
                 std::cout << "\nYou left the casino with " << playerWallet << "kr to your name.\n\n\n";

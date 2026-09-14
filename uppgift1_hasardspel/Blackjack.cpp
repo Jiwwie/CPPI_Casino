@@ -7,6 +7,7 @@ namespace Blackjack
 {
     void PlayBlackjack(bool& gameRunning, int& aPlayerWallet, int aRewardMult, int aBetAmount, int someStats[])
     {
+		const int minBet = 1;
         int hitOrStand = 0;
         int drawnCard = 0;
         int cardCount = 0;
@@ -41,10 +42,10 @@ namespace Blackjack
             drawingCards = true;
             aRewardMult = 1;
 
-            SharedFunctions::ShowGameIntro(3, aPlayerWallet, aRewardMult);
+            SharedFunctions::ShowGameIntro(Game_Blackjack, aPlayerWallet, aRewardMult);
             SharedFunctions::TotalEarningsMessage(totalEarnings);
 
-            aBetAmount = SharedFunctions::GetPlayerBet(aBetAmount, aPlayerWallet, 1);
+            aBetAmount = SharedFunctions::GetPlayerBet(aBetAmount, aPlayerWallet, minBet);
 
             system("cls");
             std::cout << "\nThe figure accepts your offer. \n";
@@ -72,7 +73,7 @@ namespace Blackjack
                 std::cout << "\nTwo options. What will you do?\n";
                 std::cout << "1. Hit\n";
                 std::cout << "2. Stand\n";
-                hitOrStand = SharedFunctions::GetPlayerNum(hitOrStand, 2, 1);
+                hitOrStand = SharedFunctions::GetPlayerNum(hitOrStand, HitOrStand_Stand, HitOrStand_Hit);
 
                 switch (hitOrStand)
                 {
@@ -92,7 +93,7 @@ namespace Blackjack
                         std::cout << "\n\nCard sum went over 21.\n";
                         std::cout << "You lose.\n";
                         SharedFunctions::UpdatePlayerWallet(aBetAmount, aRewardMult, '-', aPlayerWallet);
-                        SharedFunctions::UpdateStatistics(2, someStats);
+                        SharedFunctions::UpdateStatistics(GameResult_Loss, someStats);
                         totalEarnings -= aBetAmount;
                         if (aPlayerWallet <= 0)
                         {
@@ -133,14 +134,14 @@ namespace Blackjack
                     {
                         std::cout << "\nYou chose to stand and got your kr back. (counts as win)" << std::endl;
                         std::cout << "Balance: " << aPlayerWallet << "kr \n\n";
-                        SharedFunctions::UpdateStatistics(1, someStats);
+                        SharedFunctions::UpdateStatistics(GameResult_Win, someStats);
                     }
                     else
                     {
                         std::cout << "\nYou won " << aBetAmount * aRewardMult << "kr" << std::endl;
                         SharedFunctions::UpdatePlayerWallet(aBetAmount, aRewardMult, '+', aPlayerWallet);
                         std::cout << "New balance: " << aPlayerWallet << "kr \n\n";
-                        SharedFunctions::UpdateStatistics(1, someStats);
+                        SharedFunctions::UpdateStatistics(GameResult_Win, someStats);
                     }
                     totalEarnings += (aBetAmount * aRewardMult) - aBetAmount;
                     system("pause");
