@@ -1,6 +1,5 @@
 #include <iostream>
 #include <random>
-#include "Shared.h"
 #include "Misc.h"
 #include "RockPaperScissors.h"
 #include "Player.h"
@@ -42,12 +41,12 @@ namespace RockPaperScissors
                 system("pause");
                 break;
             }
-            else if (!(rockPaperScissors = GameFunctions::GetGameMenu(Shared::Game_RockPaperScissors, someEarnings, aPlayer.wallet, aPlayer.betMult)))
+            else if (!(rockPaperScissors = GameFunctions::GetGameMenu(Misc::Game_RockPaperScissors, someEarnings, aPlayer.wallet, aPlayer.betMult)))
             {
                 break;
             }
 
-            GameFunctions::ShowGameIntro(Shared::Game_RockPaperScissors, aPlayer.wallet, aPlayer.betMult);
+            GameFunctions::ShowGameIntro(Misc::Game_RockPaperScissors, aPlayer.wallet, aPlayer.betMult);
             GameFunctions::TotalEarningsMessage(someEarnings);
 
             aPlayer.bet = Player::GetPlayerBet(aPlayer.bet, aPlayer.wallet, minBet);
@@ -114,14 +113,14 @@ namespace RockPaperScissors
 					{
 						std::cout << "\nYou win! Your bet was doubled.\n";
 						Player::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '+', aPlayer.wallet);
-						Statistics::UpdateStatistics(Shared::GameResult_Win, someStats);
+						Statistics::UpdateStatistics(Statistics::GameResult_Win, someStats);
 						someEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
 					}
 					else if (figureInput.rps == RPS_Paper)
 					{
 						std::cout << "\nYou lose! -" << aPlayer.bet << "kr\n";
 						Player::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '-', aPlayer.wallet);
-						Statistics::UpdateStatistics(Shared::GameResult_Loss, someStats);
+						Statistics::UpdateStatistics(Statistics::GameResult_Loss, someStats);
 						someEarnings -= aPlayer.bet;
 					}
 					else
@@ -135,14 +134,14 @@ namespace RockPaperScissors
 					{
 						std::cout << "\nYou win! Your bet was doubled.\n";
 						Player::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '+', aPlayer.wallet);
-						Statistics::UpdateStatistics(Shared::GameResult_Win, someStats);
+						Statistics::UpdateStatistics(Statistics::GameResult_Win, someStats);
 						someEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
 					}
 					else if (figureInput.rps == RPS_Scissors)
 					{
 						std::cout << "\nYou lose! -" << aPlayer.bet << "kr\n";
 						Player::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '-', aPlayer.wallet);
-						Statistics::UpdateStatistics(Shared::GameResult_Loss, someStats);
+						Statistics::UpdateStatistics(Statistics::GameResult_Loss, someStats);
 						someEarnings -= aPlayer.bet;
 					}
 					else
@@ -156,14 +155,14 @@ namespace RockPaperScissors
 					{
 						std::cout << "\nYou win! Your bet was doubled.\n";
 						Player::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '+', aPlayer.wallet);
-						Statistics::UpdateStatistics(Shared::GameResult_Win, someStats);
+						Statistics::UpdateStatistics(Statistics::GameResult_Win, someStats);
 						someEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
 					}
 					else if (figureInput.rps == RPS_Rock)
 					{
 						std::cout << "\nYou lose! -" << aPlayer.bet << "kr\n";
 						Player::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '-', aPlayer.wallet);
-						Statistics::UpdateStatistics(Shared::GameResult_Loss, someStats);
+						Statistics::UpdateStatistics(Statistics::GameResult_Loss, someStats);
 						someEarnings -= aPlayer.bet;
 					}
 					else

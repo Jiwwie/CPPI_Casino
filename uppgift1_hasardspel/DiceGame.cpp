@@ -1,6 +1,5 @@
 #include <iostream>
 #include <random>
-#include "Shared.h"
 #include "Misc.h"
 #include "DiceGame.h"
 #include "Player.h"
@@ -44,7 +43,7 @@ namespace DiceGame
 
             aPlayer.betMult = 2;
 
-            GameFunctions::ShowGameIntro(Shared::Game_DiceGame, aPlayer.wallet, aPlayer.betMult);
+            GameFunctions::ShowGameIntro(Misc::Game_DiceGame, aPlayer.wallet, aPlayer.betMult);
             GameFunctions::TotalEarningsMessage(someEarnings);
 
             aPlayer.bet = Player::GetPlayerBet(aPlayer.bet, aPlayer.wallet, minBet);
@@ -74,7 +73,7 @@ namespace DiceGame
                 std::cout << "\nThe figure winks and slips you something under the table.\n";
                 std::cout << aPlayer.bet << "X" << aPlayer.betMult << "kr added to wallet.\n";
                 Player::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '+', aPlayer.wallet);
-                Statistics::UpdateStatistics(Shared::GameResult_Win, someStats);
+                Statistics::UpdateStatistics(Statistics::GameResult_Win, someStats);
                 someEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
                 std::cout << "New balance: " << aPlayer.wallet << "kr \n\n";
                 std::cout << "You are filled with determination.\n\n";
@@ -99,7 +98,7 @@ namespace DiceGame
                 else
                 {
                     std::cout << "\nYou're having a bad time... Stay determined.\n\n\n";
-                    Statistics::UpdateStatistics(Shared::GameResult_Loss, someStats);
+                    Statistics::UpdateStatistics(Statistics::GameResult_Loss, someStats);
                     system("pause");
                     Statistics::ShowStatistics(someStats);
                 }

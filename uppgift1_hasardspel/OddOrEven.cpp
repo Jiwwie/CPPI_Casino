@@ -1,6 +1,5 @@
 #include <iostream>
 #include <random>
-#include "Shared.h"
 #include "Misc.h"
 #include "OddOrEven.h"
 #include "Player.h"
@@ -45,7 +44,7 @@ namespace OddOrEven
                 break;
             }
 
-            GameFunctions::ShowGameIntro(Shared::Game_OddOrEven, aPlayer.wallet, aPlayer.betMult);
+            GameFunctions::ShowGameIntro(Misc::Game_OddOrEven, aPlayer.wallet, aPlayer.betMult);
             GameFunctions::TotalEarningsMessage(someEarnings);
 
             aPlayer.bet = Player::GetPlayerBet(aPlayer.bet, aPlayer.wallet, minBet);
@@ -119,7 +118,7 @@ namespace OddOrEven
                 std::cout << aPlayer.bet << "X" << aPlayer.betMult << "kr added to wallet.\n";
                 std::cout << "Reward multiplier increased by 1.\n";
                 Player::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '+', aPlayer.wallet);
-                Statistics::UpdateStatistics(Shared::GameResult_Win, someStats);
+                Statistics::UpdateStatistics(Statistics::GameResult_Win, someStats);
                 someEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
                 aPlayer.betMult += 1;
                 std::cout << "New balance: " << aPlayer.wallet << "kr \n\n";
@@ -145,7 +144,7 @@ namespace OddOrEven
                 {
                     std::cout << "\nYou watch as your " << aPlayer.bet << "kr dissappear under the table\n";
                     std::cout << "New balance: " << aPlayer.wallet << "kr \n\n";
-                    Statistics::UpdateStatistics(Shared::GameResult_Loss, someStats);
+                    Statistics::UpdateStatistics(Statistics::GameResult_Loss, someStats);
                     someEarnings -= aPlayer.bet;
                     std::cout << "\nYou're having a bad time... Stay determined.\n\n";
                     system("pause");

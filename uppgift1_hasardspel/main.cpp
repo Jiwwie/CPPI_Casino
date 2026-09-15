@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cstdlib>
 #include <random>
-#include "Shared.h"
 #include "Misc.h"
 #include "DiceGame.h"
 #include "OddOrEven.h"
@@ -25,22 +24,21 @@ int main()
 
     int stats[5] =
     {
-       Shared::GameResult_NoStat,
-       Shared::GameResult_NoStat,
-       Shared::GameResult_NoStat,
-       Shared::GameResult_NoStat,
-       Shared::GameResult_NoStat
+       Statistics::GameResult_NoStat,
+       Statistics::GameResult_NoStat,
+       Statistics::GameResult_NoStat,
+       Statistics::GameResult_NoStat,
+       Statistics::GameResult_NoStat
     };
 
     int activeGame = 0;
-
-	//Namespace, struct, instance of struct
+    
 	Player::Player player = {};
 	Player::TotalEarnings earnings = {};
 
     while (player.playing)
     {
-        Shared::ShowMainMenu();
+        GameFunctions::ShowMainMenu();
         std::cin >> activeGame;
         Player::ClearInputBuffer();
 

@@ -34,9 +34,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files\cpp files</Filter>
     </ClCompile>
-    <ClCompile Include="Shared.cpp">
-      <Filter>Source Files\cpp files</Filter>
-    </ClCompile>
     <ClCompile Include="Statistics.cpp">
       <Filter>Source Files\cpp files</Filter>
     </ClCompile>
@@ -59,9 +56,6 @@
     </ClInclude>
     <ClInclude Include="RockPaperScissors.h">
       <Filter>Source Files\header files\game</Filter>
-    </ClInclude>
-    <ClInclude Include="Shared.h">
-      <Filter>Source Files\header files</Filter>
     </ClInclude>
     <ClInclude Include="Misc.h">
       <Filter>Source Files\header files</Filter>
