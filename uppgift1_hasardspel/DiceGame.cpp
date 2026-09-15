@@ -12,28 +12,28 @@ namespace DiceGame
 		const int minBet = 1;
         int playerGuess = 0;
         bool diceGame = true;
-        Dice die = {};
+        Random die = {};
 
         while (diceGame)
         {
-            if (!(diceGame = SharedFunctions::CheckIfBanned(someEarnings)))
+            if (!(diceGame = Shared::CheckIfBanned(someEarnings)))
             {
                 system("cls");
                 std::cout << "\nYou earned too much at this table. Do something else.\n\n";
                 system("pause");
                 break;
             }
-            else if (!(diceGame = SharedFunctions::GetGameMenu(3, someEarnings, aPlayerWallet, aRewardMult)))
+            else if (!(diceGame = Shared::GetGameMenu(3, someEarnings, aPlayerWallet, aRewardMult)))
             {
                 break;
             }
 
             aRewardMult = 2;
 
-            SharedFunctions::ShowGameIntro(Game_DiceGame, aPlayerWallet, aRewardMult);
-            SharedFunctions::TotalEarningsMessage(someEarnings);
+            Shared::ShowGameIntro(Game_DiceGame, aPlayerWallet, aRewardMult);
+            Shared::TotalEarningsMessage(someEarnings);
 
-            aBetAmount = SharedFunctions::GetPlayerBet(aBetAmount, aPlayerWallet, minBet);
+            aBetAmount = Shared::GetPlayerBet(aBetAmount, aPlayerWallet, minBet);
 
             system("cls");
             std::cout << "\nThe figure accepts your offer. \n";
@@ -45,31 +45,31 @@ namespace DiceGame
             }
             std::cout << "_______________________________ \n";
             std::cout << "What is your guess? (2-12)  ";
-            playerGuess = SharedFunctions::GetPlayerNum(playerGuess, maxGuess, minGuess);
-            SharedFunctions::RollDice(die);
+            playerGuess = Shared::GetPlayerNum(playerGuess, maxGuess, minGuess);
+            Shared::RollDice(die);
 
             system("cls");
             std::cout << "\nThe figure throws the dice dramatically...\n\n";
-            std::cout << "Die 1: " << die.one << std::endl;
-            std::cout << "Die 2: " << die.two << std::endl;
-            std::cout << "Sum: " << die.one + die.two << std::endl;
+            std::cout << "Die 1: " << die.dieOne << std::endl;
+            std::cout << "Die 2: " << die.dieTwo << std::endl;
+            std::cout << "Sum: " << die.dieOne + die.dieTwo << std::endl;
             std::cout << "Your guess: " << playerGuess << std::endl;
 
-            if (playerGuess == die.one + die.two)
+            if (playerGuess == die.dieOne + die.dieTwo)
             {
                 std::cout << "\nThe figure winks and slips you something under the table.\n";
                 std::cout << aBetAmount << "X" << aRewardMult << "kr added to wallet.\n";
-                SharedFunctions::UpdatePlayerWallet(aBetAmount, aRewardMult, '+', aPlayerWallet);
-                SharedFunctions::UpdateStatistics(GameResult_Win, someStats);
+                Shared::UpdatePlayerWallet(aBetAmount, aRewardMult, '+', aPlayerWallet);
+                Shared::UpdateStatistics(GameResult_Win, someStats);
                 someEarnings += (aBetAmount * aRewardMult) - aBetAmount;
                 std::cout << "New balance: " << aPlayerWallet << "kr \n\n";
                 std::cout << "You are filled with determination.\n\n";
                 system("pause");
-                SharedFunctions::ShowStatistics(someStats);
+                Shared::ShowStatistics(someStats);
             }
             else
             {
-                SharedFunctions::UpdatePlayerWallet(aBetAmount, aRewardMult, '-', aPlayerWallet);
+                Shared::UpdatePlayerWallet(aBetAmount, aRewardMult, '-', aPlayerWallet);
                 std::cout << "\nYou watch as your " << aBetAmount << "kr dissappear under the table\n";
                 std::cout << "New balance: " << aPlayerWallet << "kr \n\n";
                 someEarnings -= aBetAmount;
@@ -85,9 +85,9 @@ namespace DiceGame
                 else
                 {
                     std::cout << "\nYou're having a bad time... Stay determined.\n\n\n";
-                    SharedFunctions::UpdateStatistics(GameResult_Loss, someStats);
+                    Shared::UpdateStatistics(GameResult_Loss, someStats);
                     system("pause");
-                    SharedFunctions::ShowStatistics(someStats);
+                    Shared::ShowStatistics(someStats);
                 }
             }
         }

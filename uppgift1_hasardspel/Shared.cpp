@@ -2,7 +2,7 @@
 #include <random>
 #include "Shared.h"
 
-namespace SharedFunctions
+namespace Shared
 {
     void ShowMainMenu()
     {
@@ -193,7 +193,7 @@ namespace SharedFunctions
             system("cls");
             std::cout << "You have " << aPlayerWallet << "kr \n";
             std::cout << "Reward multiplier: X" << aRewardMult << "\n";
-            SharedFunctions::TotalEarningsMessage(aTotalEarnings);
+            Shared::TotalEarningsMessage(aTotalEarnings);
 
             std::cout << "\n\nGAME MENU\n";
             std::cout << "1. Play game\n";
@@ -202,7 +202,7 @@ namespace SharedFunctions
             std::cout << "===================================\n\n";
 
             std::cout << "What will you do? ";
-            menuChoice = SharedFunctions::GetPlayerNum(menuChoice, maxMenu, minMenu);
+            menuChoice = Shared::GetPlayerNum(menuChoice, maxMenu, minMenu);
 
             switch (menuChoice)
             {
@@ -345,15 +345,23 @@ namespace SharedFunctions
         system("pause");
     }
 
-    void RollDice(Dice& aDie)
+    void RollDice(Random& aDie)
     {
         std::random_device seed;
         std::mt19937 rndEngine(seed());
         std::uniform_int_distribution<int> rndDist(1, 6);
 
-        aDie.one = rndDist(rndEngine);
-        aDie.two = rndDist(rndEngine);
+        aDie.dieOne = rndDist(rndEngine);
+        aDie.dieTwo = rndDist(rndEngine);
     }
+
+	void RollRPS(Random& aRPS)
+	{
+		std::random_device seed;
+		std::mt19937 rndEngine(seed());
+		std::uniform_int_distribution<int> rndDist(1, 3);
+		aRPS.rps = rndDist(rndEngine);
+	}
 
     int DrawCard()
     {
@@ -362,6 +370,5 @@ namespace SharedFunctions
         std::uniform_int_distribution<int> rndDist(1, 11);
         return rndDist(rndEngine);
     }
-}
 
 

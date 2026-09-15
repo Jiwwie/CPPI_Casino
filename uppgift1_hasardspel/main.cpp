@@ -38,9 +38,9 @@ int main()
 
     while (gameRunning)
     {
-        SharedFunctions::ShowMainMenu();
+        Shared::ShowMainMenu();
         std::cin >> activeGame;
-        SharedFunctions::ClearInputBuffer();
+        Shared::ClearInputBuffer();
 
         switch (activeGame)
         {
@@ -61,12 +61,12 @@ int main()
             }
 			case MainMenu_RockPaperScissors:
 			{
-				//RockPaperScissors::PlayRPS(gameRunning, playerWallet, rewardMult, betAmount, stats, earnings.RockPaperScissors);
+				RockPaperScissors::PlayRPS(gameRunning, playerWallet, rewardMult, betAmount, stats, earnings.RockPaperScissors);
 				break;
 			}
             case MainMenu_Statistics:
             {
-                SharedFunctions::ShowStatistics(stats);
+                Shared::ShowStatistics(stats);
                 break;
             }
             case MainMenu_LeaveCasino:

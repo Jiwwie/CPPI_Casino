@@ -1,9 +1,11 @@
 #pragma once
 
-struct Dice
+struct Random
 {
-    int one;
-    int two;
+    int dieOne;
+    int dieTwo;
+	int card;
+	int rps;
 };
 
 struct TotalEarnings
@@ -29,7 +31,7 @@ enum Game
 	Game_RockPaperScissors = 4
 };
 
-namespace SharedFunctions
+namespace Shared
 {
     void ShowMainMenu();
     void ShowGameIntro(int anIntroKey, int aPlayerWallet, int aRewardMult);
@@ -44,7 +46,8 @@ namespace SharedFunctions
     void WriteStat(int aPlace, int someStats[]);
     void ShowStatistics(int someStats[]);
 
-    void RollDice(Dice& aDie);
+    void RollDice(Random& aDie);
+    void RollRPS(Random& aRPS);
     int DrawCard();
 
 }
