@@ -1,5 +1,6 @@
 #include <iostream>
 #include <random>
+#include "Structs.h"
 #include "Shared.h"
 
 namespace Shared
@@ -343,32 +344,6 @@ namespace Shared
         std::cout << "======================" << std::endl;
         std::cout << "\n\n";
         system("pause");
-    }
-
-    void RollDice(Random& aDie)
-    {
-        std::random_device seed;
-        std::mt19937 rndEngine(seed());
-        std::uniform_int_distribution<int> rndDist(1, 6);
-
-        aDie.dieOne = rndDist(rndEngine);
-        aDie.dieTwo = rndDist(rndEngine);
-    }
-
-    void RollRPS(Random& aRPS)
-    {
-        std::random_device seed;
-        std::mt19937 rndEngine(seed());
-        std::uniform_int_distribution<int> rndDist(1, 3);
-        aRPS.rps = rndDist(rndEngine);
-    }
-
-    int DrawCard()
-    {
-        std::random_device seed;
-        std::mt19937 rndEngine(seed());
-        std::uniform_int_distribution<int> rndDist(1, 11);
-        return rndDist(rndEngine);
     }
 }
 

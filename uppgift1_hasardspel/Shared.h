@@ -1,38 +1,22 @@
 #pragma once
 
-struct Random
-{
-    int dieOne;
-    int dieTwo;
-	int card;
-	int rps;
-};
-
-struct TotalEarnings
-{
-	int DiceGame;
-	int OddOrEven;
-	int Blackjack;
-	int RockPaperScissors;
-};
-
-enum GameResult
-{
-	GameResult_NoStat = 0,
-	GameResult_Win = 1,
-	GameResult_Loss = 2
-};
-
-enum Game
-{
-	Game_DiceGame = 1,
-	Game_OddOrEven = 2,
-	Game_Blackjack = 3,
-	Game_RockPaperScissors = 4
-};
-
 namespace Shared
 {
+    enum GameResult
+    {
+	    GameResult_NoStat = 0,
+	    GameResult_Win = 1,
+	    GameResult_Loss = 2,
+    };
+
+    enum Game
+    {
+	    Game_DiceGame = 1,
+	    Game_OddOrEven = 2,
+	    Game_Blackjack = 3,
+	    Game_RockPaperScissors = 4
+    };
+
     void ShowMainMenu();
     void ShowGameIntro(int anIntroKey, int aPlayerWallet, int aRewardMult);
     int GetGameMenu(int aGameNum, int aTotalEarnings, int aPlayerWallet, int aRewardMult);
@@ -45,9 +29,4 @@ namespace Shared
     void UpdateStatistics(int aStat, int someStats[]);
     void WriteStat(int aPlace, int someStats[]);
     void ShowStatistics(int someStats[]);
-
-    void RollDice(Random& aDie);
-    void RollRPS(Random& aRPS);
-    int DrawCard();
-
 }

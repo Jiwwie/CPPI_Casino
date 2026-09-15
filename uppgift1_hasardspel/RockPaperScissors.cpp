@@ -1,17 +1,26 @@
 #include <iostream>
 #include <random>
 #include "Shared.h"
+#include "Structs.h"
 #include "RockPaperScissors.h"
 
 namespace RockPaperScissors
 {
-	void PlayRPS(bool& aGameRunning, int& aPlayerWallet, int aRewardMult, int aBetAmount, int someStats[], int& someEarnings)
+	void RollRPS(Struct::Random& aRPS, int aMin, int aMax)
+	{
+		std::random_device seed;
+		std::mt19937 rndEngine(seed());
+		std::uniform_int_distribution<int> rndDist(aMin, aMax);
+		aRPS.rps = rndDist(rndEngine);
+	}
+
+	void PlayRPS(Struct::Player& aPlayer, int someStats[], int& someEarnings)
 	{
 		const int maxNum = 3;
 		const int minNum = 1;
 		const int minBet = 1;
 		int playerInput = 0;
-		Random figureInput = {};
+		Struct::Random figureInput = {};
 		bool rockPaperScissors = true;
 
 		enum RPS
@@ -30,19 +39,19 @@ namespace RockPaperScissors
                 system("pause");
                 break;
             }
-            else if (!(rockPaperScissors = Shared::GetGameMenu(Game_RockPaperScissors, someEarnings, aPlayerWallet, aRewardMult)))
+            else if (!(rockPaperScissors = Shared::GetGameMenu(Shared::Game_RockPaperScissors, someEarnings, aPlayer.wallet, aPlayer.betMult)))
             {
                 break;
             }
 
-            Shared::ShowGameIntro(Game_RockPaperScissors, aPlayerWallet, aRewardMult);
+            Shared::ShowGameIntro(Shared::Game_RockPaperScissors, aPlayer.wallet, aPlayer.betMult);
             Shared::TotalEarningsMessage(someEarnings);
 
-            aBetAmount = Shared::GetPlayerBet(aBetAmount, aPlayerWallet, minBet);
+            aPlayer.bet = Shared::GetPlayerBet(aPlayer.bet, aPlayer.wallet, minBet);
 
             system("cls");
             std::cout << "\nThe figure accepts your offer. \n";
-            if (aBetAmount == aPlayerWallet)
+            if (aPlayer.bet == aPlayer.wallet)
             {
                 std::cout << "\n***HIGH STAKES***\n";
                 std::cout << "Betting your whole wallet fills you with determination.\n";
@@ -56,22 +65,22 @@ namespace RockPaperScissors
             std::cout << "2. Paper\n";
             std::cout << "3. Scissors\n";
             playerInput = Shared::GetPlayerNum(playerInput, maxNum, minNum);
-            Shared::RollRPS(figureInput);
+            RollRPS(figureInput, minNum, maxNum);
 
 
 			system("cls");
-			std::cout << "\nThe figure throws its hand dramatically...\n\n";
+			std::cout << "\nThe figure throws its hand dramatically...\n";
 
 			switch (playerInput)
 			{
 				case RPS_Rock:
-					std::cout << "\nYou threw: Rock\n";
+					std::cout << "You threw: Rock\n";
 					break;
 				case RPS_Paper:
-					std::cout << "\nYou threw: Paper\n";
+					std::cout << "You threw: Paper\n";
 					break;
 				case RPS_Scissors:
-					std::cout << "\nYou threw: Scissors\n";
+					std::cout << "You threw: Scissors\n";
 					break;
 				default:
 					break;
@@ -79,17 +88,17 @@ namespace RockPaperScissors
 
 			switch (figureInput.rps)
 			{
-			case RPS_Rock:
-				std::cout << "The figure threw: Rock\n";
-				break;
-			case RPS_Paper:
-				std::cout << "The figure threw: Paper\n";
-				break;
-			case RPS_Scissors:
-				std::cout << "The figure threw: Scissors\n";
-				break;
-			default:
-				break;
+				case RPS_Rock:
+					std::cout << "The figure threw: Rock\n";
+					break;
+				case RPS_Paper:
+					std::cout << "The figure threw: Paper\n";
+					break;
+				case RPS_Scissors:
+					std::cout << "The figure threw: Scissors\n";
+					break;
+				default:
+					break;
 			}
 
 			system("pause");
@@ -101,16 +110,16 @@ namespace RockPaperScissors
 					if (figureInput.rps == RPS_Scissors)
 					{
 						std::cout << "\nYou win! Your bet was doubled.\n";
-						Shared::UpdatePlayerWallet(aBetAmount, aRewardMult, '+', aPlayerWallet);
-						Shared::UpdateStatistics(GameResult_Win, someStats);
-						someEarnings += (aBetAmount * aRewardMult) - aBetAmount;
+						Shared::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '+', aPlayer.wallet);
+						Shared::UpdateStatistics(Shared::GameResult_Win, someStats);
+						someEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
 					}
 					else if (figureInput.rps == RPS_Paper)
 					{
-						std::cout << "\nYou lose! -" << aBetAmount << "\n";
-						Shared::UpdatePlayerWallet(aBetAmount, aRewardMult, '-', aPlayerWallet);
-						Shared::UpdateStatistics(GameResult_Loss, someStats);
-						someEarnings -= aBetAmount;
+						std::cout << "\nYou lose! -" << aPlayer.bet << "kr\n";
+						Shared::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '-', aPlayer.wallet);
+						Shared::UpdateStatistics(Shared::GameResult_Loss, someStats);
+						someEarnings -= aPlayer.bet;
 					}
 					else
 					{
@@ -122,16 +131,16 @@ namespace RockPaperScissors
 					if (figureInput.rps == RPS_Rock)
 					{
 						std::cout << "\nYou win! Your bet was doubled.\n";
-						Shared::UpdatePlayerWallet(aBetAmount, aRewardMult, '+', aPlayerWallet);
-						Shared::UpdateStatistics(GameResult_Win, someStats);
-						someEarnings += (aBetAmount * aRewardMult) - aBetAmount;
+						Shared::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '+', aPlayer.wallet);
+						Shared::UpdateStatistics(Shared::GameResult_Win, someStats);
+						someEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
 					}
 					else if (figureInput.rps == RPS_Scissors)
 					{
-						std::cout << "\nYou lose! -" << aBetAmount << "\n";
-						Shared::UpdatePlayerWallet(aBetAmount, aRewardMult, '-', aPlayerWallet);
-						Shared::UpdateStatistics(GameResult_Loss, someStats);
-						someEarnings -= aBetAmount;
+						std::cout << "\nYou lose! -" << aPlayer.bet << "kr\n";
+						Shared::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '-', aPlayer.wallet);
+						Shared::UpdateStatistics(Shared::GameResult_Loss, someStats);
+						someEarnings -= aPlayer.bet;
 					}
 					else
 					{
@@ -143,16 +152,16 @@ namespace RockPaperScissors
 					if (figureInput.rps == RPS_Paper)
 					{
 						std::cout << "\nYou win! Your bet was doubled.\n";
-						Shared::UpdatePlayerWallet(aBetAmount, aRewardMult, '+', aPlayerWallet);
-						Shared::UpdateStatistics(GameResult_Win, someStats);
-						someEarnings += (aBetAmount * aRewardMult) - aBetAmount;
+						Shared::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '+', aPlayer.wallet);
+						Shared::UpdateStatistics(Shared::GameResult_Win, someStats);
+						someEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
 					}
 					else if (figureInput.rps == RPS_Rock)
 					{
-						std::cout << "\nYou lose! -" << aBetAmount << "\n";
-						Shared::UpdatePlayerWallet(aBetAmount, aRewardMult, '-', aPlayerWallet);
-						Shared::UpdateStatistics(GameResult_Loss, someStats);
-						someEarnings -= aBetAmount;
+						std::cout << "\nYou lose! -" << aPlayer.bet << "kr\n";
+						Shared::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '-', aPlayer.wallet);
+						Shared::UpdateStatistics(Shared::GameResult_Loss, someStats);
+						someEarnings -= aPlayer.bet;
 					}
 					else
 					{
@@ -166,10 +175,10 @@ namespace RockPaperScissors
 
 			system("pause");
 
-			if (aPlayerWallet <= 0)
+			if (aPlayer.wallet <= 0)
 			{
 				std::cout << "\nJust as you gambled away your last kr, you were suddenly dragged out of the casino. \nDetermination won't help you this time\n\n\n";
-				aGameRunning = false;
+				aPlayer.playing = false;
 				rockPaperScissors = false;
 				system("pause");
 				break;

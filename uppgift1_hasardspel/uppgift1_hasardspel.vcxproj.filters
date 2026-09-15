@@ -5,42 +5,57 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Source Files\cpp files">
+      <UniqueIdentifier>{8d2bd329-1a4e-49fb-9192-d356d651826b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\header files">
+      <UniqueIdentifier>{329af247-2dc7-4386-9583-ef51048e5d60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\header files\game">
+      <UniqueIdentifier>{48891ed1-25d6-4c8a-9554-72aae4d9963a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cpp files\game">
+      <UniqueIdentifier>{c59ba187-c41e-4754-949a-496831bad0af}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Blackjack.cpp">
+      <Filter>Source Files\cpp files\game</Filter>
     </ClCompile>
     <ClCompile Include="DiceGame.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Shared.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\cpp files\game</Filter>
     </ClCompile>
     <ClCompile Include="OddOrEven.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Blackjack.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\cpp files\game</Filter>
     </ClCompile>
     <ClCompile Include="RockPaperScissors.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\cpp files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files\cpp files</Filter>
+    </ClCompile>
+    <ClCompile Include="Shared.cpp">
+      <Filter>Source Files\cpp files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DiceGame.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="Blackjack.h">
+      <Filter>Source Files\header files\game</Filter>
     </ClInclude>
-    <ClInclude Include="Shared.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="DiceGame.h">
+      <Filter>Source Files\header files\game</Filter>
     </ClInclude>
     <ClInclude Include="OddOrEven.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Blackjack.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\header files\game</Filter>
     </ClInclude>
     <ClInclude Include="RockPaperScissors.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\header files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="Shared.h">
+      <Filter>Source Files\header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Structs.h">
+      <Filter>Source Files\header files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

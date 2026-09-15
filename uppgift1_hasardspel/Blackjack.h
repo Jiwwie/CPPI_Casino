@@ -2,5 +2,6 @@
 
 namespace Blackjack
 {
-	void PlayBlackjack(bool aGameRunning, int& aPlayerWallet, int aRewardMult, int aBetAmount, int someStats[], int& someEarnings);
+	int DrawCard(int aMin, int aMax);
+	void PlayBlackjack(Struct::Player& aPlayer, int someStats[], int& someEarnings);
 }

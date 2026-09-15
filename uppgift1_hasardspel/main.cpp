@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <random>
 #include "Shared.h"
+#include "Structs.h"
 #include "DiceGame.h"
 #include "OddOrEven.h"
 #include "Blackjack.h"
@@ -21,22 +22,20 @@ int main()
 
     int stats[5] =
     {
-       GameResult_NoStat,
-       GameResult_NoStat,
-       GameResult_NoStat,
-       GameResult_NoStat,
-       GameResult_NoStat
+       Shared::GameResult_NoStat,
+       Shared::GameResult_NoStat,
+       Shared::GameResult_NoStat,
+       Shared::GameResult_NoStat,
+       Shared::GameResult_NoStat
     };
 
     int activeGame = 0;
-    bool gameRunning = true;
     int playerWallet = 1000;
-    int rewardMult = 2;
-    int betAmount = 0;
 
-	TotalEarnings earnings = {};
+	Struct::Player player = {};
+	Struct::TotalEarnings earnings = {};
 
-    while (gameRunning)
+    while (player.playing)
     {
         Shared::ShowMainMenu();
         std::cin >> activeGame;
@@ -46,22 +45,22 @@ int main()
         {
             case MainMenu_DiceGame:
             {
-                DiceGame::PlayDiceGame(gameRunning, playerWallet, rewardMult, betAmount, stats, earnings.DiceGame);
+                DiceGame::PlayDiceGame(player, stats, earnings.DiceGame);
                 break;
             }
             case MainMenu_OddOrEven:
             {
-                OddOrEven::PlayOddOrEven(gameRunning, playerWallet, rewardMult, betAmount, stats, earnings.OddOrEven);
+                OddOrEven::PlayOddOrEven(player, stats, earnings.OddOrEven);
                 break;
             }
             case MainMenu_Blackjack:
             {
-                Blackjack::PlayBlackjack(gameRunning, playerWallet, rewardMult, betAmount, stats, earnings.Blackjack);
+                Blackjack::PlayBlackjack(player, stats, earnings.Blackjack);
                 break;
             }
 			case MainMenu_RockPaperScissors:
 			{
-				RockPaperScissors::PlayRPS(gameRunning, playerWallet, rewardMult, betAmount, stats, earnings.RockPaperScissors);
+				RockPaperScissors::PlayRPS(player, stats, earnings.RockPaperScissors);
 				break;
 			}
             case MainMenu_Statistics:
@@ -74,7 +73,7 @@ int main()
                 system("cls");
                 std::cout << "\nYou left the casino with " << playerWallet << "kr to your name.\n\n\n";
                 system("pause");
-                gameRunning = false;
+                player.playing = false;
                 break;
             }
             default: 
