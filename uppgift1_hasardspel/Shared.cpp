@@ -1,6 +1,6 @@
 #include <iostream>
 #include <random>
-#include "Structs.h"
+#include "Misc.h"
 #include "Shared.h"
 
 namespace Shared
@@ -26,8 +26,6 @@ namespace Shared
         std::cout << "5. Show statistics" << std::endl;
         std::cout << "6. Leave Casino\n" << std::endl;
     }
-
-
 
 }
 

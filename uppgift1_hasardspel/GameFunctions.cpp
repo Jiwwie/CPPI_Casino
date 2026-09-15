@@ -3,7 +3,6 @@
 
 namespace GameFunctions
 {
-
     void ShowGameIntro(int anIntroKey, int aPlayerWallet, int aRewardMult)
     {
         enum IntroKey

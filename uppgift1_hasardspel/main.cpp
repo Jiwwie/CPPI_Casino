@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <random>
 #include "Shared.h"
-#include "Structs.h"
+#include "Misc.h"
 #include "DiceGame.h"
 #include "OddOrEven.h"
 #include "Blackjack.h"

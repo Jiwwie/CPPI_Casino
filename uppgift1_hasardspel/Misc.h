@@ -1,10 +1,7 @@
 #pragma once
 
-namespace Struct
+namespace Misc
 {
-
-
-	//TA BORT
 	struct Random
 	{
 		int dieOne;

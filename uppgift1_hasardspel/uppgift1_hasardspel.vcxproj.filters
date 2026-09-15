@@ -63,7 +63,7 @@
     <ClInclude Include="Shared.h">
       <Filter>Source Files\header files</Filter>
     </ClInclude>
-    <ClInclude Include="Structs.h">
+    <ClInclude Include="Misc.h">
       <Filter>Source Files\header files</Filter>
     </ClInclude>
     <ClInclude Include="GameFunctions.h">

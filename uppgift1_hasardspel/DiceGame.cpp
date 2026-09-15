@@ -1,7 +1,7 @@
 #include <iostream>
 #include <random>
 #include "Shared.h"
-#include "Structs.h"
+#include "Misc.h"
 #include "DiceGame.h"
 #include "Player.h"
 #include "GameFunctions.h"
@@ -9,7 +9,7 @@
 
 namespace DiceGame
 {
-    void RollDice(Struct::Random& aDie, int aMin, int aMax)
+    void RollDice(Misc::Random& aDie, int aMin, int aMax)
     {
         std::random_device seed;
         std::mt19937 rndEngine(seed());
@@ -26,7 +26,7 @@ namespace DiceGame
 		const int minBet = 1;
         int playerGuess = 0;
         bool diceGame = true;
-        Struct::Random die = {};
+        Misc::Random die = {};
 
         while (diceGame)
         {

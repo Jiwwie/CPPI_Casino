@@ -3,6 +3,6 @@
 
 namespace OddOrEven
 {
-	void RollDice(Struct::Random& aDie, int aMin, int aMax);
+	void RollDice(Misc::Random& aDie, int aMin, int aMax);
 	void PlayOddOrEven(Player::Player& aPlayer, int someStats[], int& someEarnings);
 }

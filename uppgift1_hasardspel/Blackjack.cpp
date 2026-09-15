@@ -1,7 +1,7 @@
 #include <iostream>
 #include <random>
 #include "Shared.h"
-#include "Structs.h"
+#include "Misc.h"
 #include "Blackjack.h"
 #include "Player.h"
 #include "GameFunctions.h"

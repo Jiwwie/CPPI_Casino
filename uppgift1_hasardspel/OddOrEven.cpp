@@ -1,7 +1,7 @@
 #include <iostream>
 #include <random>
 #include "Shared.h"
-#include "Structs.h"
+#include "Misc.h"
 #include "OddOrEven.h"
 #include "Player.h"
 #include "GameFunctions.h"
@@ -9,7 +9,7 @@
 
 namespace OddOrEven
 {
-    void RollDice(Struct::Random& aDie, int aMin, int aMax)
+    void RollDice(Misc::Random& aDie, int aMin, int aMax)
     {
         std::random_device seed;
         std::mt19937 rndEngine(seed());
@@ -27,7 +27,7 @@ namespace OddOrEven
         int playerGuess = 0;
         int rollResult = 0;
         bool oddOrEven = true;
-        Struct::Random die = {};
+        Misc::Random die = {};
 
         aPlayer.betMult = 2;
 

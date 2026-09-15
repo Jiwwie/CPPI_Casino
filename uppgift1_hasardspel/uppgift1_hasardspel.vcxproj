@@ -159,7 +159,7 @@
     <ClInclude Include="RockPaperScissors.h" />
     <ClInclude Include="Shared.h" />
     <ClInclude Include="Statistics.h" />
-    <ClInclude Include="Structs.h" />
+    <ClInclude Include="Misc.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <random>
 #include "Shared.h"
-#include "Structs.h"
+#include "Misc.h"
 #include "RockPaperScissors.h"
 #include "Player.h"
 #include "GameFunctions.h"
@@ -9,7 +9,7 @@
 
 namespace RockPaperScissors
 {
-	void RollRPS(Struct::Random& aRPS, int aMin, int aMax)
+	void RollRPS(Misc::Random& aRPS, int aMin, int aMax)
 	{
 		std::random_device seed;
 		std::mt19937 rndEngine(seed());
@@ -23,7 +23,7 @@ namespace RockPaperScissors
 		const int minNum = 1;
 		const int minBet = 1;
 		int playerInput = 0;
-		Struct::Random figureInput = {};
+		Misc::Random figureInput = {};
 		bool rockPaperScissors = true;
 
 		enum RPS

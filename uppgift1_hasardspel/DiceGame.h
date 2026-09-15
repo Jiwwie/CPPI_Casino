@@ -1,9 +1,9 @@
 #pragma once
 #include "Player.h"
-#include "Structs.h"
+#include "Misc.h"
 
 namespace DiceGame
 {
-	void RollDice(Struct::Random& aDie, int aMin, int aMax);
+	void RollDice(Misc::Random& aDie, int aMin, int aMax);
 	void PlayDiceGame(Player::Player& aPlayer, int someStats[], int& someEarnings);
 }
