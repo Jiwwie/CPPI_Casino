@@ -144,14 +144,14 @@
     <ClCompile Include="DiceGame.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="OddOrEven.cpp" />
-    <ClCompile Include="RockPaperScissor.cpp" />
+    <ClCompile Include="RockPaperScissors.cpp" />
     <ClCompile Include="Shared.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Blackjack.h" />
     <ClInclude Include="DiceGame.h" />
     <ClInclude Include="OddOrEven.h" />
-    <ClInclude Include="RockPaperScissor.h" />
+    <ClInclude Include="RockPaperScissors.h" />
     <ClInclude Include="Shared.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -10,6 +10,8 @@ struct TotalEarnings
 {
 	int DiceGame;
 	int OddOrEven;
+	int Blackjack;
+	int RockPaperScissors;
 };
 
 enum GameResult
@@ -24,7 +26,7 @@ enum Game
 	Game_DiceGame = 1,
 	Game_OddOrEven = 2,
 	Game_Blackjack = 3,
-	Game_RockPaperScissor = 4
+	Game_RockPaperScissors = 4
 };
 
 namespace SharedFunctions

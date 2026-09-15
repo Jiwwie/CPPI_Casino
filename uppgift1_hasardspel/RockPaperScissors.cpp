@@ -1,11 +1,11 @@
 #include <iostream>
 #include <random>
 #include "Shared.h"
-#include "RockPaperScissor.h"
+#include "RockPaperScissors.h"
 /*
-namespace RockPaperScissor
+namespace RockPaperScissors
 {
-	void PlayRPS(bool aGameRunning, int& aPlayerWallet, int aRewardMult, int aBetAmount, int someStats[])
+	void PlayRPS(bool aGameRunning, int& aPlayerWallet, int aRewardMult, int aBetAmount, int someStats[], int& someEarnings)
 	{
 		const int maxGuess = 12;
 		const int minGuess = 2;

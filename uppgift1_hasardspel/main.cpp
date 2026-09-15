@@ -5,7 +5,7 @@
 #include "DiceGame.h"
 #include "OddOrEven.h"
 #include "Blackjack.h"
-#include "RockPaperScissor.h"
+#include "RockPaperScissors.h"
 
 int main()
 {
@@ -14,7 +14,7 @@ int main()
         MainMenu_DiceGame = 1,
         MainMenu_OddOrEven = 2,
         MainMenu_Blackjack = 3,
-        MainMenu_RockPaperScissor = 4,
+        MainMenu_RockPaperScissors = 4,
         MainMenu_Statistics = 5,
         MainMenu_LeaveCasino = 6
     };
@@ -51,17 +51,17 @@ int main()
             }
             case MainMenu_OddOrEven:
             {
-                OddOrEven::PlayOddOrEven(gameRunning, playerWallet, rewardMult, betAmount, stats);
+                OddOrEven::PlayOddOrEven(gameRunning, playerWallet, rewardMult, betAmount, stats, earnings.OddOrEven);
                 break;
             }
             case MainMenu_Blackjack:
             {
-                Blackjack::PlayBlackjack(gameRunning, playerWallet, rewardMult, betAmount, stats);
+                Blackjack::PlayBlackjack(gameRunning, playerWallet, rewardMult, betAmount, stats, earnings.Blackjack);
                 break;
             }
-			case MainMenu_RockPaperScissor:
+			case MainMenu_RockPaperScissors:
 			{
-				//RockPaperScissor::PlayRPS(gameRunning, playerWallet, rewardMult, betAmount, stats);
+				//RockPaperScissors::PlayRPS(gameRunning, playerWallet, rewardMult, betAmount, stats, earnings.RockPaperScissors);
 				break;
 			}
             case MainMenu_Statistics:

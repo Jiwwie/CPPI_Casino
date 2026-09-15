@@ -5,14 +5,13 @@
 
 namespace OddOrEven
 {
-    void PlayOddOrEven(bool gameRunning, int& aPlayerWallet, int aRewardMult, int aBetAmount, int someStats[])
+    void PlayOddOrEven(bool gameRunning, int& aPlayerWallet, int aRewardMult, int aBetAmount, int someStats[], int& someEarnings)
     {
 		const int maxGuess = 2;
 		const int minGuess = 1;
 		const int minBet = 1;
         int playerGuess = 0;
         int rollResult = 0;
-        static signed int totalEarnings = 0;
         bool oddOrEven = true;
         Dice die = {};
 
@@ -20,20 +19,20 @@ namespace OddOrEven
 
         while (oddOrEven)
         {
-            if (!(oddOrEven = SharedFunctions::CheckIfBanned(totalEarnings)))
+            if (!(oddOrEven = SharedFunctions::CheckIfBanned(someEarnings)))
             {
                 system("cls");
                 std::cout << "\nYou earned too much at this table. Do something else.\n\n";
                 system("pause");
                 break;
             }
-            else if (!(oddOrEven = SharedFunctions::GetGameMenu(3, totalEarnings, aPlayerWallet, aRewardMult)))
+            else if (!(oddOrEven = SharedFunctions::GetGameMenu(3, someEarnings, aPlayerWallet, aRewardMult)))
             {
                 break;
             }
 
             SharedFunctions::ShowGameIntro(Game_OddOrEven, aPlayerWallet, aRewardMult);
-            SharedFunctions::TotalEarningsMessage(totalEarnings);
+            SharedFunctions::TotalEarningsMessage(someEarnings);
 
             aBetAmount = SharedFunctions::GetPlayerBet(aBetAmount, aPlayerWallet, minBet);
 
@@ -107,7 +106,7 @@ namespace OddOrEven
                 std::cout << "Reward multiplier increased by 1.\n";
                 SharedFunctions::UpdatePlayerWallet(aBetAmount, aRewardMult, '+', aPlayerWallet);
                 SharedFunctions::UpdateStatistics(GameResult_Win, someStats);
-                totalEarnings += (aBetAmount * aRewardMult) - aBetAmount;
+                someEarnings += (aBetAmount * aRewardMult) - aBetAmount;
                 aRewardMult += 1;
                 std::cout << "New balance: " << aPlayerWallet << "kr \n\n";
                 system("pause");
@@ -133,7 +132,7 @@ namespace OddOrEven
                     std::cout << "\nYou watch as your " << aBetAmount << "kr dissappear under the table\n";
                     std::cout << "New balance: " << aPlayerWallet << "kr \n\n";
                     SharedFunctions::UpdateStatistics(GameResult_Loss, someStats);
-                    totalEarnings -= aBetAmount;
+                    someEarnings -= aBetAmount;
                     std::cout << "\nYou're having a bad time... Stay determined.\n\n";
                     system("pause");
                     SharedFunctions::ShowStatistics(someStats);

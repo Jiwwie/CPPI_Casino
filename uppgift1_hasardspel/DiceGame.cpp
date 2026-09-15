@@ -5,7 +5,7 @@
 
 namespace DiceGame
 {
-    void PlayDiceGame(bool gameRunning, int& aPlayerWallet, int aRewardMult, int aBetAmount, int someStats[], int& someTotalEarnings)
+    void PlayDiceGame(bool gameRunning, int& aPlayerWallet, int aRewardMult, int aBetAmount, int someStats[], int& someEarnings)
     {
 		const int maxGuess = 12;
 		const int minGuess = 2;
@@ -16,14 +16,14 @@ namespace DiceGame
 
         while (diceGame)
         {
-            if (!(diceGame = SharedFunctions::CheckIfBanned(someTotalEarnings)))
+            if (!(diceGame = SharedFunctions::CheckIfBanned(someEarnings)))
             {
                 system("cls");
                 std::cout << "\nYou earned too much at this table. Do something else.\n\n";
                 system("pause");
                 break;
             }
-            else if (!(diceGame = SharedFunctions::GetGameMenu(3, someTotalEarnings, aPlayerWallet, aRewardMult)))
+            else if (!(diceGame = SharedFunctions::GetGameMenu(3, someEarnings, aPlayerWallet, aRewardMult)))
             {
                 break;
             }
@@ -31,7 +31,7 @@ namespace DiceGame
             aRewardMult = 2;
 
             SharedFunctions::ShowGameIntro(Game_DiceGame, aPlayerWallet, aRewardMult);
-            SharedFunctions::TotalEarningsMessage(someTotalEarnings);
+            SharedFunctions::TotalEarningsMessage(someEarnings);
 
             aBetAmount = SharedFunctions::GetPlayerBet(aBetAmount, aPlayerWallet, minBet);
 
@@ -61,7 +61,7 @@ namespace DiceGame
                 std::cout << aBetAmount << "X" << aRewardMult << "kr added to wallet.\n";
                 SharedFunctions::UpdatePlayerWallet(aBetAmount, aRewardMult, '+', aPlayerWallet);
                 SharedFunctions::UpdateStatistics(GameResult_Win, someStats);
-                someTotalEarnings += (aBetAmount * aRewardMult) - aBetAmount;
+                someEarnings += (aBetAmount * aRewardMult) - aBetAmount;
                 std::cout << "New balance: " << aPlayerWallet << "kr \n\n";
                 std::cout << "You are filled with determination.\n\n";
                 system("pause");
@@ -72,7 +72,7 @@ namespace DiceGame
                 SharedFunctions::UpdatePlayerWallet(aBetAmount, aRewardMult, '-', aPlayerWallet);
                 std::cout << "\nYou watch as your " << aBetAmount << "kr dissappear under the table\n";
                 std::cout << "New balance: " << aPlayerWallet << "kr \n\n";
-                someTotalEarnings -= aBetAmount;
+                someEarnings -= aBetAmount;
 
                 if (aPlayerWallet <= 0)
                 {
