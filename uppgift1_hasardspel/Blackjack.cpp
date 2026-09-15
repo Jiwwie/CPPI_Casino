@@ -3,6 +3,9 @@
 #include "Shared.h"
 #include "Structs.h"
 #include "Blackjack.h"
+#include "Player.h"
+#include "GameFunctions.h"
+#include "Statistics.h"
 
 namespace Blackjack
 {
@@ -14,7 +17,7 @@ namespace Blackjack
         return rndDist(rndEngine);
     }
 
-    void PlayBlackjack(Struct::Player& aPlayer, int someStats[], int& someEarnings)
+    void PlayBlackjack(Player::Player& aPlayer, int someStats[], int& someEarnings)
     {
 		const int minBet = 1;
         int hitOrStand = 0;
@@ -32,14 +35,14 @@ namespace Blackjack
 
         while (blackjack)
         {
-            if (!(blackjack = Shared::CheckIfBanned(someEarnings)))
+            if (!(blackjack = Player::CheckIfBanned(someEarnings)))
             {
                 system("cls");
                 std::cout << "\nYou earned too much at this table. Do something else.\n\n";
                 system("pause");
                 break;
             }
-            else if (!(blackjack = Shared::GetGameMenu(Shared::Game_Blackjack, someEarnings, aPlayer.wallet, aPlayer.betMult)))
+            else if (!(blackjack = GameFunctions::GetGameMenu(Shared::Game_Blackjack, someEarnings, aPlayer.wallet, aPlayer.betMult)))
             {
                 break;
             }
@@ -50,10 +53,10 @@ namespace Blackjack
             drawingCards = true;
             aPlayer.betMult = 1;
 
-            Shared::ShowGameIntro(Shared::Game_Blackjack, aPlayer.wallet, aPlayer.betMult);
-            Shared::TotalEarningsMessage(someEarnings);
+            GameFunctions::ShowGameIntro(Shared::Game_Blackjack, aPlayer.wallet, aPlayer.betMult);
+            GameFunctions::TotalEarningsMessage(someEarnings);
 
-            aPlayer.bet = Shared::GetPlayerBet(aPlayer.bet, aPlayer.wallet, minBet);
+            aPlayer.bet = Player::GetPlayerBet(aPlayer.bet, aPlayer.wallet, minBet);
 
             system("cls");
             std::cout << "\nThe figure accepts your offer. \n";
@@ -81,7 +84,7 @@ namespace Blackjack
                 std::cout << "\nTwo options. What will you do?\n";
                 std::cout << "1. Hit\n";
                 std::cout << "2. Stand\n";
-                hitOrStand = Shared::GetPlayerNum(hitOrStand, HitOrStand_Stand, HitOrStand_Hit);
+                hitOrStand = Player::GetPlayerNum(hitOrStand, HitOrStand_Stand, HitOrStand_Hit);
 
                 switch (hitOrStand)
                 {
@@ -100,8 +103,8 @@ namespace Blackjack
                     {
                         std::cout << "\n\nCard sum went over 21.\n";
                         std::cout << "You lose.\n";
-                        Shared::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '-', aPlayer.wallet);
-                        Shared::UpdateStatistics(Shared::GameResult_Loss, someStats);
+                        Player::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '-', aPlayer.wallet);
+                        Statistics::UpdateStatistics(Shared::GameResult_Loss, someStats);
                         someEarnings -= aPlayer.bet;
                         if (aPlayer.wallet <= 0)
                         {
@@ -113,7 +116,7 @@ namespace Blackjack
                             break;
                         }
                         system("pause");
-                        Shared::ShowStatistics(someStats);
+                        Statistics::ShowStatistics(someStats);
                         drawingCards = false;
                     }
 
@@ -142,18 +145,18 @@ namespace Blackjack
                     {
                         std::cout << "\nYou chose to stand and got your kr back. (counts as win)" << std::endl;
                         std::cout << "Balance: " << aPlayer.wallet << "kr \n\n";
-                        Shared::UpdateStatistics(Shared::GameResult_Win, someStats);
+                        Statistics::UpdateStatistics(Shared::GameResult_Win, someStats);
                     }
                     else
                     {
                         std::cout << "\nYou won " << aPlayer.bet * aPlayer.betMult << "kr" << std::endl;
-                        Shared::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '+', aPlayer.wallet);
+                        Player::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '+', aPlayer.wallet);
                         std::cout << "New balance: " << aPlayer.wallet << "kr \n\n";
-                        Shared::UpdateStatistics(Shared::GameResult_Win, someStats);
+                        Statistics::UpdateStatistics(Shared::GameResult_Win, someStats);
                     }
                     someEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
                     system("pause");
-                    Shared::ShowStatistics(someStats);
+                    Statistics::ShowStatistics(someStats);
                     drawingCards = false;
                     break;
                 }

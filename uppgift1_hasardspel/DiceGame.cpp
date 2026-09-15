@@ -3,6 +3,9 @@
 #include "Shared.h"
 #include "Structs.h"
 #include "DiceGame.h"
+#include "Player.h"
+#include "GameFunctions.h"
+#include "Statistics.h"
 
 namespace DiceGame
 {
@@ -16,7 +19,7 @@ namespace DiceGame
         aDie.dieTwo = rndDist(rndEngine);
     }
 
-    void PlayDiceGame(Struct::Player& aPlayer, int someStats[], int& someEarnings)
+    void PlayDiceGame(Player::Player& aPlayer, int someStats[], int& someEarnings)
     {
 		const int maxGuess = 12;
 		const int minGuess = 2;
@@ -27,24 +30,24 @@ namespace DiceGame
 
         while (diceGame)
         {
-            if (!(diceGame = Shared::CheckIfBanned(someEarnings)))
+            if (!(diceGame = Player::CheckIfBanned(someEarnings)))
             {
                 system("cls");
                 std::cout << "\nYou earned too much at this table. Do something else.\n\n";
                 system("pause");
                 break;
             }
-            else if (!(diceGame = Shared::GetGameMenu(3, someEarnings, aPlayer.wallet, aPlayer.betMult)))
+            else if (!(diceGame = GameFunctions::GetGameMenu(3, someEarnings, aPlayer.wallet, aPlayer.betMult)))
             {
                 break;
             }
 
             aPlayer.betMult = 2;
 
-            Shared::ShowGameIntro(Shared::Game_DiceGame, aPlayer.wallet, aPlayer.betMult);
-            Shared::TotalEarningsMessage(someEarnings);
+            GameFunctions::ShowGameIntro(Shared::Game_DiceGame, aPlayer.wallet, aPlayer.betMult);
+            GameFunctions::TotalEarningsMessage(someEarnings);
 
-            aPlayer.bet = Shared::GetPlayerBet(aPlayer.bet, aPlayer.wallet, minBet);
+            aPlayer.bet = Player::GetPlayerBet(aPlayer.bet, aPlayer.wallet, minBet);
 
             system("cls");
             std::cout << "\nThe figure accepts your offer. \n";
@@ -56,7 +59,7 @@ namespace DiceGame
             }
             std::cout << "_______________________________ \n";
             std::cout << "What is your guess? (2-12)  ";
-            playerGuess = Shared::GetPlayerNum(playerGuess, maxGuess, minGuess);
+            playerGuess = Player::GetPlayerNum(playerGuess, maxGuess, minGuess);
             RollDice(die, 1, 6);
 
             system("cls");
@@ -70,17 +73,17 @@ namespace DiceGame
             {
                 std::cout << "\nThe figure winks and slips you something under the table.\n";
                 std::cout << aPlayer.bet << "X" << aPlayer.betMult << "kr added to wallet.\n";
-                Shared::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '+', aPlayer.wallet);
-                Shared::UpdateStatistics(Shared::GameResult_Win, someStats);
+                Player::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '+', aPlayer.wallet);
+                Statistics::UpdateStatistics(Shared::GameResult_Win, someStats);
                 someEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
                 std::cout << "New balance: " << aPlayer.wallet << "kr \n\n";
                 std::cout << "You are filled with determination.\n\n";
                 system("pause");
-                Shared::ShowStatistics(someStats);
+                Statistics::ShowStatistics(someStats);
             }
             else
             {
-                Shared::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '-', aPlayer.wallet);
+                Player::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '-', aPlayer.wallet);
                 std::cout << "\nYou watch as your " << aPlayer.bet << "kr dissappear under the table\n";
                 std::cout << "New balance: " << aPlayer.wallet << "kr \n\n";
                 someEarnings -= aPlayer.bet;
@@ -96,9 +99,9 @@ namespace DiceGame
                 else
                 {
                     std::cout << "\nYou're having a bad time... Stay determined.\n\n\n";
-                    Shared::UpdateStatistics(Shared::GameResult_Loss, someStats);
+                    Statistics::UpdateStatistics(Shared::GameResult_Loss, someStats);
                     system("pause");
-                    Shared::ShowStatistics(someStats);
+                    Statistics::ShowStatistics(someStats);
                 }
             }
         }

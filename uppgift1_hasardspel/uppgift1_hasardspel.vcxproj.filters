@@ -37,6 +37,15 @@
     <ClCompile Include="Shared.cpp">
       <Filter>Source Files\cpp files</Filter>
     </ClCompile>
+    <ClCompile Include="Statistics.cpp">
+      <Filter>Source Files\cpp files</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\cpp files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameFunctions.cpp">
+      <Filter>Source Files\cpp files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Blackjack.h">
@@ -55,6 +64,15 @@
       <Filter>Source Files\header files</Filter>
     </ClInclude>
     <ClInclude Include="Structs.h">
+      <Filter>Source Files\header files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameFunctions.h">
+      <Filter>Source Files\header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Source Files\header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Statistics.h">
       <Filter>Source Files\header files</Filter>
     </ClInclude>
   </ItemGroup>

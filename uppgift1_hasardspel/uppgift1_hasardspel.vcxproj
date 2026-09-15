@@ -142,17 +142,23 @@
   <ItemGroup>
     <ClCompile Include="Blackjack.cpp" />
     <ClCompile Include="DiceGame.cpp" />
+    <ClCompile Include="GameFunctions.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="OddOrEven.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="RockPaperScissors.cpp" />
     <ClCompile Include="Shared.cpp" />
+    <ClCompile Include="Statistics.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Blackjack.h" />
     <ClInclude Include="DiceGame.h" />
+    <ClInclude Include="GameFunctions.h" />
     <ClInclude Include="OddOrEven.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="RockPaperScissors.h" />
     <ClInclude Include="Shared.h" />
+    <ClInclude Include="Statistics.h" />
     <ClInclude Include="Structs.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

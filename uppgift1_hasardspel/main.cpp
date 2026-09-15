@@ -7,6 +7,9 @@
 #include "OddOrEven.h"
 #include "Blackjack.h"
 #include "RockPaperScissors.h"
+#include "Player.h"
+#include "GameFunctions.h"
+#include "Statistics.h"
 
 int main()
 {
@@ -30,16 +33,16 @@ int main()
     };
 
     int activeGame = 0;
-    int playerWallet = 1000;
 
-	Struct::Player player = {};
-	Struct::TotalEarnings earnings = {};
+	//Namespace, struct, instance of struct
+	Player::Player player = {};
+	Player::TotalEarnings earnings = {};
 
     while (player.playing)
     {
         Shared::ShowMainMenu();
         std::cin >> activeGame;
-        Shared::ClearInputBuffer();
+        Player::ClearInputBuffer();
 
         switch (activeGame)
         {
@@ -65,13 +68,13 @@ int main()
 			}
             case MainMenu_Statistics:
             {
-                Shared::ShowStatistics(stats);
+                Statistics::ShowStatistics(stats);
                 break;
             }
             case MainMenu_LeaveCasino:
             {
                 system("cls");
-                std::cout << "\nYou left the casino with " << playerWallet << "kr to your name.\n\n\n";
+                std::cout << "\nYou left the casino with " << player.wallet << "kr to your name.\n\n\n";
                 system("pause");
                 player.playing = false;
                 break;
