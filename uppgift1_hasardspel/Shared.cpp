@@ -74,15 +74,15 @@ namespace Shared
             std::cout << "You are filled with determination.\n\n";
             break;
         }
-		case IntroKey_RockPaperScissors:
-		{
-			std::cout << "A mysterious figure steps forth and reveals a hand.\n";
-			std::cout << "\"If you can guess what I will throw...\"\n";
-			std::cout << "\"I'll reward you handsomely.\"\n\n";
+        case IntroKey_RockPaperScissors:
+        {
+            std::cout << "A mysterious figure steps forth and reveals a hand.\n";
+            std::cout << "\"If you can guess what I will throw...\"\n";
+            std::cout << "\"I'll reward you handsomely.\"\n\n";
 
-			std::cout << "You are filled with determination.\n\n";
-			break;
-		}
+            std::cout << "You are filled with determination.\n\n";
+            break;
+        }
         default:
         {
             std::cout << "Key does not exist\n";
@@ -184,7 +184,7 @@ namespace Shared
             Rules_DiceGame = 1,
             Rules_OddOrEven = 2,
             Rules_Blackjack = 3,
-			Rules_RockPaperScissor = 4
+            Rules_RockPaperScissor = 4
         };
 
         while (menu)
@@ -206,55 +206,55 @@ namespace Shared
 
             switch (menuChoice)
             {
-                case MenuChoice_PlayGame:
+            case MenuChoice_PlayGame:
+            {
+                startGame = true;
+                menu = false;
+                break;
+            }
+            case MenuChoice_ShowRules:
+            {
+                system("cls");
+                std::cout << "RULES:\n";
+                if (aGameNum == Rules_DiceGame)
                 {
-                    startGame = true;
-                    menu = false;
-                    break;
+                    std::cout << "1. Guess any number between 2-12\n";
+                    std::cout << "2. Two six-sided dice are rolled\n";
+                    std::cout << "3. If you guessed the sum, you win\n\n";
                 }
-                case MenuChoice_ShowRules:
+                else if (aGameNum == Rules_OddOrEven)
                 {
-                    system("cls");
-                    std::cout << "RULES:\n";
-                    if (aGameNum == Rules_DiceGame)
-                    {
-                        std::cout << "1. Guess any number between 2-12\n";
-                        std::cout << "2. Two six-sided dice are rolled\n";
-                        std::cout << "3. If you guessed the sum, you win\n\n";
-                    }
-                    else if (aGameNum == Rules_OddOrEven)
-                    {
-                        std::cout << "1. Place your bet, odd or even\n";
-                        std::cout << "2. Two six-sided dice are rolled\n";
-                        std::cout << "3. If both sides show odd/even, you win\n";
-                        std::cout << "3. Winning multiple times in a row will increase your reward multiplier\n\n\n";
-                    }
-                    else if (aGameNum == Rules_Blackjack)
-                    {
-                        std::cout << "1. The deck contains cards with values 1-11.\n";
-                        std::cout << "2. Hit to draw a card, stand to end round.\n";
-                        std::cout << "3. Each card after your third increases reward.\n";
-                        std::cout << "3. If your sum oversteps 21, you lose.\n\n\n";
-                    }
-                    else if (aGameNum == Rules_RockPaperScissor)
-                    {
-                        std::cout << "1. Choose rock, paper, or scissors\n";
-                        std::cout << "2. The figure will too...\n";
-                        std::cout << "3. Rock beats scissors, scissors beats paper, paper beats rock\n\n\n";
-                    }
-                    system("pause");
-                    break;
+                    std::cout << "1. Place your bet, odd or even\n";
+                    std::cout << "2. Two six-sided dice are rolled\n";
+                    std::cout << "3. If both sides show odd/even, you win\n";
+                    std::cout << "3. Winning multiple times in a row will increase your reward multiplier\n\n\n";
+                }
+                else if (aGameNum == Rules_Blackjack)
+                {
+                    std::cout << "1. The deck contains cards with values 1-11.\n";
+                    std::cout << "2. Hit to draw a card, stand to end round.\n";
+                    std::cout << "3. Each card after your third increases reward.\n";
+                    std::cout << "3. If your sum oversteps 21, you lose.\n\n\n";
+                }
+                else if (aGameNum == Rules_RockPaperScissor)
+                {
+                    std::cout << "1. Choose rock, paper, or scissors\n";
+                    std::cout << "2. The figure will too...\n";
+                    std::cout << "3. Rock beats scissors, scissors beats paper, paper beats rock\n\n\n";
+                }
+                system("pause");
+                break;
 
-                }
-                case MenuChoice_BackToMain:
-                {
-                    menu = false;
-                    break;
-                }
-                default:
-                {
-                    break;
-                }
+            }
+            case MenuChoice_BackToMain:
+            {
+                menu = false;
+                break;
+            }
+            default:
+            {
+                break;
+            }
             }
         }
         return startGame;
@@ -355,13 +355,13 @@ namespace Shared
         aDie.dieTwo = rndDist(rndEngine);
     }
 
-	void RollRPS(Random& aRPS)
-	{
-		std::random_device seed;
-		std::mt19937 rndEngine(seed());
-		std::uniform_int_distribution<int> rndDist(1, 3);
-		aRPS.rps = rndDist(rndEngine);
-	}
+    void RollRPS(Random& aRPS)
+    {
+        std::random_device seed;
+        std::mt19937 rndEngine(seed());
+        std::uniform_int_distribution<int> rndDist(1, 3);
+        aRPS.rps = rndDist(rndEngine);
+    }
 
     int DrawCard()
     {
@@ -370,5 +370,6 @@ namespace Shared
         std::uniform_int_distribution<int> rndDist(1, 11);
         return rndDist(rndEngine);
     }
+}
 
 
