@@ -54,6 +54,16 @@ namespace Roulette
 		aWheel[36][1] = Color_Red;
 	}
 
+	void GetColumn(int aWheel[wheelSize][colSize], int aColumn)
+	{ 
+		std::cout << "Your numbers: \n";
+		for (int i = (0 + aColumn); i < wheelSize; i+=3)
+		{
+			std::cout << aWheel[i][0] << " ";
+		}
+		std::cout << "\n";
+	}
+
 	void PlayRoulette(Player::Player& aPlayer, int someStats[], int& someEarnings)
 	{
 		int wheel[wheelSize][colSize];
@@ -78,7 +88,7 @@ namespace Roulette
 				break;
 			}
 
-			GameFunctions::ShowGameIntro(Misc::Game_Blackjack, aPlayer.wallet, aPlayer.betMult);
+			GameFunctions::ShowGameIntro(Misc::Game_Roulette, aPlayer.wallet, aPlayer.betMult);
 			GameFunctions::TotalEarningsMessage(someEarnings);
 
 			std::cout << "_______________________________ \n";
@@ -92,17 +102,17 @@ namespace Roulette
 				{
 					case Color_Green:
 					{
-						std::cout << "(Green) ";
+						std::cout << "(G) ";
 						break;
 					}
 					case Color_Red:
 					{
-						std::cout << "(Red) ";
+						std::cout << "(R) |";
 						break;
 					}
 					case Color_Black:
 					{
-						std::cout << "(Black) ";
+						std::cout << "(B) |";
 						break;
 					}
 					default:
@@ -127,7 +137,6 @@ namespace Roulette
 			
 			std::cout << "What will you do?\n";
 			playerInput = Player::GetPlayerNum(playerInput, maxNum, minNum);
-
 			aPlayer.bet = Player::GetPlayerBet(aPlayer.bet, aPlayer.wallet, minBet);
 
 			system("cls");
@@ -138,14 +147,51 @@ namespace Roulette
 				std::cout << "Betting your whole wallet fills you with determination.\n";
 			}
 
+
+			switch (playerInput)
+			{
+				case BettingOption_Straight:
+				{
+					std::cout << "You chose to bet on a straight number.\n";
+					std::cout << "You're betting " << aPlayer.bet << "kr.\n\n";
+					break;
+				}
+				case BettingOption_OddEven:
+				{
+					std::cout << "You chose to bet on odd or even.\n";
+					std::cout << "You're betting " << aPlayer.bet << "kr.\n\n";
+					break;
+				}
+				case BettingOption_RedBlack:
+				{
+					std::cout << "You chose to bet on red or black.\n";
+					std::cout << "You're betting " << aPlayer.bet << "kr.\n\n";
+					break;
+				}
+				case BettingOption_Column:
+				{
+					const int maxCol = 3;
+					const int minCol = 1;
+
+					std::cout << "You chose to bet on a column.\n";
+					std::cout << "You're betting " << aPlayer.bet << "kr.\n\n";
+					std::cout << "Which column do you want? (1-3) " << "\n";
+					playerInput = Player::GetPlayerNum(playerInput, maxCol, minCol);
+
+					GetColumn(wheel, playerInput);
+					system("pause");
+					break;
+				}
+				default:
+					break;
+				}
+
 		}
 
 		//placeholder
 		std::cout << aPlayer.wallet; 
 		std::cout << someStats[0];
 		std::cout << someEarnings;
-
-		system("pause");
 
 	}
 }
