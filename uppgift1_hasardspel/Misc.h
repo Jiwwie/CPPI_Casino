@@ -16,5 +16,4 @@ namespace Misc
 		Game_Blackjack = 3,
 		Game_RockPaperScissors = 4
 	};
-
 }
