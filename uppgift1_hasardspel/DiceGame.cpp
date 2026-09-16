@@ -23,7 +23,6 @@ namespace DiceGame
 		const int maxGuess = 12;
 		const int minGuess = 2;
 		const int minBet = 1;
-        int playerGuess = 0;
         bool diceGame = true;
         Misc::Random die = {};
 
@@ -58,7 +57,7 @@ namespace DiceGame
             }
             std::cout << "_______________________________ \n";
             std::cout << "What is your guess? (2-12)  ";
-            playerGuess = Player::GetPlayerNum(playerGuess, maxGuess, minGuess);
+            aPlayer.input = Player::GetPlayerNum(aPlayer.input, maxGuess, minGuess);
             RollDice(die, 1, 6);
 
             system("cls");
@@ -66,9 +65,9 @@ namespace DiceGame
             std::cout << "Die 1: " << die.dieOne << std::endl;
             std::cout << "Die 2: " << die.dieTwo << std::endl;
             std::cout << "Sum: " << die.dieOne + die.dieTwo << std::endl;
-            std::cout << "Your guess: " << playerGuess << std::endl;
+            std::cout << "Your guess: " << aPlayer.input << std::endl;
 
-            if (playerGuess == die.dieOne + die.dieTwo)
+            if (aPlayer.input == die.dieOne + die.dieTwo)
             {
                 std::cout << "\nThe figure winks and slips you something under the table.\n";
                 std::cout << aPlayer.bet << "X" << aPlayer.betMult << "kr added to wallet.\n";

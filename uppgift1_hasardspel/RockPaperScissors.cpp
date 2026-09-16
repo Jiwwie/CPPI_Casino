@@ -21,7 +21,6 @@ namespace RockPaperScissors
 		const int maxNum = 3;
 		const int minNum = 1;
 		const int minBet = 1;
-		int playerInput = 0;
 		Misc::Random figureInput = {};
 		bool rockPaperScissors = true;
 
@@ -66,14 +65,14 @@ namespace RockPaperScissors
             std::cout << "1. Rock\n";
             std::cout << "2. Paper\n";
             std::cout << "3. Scissors\n";
-            playerInput = Player::GetPlayerNum(playerInput, maxNum, minNum);
+            aPlayer.input = Player::GetPlayerNum(aPlayer.input, maxNum, minNum);
             RollRPS(figureInput, minNum, maxNum);
 
 
 			system("cls");
 			std::cout << "\nThe figure throws its hand dramatically...\n";
 
-			switch (playerInput)
+			switch (aPlayer.input)
 			{
 				case RPS_Rock:
 					std::cout << "You threw: Rock\n";
@@ -106,7 +105,7 @@ namespace RockPaperScissors
 			system("pause");
 
 
-            switch (playerInput)
+            switch (aPlayer.input)
             {
 				case RPS_Rock:
 					if (figureInput.rps == RPS_Scissors)

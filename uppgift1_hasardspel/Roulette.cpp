@@ -86,7 +86,6 @@ namespace Roulette
 		const int maxNum = 4;
 		const int minNum = 1;
 		const int minBet = 1;
-		int playerInput = 0;
 		bool roulette = true;
 		Misc::Random aBall = {};
 		
@@ -152,7 +151,7 @@ namespace Roulette
 			std::cout << "4. Column    (3x bet)\n\n";
 			
 			std::cout << "What will you do?\n";
-			playerInput = Player::GetPlayerNum(playerInput, maxNum, minNum);
+			aPlayer.input = Player::GetPlayerNum(aPlayer.input, maxNum, minNum);
 			aPlayer.bet = Player::GetPlayerBet(aPlayer.bet, aPlayer.wallet, minBet);
 
 			system("cls");
@@ -164,7 +163,7 @@ namespace Roulette
 			}
 
 
-			switch (playerInput)
+			switch (aPlayer.input)
 			{
 				case BettingOption_Straight:
 				{
@@ -175,12 +174,12 @@ namespace Roulette
 					std::cout << "You chose to bet on a straight number.\n";
 					std::cout << "You're betting " << aPlayer.bet << "kr.\n\n";
 					std::cout << "Which number do you want? (0-36) " << "\n";
-					playerInput = Player::GetPlayerNum(playerInput, maxGuess, minGuess);
+					aPlayer.input = Player::GetPlayerNum(aPlayer.input, maxGuess, minGuess);
 					system("pause");
 
 					SpinBall(aBall, 0, wheelSize-1);
 
-					if (playerInput == aBall.ball)
+					if (aPlayer.input == aBall.ball)
 					{
 						std::cout << "\n\nYou win! Are you hacking?\n";
 						std::cout << aPlayer.bet * aPlayer.betMult << "kr added to wallet.\n\n";
@@ -217,12 +216,12 @@ namespace Roulette
 					std::cout << "Two options. Even or odd?\n";
 					std::cout << "1. Even\n";
 					std::cout << "2. Odd\n";
-					playerInput = Player::GetPlayerNum(playerInput, maxChoice, minChoice);
+					aPlayer.input = Player::GetPlayerNum(aPlayer.input, maxChoice, minChoice);
 					system("pause");
 
 					SpinBall(aBall, 0, wheelSize - 1);
 
-					switch (playerInput)
+					switch (aPlayer.input)
 					{
 						case Choice_Even:
 						{
@@ -287,7 +286,7 @@ namespace Roulette
 					std::cout << "Two options. Red or black?\n";
 					std::cout << "1. Red\n";
 					std::cout << "2. Black\n";
-					playerInput = Player::GetPlayerNum(playerInput, maxChoice, minChoice);
+					aPlayer.input = Player::GetPlayerNum(aPlayer.input, maxChoice, minChoice);
 					system("pause");
 
 					SpinBall(aBall, 0, wheelSize - 1);
@@ -313,7 +312,7 @@ namespace Roulette
 							break;
 					}
 
-					switch (playerInput)
+					switch (aPlayer.input)
 					{
 					case Choice_Red:
 					{
@@ -371,13 +370,13 @@ namespace Roulette
 					std::cout << "You chose to bet on a column.\n";
 					std::cout << "You're betting " << aPlayer.bet << "kr.\n\n";
 					std::cout << "Which column do you want? (1-3) " << "\n";
-					playerInput = Player::GetPlayerNum(playerInput, maxCol, minCol);
+					aPlayer.input = Player::GetPlayerNum(aPlayer.input, maxCol, minCol);
 
-					GetColumn(wheel, playerInput);
+					GetColumn(wheel, aPlayer.input);
 					system("pause");
 
 					SpinBall(aBall, 0, wheelSize - 1);
-					for (int i = (0 + playerInput) ; i < wheelSize; i+=3)
+					for (int i = (0 + aPlayer.input) ; i < wheelSize; i+=3)
 					{
 						if (aBall.ball == i)
 						{

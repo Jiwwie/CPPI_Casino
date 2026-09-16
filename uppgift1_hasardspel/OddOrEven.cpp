@@ -23,7 +23,6 @@ namespace OddOrEven
 		const int maxGuess = 2;
 		const int minGuess = 1;
 		const int minBet = 1;
-        int playerGuess = 0;
         int rollResult = 0;
         bool oddOrEven = true;
         Misc::Random die = {};
@@ -63,7 +62,7 @@ namespace OddOrEven
             std::cout << "1. Odd\n";
             std::cout << "2. Even\n";
 
-            playerGuess = Player::GetPlayerNum(playerGuess, maxGuess, minGuess);
+            aPlayer.input = Player::GetPlayerNum(aPlayer.input, maxGuess, minGuess);
             RollDice(die, 1, 6);
 
             if (die.dieOne % 2 == 0 && die.dieTwo % 2 == 0)
@@ -103,7 +102,7 @@ namespace OddOrEven
             }
 
             std::cout << "\n\nYou guessed: ";
-            if (playerGuess == 1)
+            if (aPlayer.input == 1)
             {
                 std::cout << "Odd\n";
             }
@@ -112,7 +111,7 @@ namespace OddOrEven
                 std::cout << "Even\n";
             }
 
-            if (playerGuess == rollResult)
+            if (aPlayer.input == rollResult)
             {
                 std::cout << "The figure nods slowly while handing over your reward.\n\n";
                 std::cout << aPlayer.bet << "X" << aPlayer.betMult << "kr added to wallet.\n";
