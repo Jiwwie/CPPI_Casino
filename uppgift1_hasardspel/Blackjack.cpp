@@ -16,7 +16,7 @@ namespace Blackjack
         return rndDist(rndEngine);
     }
 
-    void PlayBlackjack(Player::Player& aPlayer, int someStats[], int& someEarnings)
+    void PlayBlackjack(Player::PlayerData& aPlayer, int someStats[], int& someEarnings)
     {
 		const int minBet = 1;
         int hitOrStand = 0;
@@ -102,7 +102,7 @@ namespace Blackjack
                     {
                         std::cout << "\n\nCard sum went over 21.\n";
                         std::cout << "You lose.\n";
-                        Player::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '-', aPlayer.wallet);
+                        Player::UpdatePlayerWallet(aPlayer, '-');
                         Statistics::UpdateStatistics(Statistics::GameResult_Loss, someStats);
                         someEarnings -= aPlayer.bet;
                         if (aPlayer.wallet <= 0)
@@ -149,7 +149,7 @@ namespace Blackjack
                     else
                     {
                         std::cout << "\nYou won " << aPlayer.bet * aPlayer.betMult << "kr" << std::endl;
-                        Player::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '+', aPlayer.wallet);
+                        Player::UpdatePlayerWallet(aPlayer, '+');
                         std::cout << "New balance: " << aPlayer.wallet << "kr \n\n";
                         Statistics::UpdateStatistics(Statistics::GameResult_Win, someStats);
                     }

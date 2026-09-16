@@ -4,5 +4,5 @@
 namespace OddOrEven
 {
 	void RollDice(Misc::Random& aDie, int aMin, int aMax);
-	void PlayOddOrEven(Player::Player& aPlayer, int someStats[], int& someEarnings);
+	void PlayOddOrEven(Player::PlayerData& aPlayer, int someStats[], int& someEarnings);
 }

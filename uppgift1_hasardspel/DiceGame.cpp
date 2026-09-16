@@ -18,7 +18,7 @@ namespace DiceGame
         aDie.dieTwo = rndDist(rndEngine);
     }
 
-    void PlayDiceGame(Player::Player& aPlayer, int someStats[], int& someEarnings)
+    void PlayDiceGame(Player::PlayerData& aPlayer, int someStats[], int& someEarnings)
     {
 		const int maxGuess = 12;
 		const int minGuess = 2;
@@ -71,7 +71,7 @@ namespace DiceGame
             {
                 std::cout << "\nThe figure winks and slips you something under the table.\n";
                 std::cout << aPlayer.bet << "X" << aPlayer.betMult << "kr added to wallet.\n";
-                Player::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '+', aPlayer.wallet);
+                Player::UpdatePlayerWallet(aPlayer, '+');
                 Statistics::UpdateStatistics(Statistics::GameResult_Win, someStats);
                 someEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
                 std::cout << "New balance: " << aPlayer.wallet << "kr \n\n";
@@ -81,7 +81,7 @@ namespace DiceGame
             }
             else
             {
-                Player::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '-', aPlayer.wallet);
+                Player::UpdatePlayerWallet(aPlayer, '-');
                 std::cout << "\nYou watch as your " << aPlayer.bet << "kr dissappear under the table\n";
                 std::cout << "New balance: " << aPlayer.wallet << "kr \n\n";
                 someEarnings -= aPlayer.bet;

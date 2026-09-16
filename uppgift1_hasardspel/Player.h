@@ -2,12 +2,17 @@
 
 namespace Player
 {
-	struct Player
+	struct PlayerData
 	{
+		//replace all const int to use player data
+		int maxInput;
+		int minInput;
 		int input;
+
 		int wallet = 1000;
 		int bet;
 		int betMult = 2;
+		
 		bool playing = true;
 		bool banned = false;
 	};
@@ -25,5 +30,5 @@ namespace Player
     int GetPlayerNum(int aPlayerNum, int aMax, int aMin);
     int GetPlayerBet(int aPlayerNum, int aMax, int aMin);
     int CheckIfBanned(int aTotalEarnings);
-    void UpdatePlayerWallet(int aBetAmount, int aMultiplier, char anOperator, int& aPlayerWallet);
+    void UpdatePlayerWallet(Player::PlayerData& aPlayer, char anOperator);
 }

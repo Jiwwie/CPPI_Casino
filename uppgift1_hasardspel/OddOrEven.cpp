@@ -18,7 +18,7 @@ namespace OddOrEven
         aDie.dieTwo = rndDist(rndEngine);
     }
 
-    void PlayOddOrEven(Player::Player& aPlayer, int someStats[], int& someEarnings)
+    void PlayOddOrEven(Player::PlayerData& aPlayer, int someStats[], int& someEarnings)
     {
 		const int maxGuess = 2;
 		const int minGuess = 1;
@@ -116,7 +116,7 @@ namespace OddOrEven
                 std::cout << "The figure nods slowly while handing over your reward.\n\n";
                 std::cout << aPlayer.bet << "X" << aPlayer.betMult << "kr added to wallet.\n";
                 std::cout << "Reward multiplier increased by 1.\n";
-                Player::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '+', aPlayer.wallet);
+                Player::UpdatePlayerWallet(aPlayer, '+');
                 Statistics::UpdateStatistics(Statistics::GameResult_Win, someStats);
                 someEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
                 aPlayer.betMult += 1;
@@ -126,7 +126,7 @@ namespace OddOrEven
             }
             else
             {
-                Player::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '-', aPlayer.wallet);
+                Player::UpdatePlayerWallet(aPlayer, '-');
                 aPlayer.betMult = 2;
 
                 if (aPlayer.wallet <= 0)

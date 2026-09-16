@@ -5,5 +5,5 @@
 namespace RockPaperScissors
 {
 	void RollRPS(Misc::Random& aRPS, int aMin, int aMax);
-	void PlayRPS(Player::Player& aPlayer, int someStats[], int& someEarnings);
+	void PlayRPS(Player::PlayerData& aPlayer, int someStats[], int& someEarnings);
 }

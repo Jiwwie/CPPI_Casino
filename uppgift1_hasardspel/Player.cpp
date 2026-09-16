@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Player.h"
 
 namespace Player
 {
@@ -8,18 +9,18 @@ namespace Player
         std::cin.ignore(10000, '\n');
     }
 
-    void UpdatePlayerWallet(int aBetAmount, int aMultiplier, char anOperator, int& aPlayerWallet)
+    void UpdatePlayerWallet(Player::PlayerData& aPlayer, char anOperator)
     {
         switch (anOperator)
         {
         case '+':
         {
-            aPlayerWallet = (aPlayerWallet + (aBetAmount * aMultiplier)) - aBetAmount;
+            aPlayer.wallet = (aPlayer.wallet + (aPlayer.bet * aPlayer.betMult)) - aPlayer.bet;
             break;
         }
         case '-':
         {
-            aPlayerWallet = aPlayerWallet - aBetAmount;
+            aPlayer.wallet = aPlayer.wallet - aPlayer.bet;
             break;
         }
         default:

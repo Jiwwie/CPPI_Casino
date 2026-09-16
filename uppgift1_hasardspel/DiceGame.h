@@ -5,5 +5,5 @@
 namespace DiceGame
 {
 	void RollDice(Misc::Random& aDie, int aMin, int aMax);
-	void PlayDiceGame(Player::Player& aPlayer, int someStats[], int& someEarnings);
+	void PlayDiceGame(Player::PlayerData& aPlayer, int someStats[], int& someEarnings);
 }

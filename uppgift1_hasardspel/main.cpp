@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cstdlib>
 #include <random>
-#include "Misc.h"
 #include "DiceGame.h"
 #include "OddOrEven.h"
 #include "Blackjack.h"
@@ -35,7 +34,7 @@ int main()
 
     int activeGame = 0;
     
-	Player::Player player = {};
+	Player::PlayerData player = {};
 	Player::TotalEarnings earnings = {};
 
     while (player.playing)
