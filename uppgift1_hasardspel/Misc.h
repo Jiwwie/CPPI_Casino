@@ -7,6 +7,7 @@ namespace Misc
 		int dieOne;
 		int dieTwo;
 		int rps;
+		int ball;
 	};
 
 	enum Game

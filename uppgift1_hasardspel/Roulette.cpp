@@ -64,6 +64,14 @@ namespace Roulette
 		std::cout << "\n";
 	}
 
+	void SpinBall(Misc::Random& aBall, int aMin, int aMax)
+	{
+		std::random_device seed;
+		std::mt19937 rndEngine(seed());
+		std::uniform_int_distribution<int> rndDist(aMin, aMax);
+		aBall.ball = rndDist(rndEngine);
+	}
+
 	void PlayRoulette(Player::Player& aPlayer, int someStats[], int& someEarnings)
 	{
 		int wheel[wheelSize][colSize];
@@ -73,6 +81,7 @@ namespace Roulette
 		const int minBet = 1;
 		int playerInput = 0;
 		bool roulette = true;
+		Misc::Random aBall = {};
 		
 		while (roulette)
 		{
@@ -130,10 +139,10 @@ namespace Roulette
 			}
 			std::cout << std::endl;
 			std::cout << "Betting options: (1-4)\n";
-			std::cout << "1. Straight (30x bet)\n";
-			std::cout << "2. Odd/Even (2x bet)\n";
+			std::cout << "1. Straight  (30x bet)\n";
+			std::cout << "2. Odd/Even  (2x bet)\n";
 			std::cout << "3. Red/Black (2x bet)\n";
-			std::cout << "4. Column (3x bet)\n\n";
+			std::cout << "4. Column    (3x bet)\n\n";
 			
 			std::cout << "What will you do?\n";
 			playerInput = Player::GetPlayerNum(playerInput, maxNum, minNum);
@@ -152,18 +161,53 @@ namespace Roulette
 			{
 				case BettingOption_Straight:
 				{
+					const int maxGuess = 36;
+					const int minGuess = 0;
+					aPlayer.betMult = 30;
+
 					std::cout << "You chose to bet on a straight number.\n";
 					std::cout << "You're betting " << aPlayer.bet << "kr.\n\n";
+					std::cout << "Which number do you want? (0-36) " << "\n";
+					playerInput = Player::GetPlayerNum(playerInput, maxGuess, minGuess);
+					system("pause");
+
+					SpinBall(aBall, 0, wheelSize-1);
+					std::cout << "========================================= " << "\n";
+					std::cout << "The figure spins the ball dramatically... " << "\n";
+					std::cout << "It lands on... " << "\n" << aBall.ball << "!\n\n";
+					system("pause");
+
+					if (playerInput == aBall.ball)
+					{
+						std::cout << "\n\nYou win! Are you hacking?\n";
+						std::cout << aPlayer.bet * aPlayer.betMult << "kr added to wallet.\n\n";
+						Player::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '+', aPlayer.wallet);
+						Statistics::UpdateStatistics(Statistics::GameResult_Win, someStats);
+						someEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
+					}
+					else
+					{
+						std::cout << "\nYou lose... XD\n\n";
+						Player::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '-', aPlayer.wallet);
+						Statistics::UpdateStatistics(Statistics::GameResult_Loss, someStats);
+						someEarnings -= aPlayer.bet;
+					}
+					system("pause");
+
 					break;
 				}
 				case BettingOption_OddEven:
 				{
+					aPlayer.betMult = 2;
+
 					std::cout << "You chose to bet on odd or even.\n";
 					std::cout << "You're betting " << aPlayer.bet << "kr.\n\n";
 					break;
 				}
 				case BettingOption_RedBlack:
 				{
+					aPlayer.betMult = 2;
+
 					std::cout << "You chose to bet on red or black.\n";
 					std::cout << "You're betting " << aPlayer.bet << "kr.\n\n";
 					break;
@@ -172,6 +216,7 @@ namespace Roulette
 				{
 					const int maxCol = 3;
 					const int minCol = 1;
+					aPlayer.betMult = 3;
 
 					std::cout << "You chose to bet on a column.\n";
 					std::cout << "You're betting " << aPlayer.bet << "kr.\n\n";
@@ -180,12 +225,14 @@ namespace Roulette
 
 					GetColumn(wheel, playerInput);
 					system("pause");
+					SpinBall(aBall, 0, wheelSize-1);
+
+
 					break;
 				}
 				default:
 					break;
-				}
-
+			}
 		}
 
 		//placeholder
