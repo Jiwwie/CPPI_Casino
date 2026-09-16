@@ -6,6 +6,7 @@
 #include "OddOrEven.h"
 #include "Blackjack.h"
 #include "RockPaperScissors.h"
+#include "Roulette.h"
 #include "Player.h"
 #include "GameFunctions.h"
 #include "Statistics.h"
@@ -18,8 +19,9 @@ int main()
         MainMenu_OddOrEven = 2,
         MainMenu_Blackjack = 3,
         MainMenu_RockPaperScissors = 4,
-        MainMenu_Statistics = 5,
-        MainMenu_LeaveCasino = 6
+		MainMenu_Roulette = 5,
+        MainMenu_Statistics = 6,
+        MainMenu_LeaveCasino = 7
     };
 
     int stats[5] =
@@ -62,6 +64,11 @@ int main()
 			case MainMenu_RockPaperScissors:
 			{
 				RockPaperScissors::PlayRPS(player, stats, earnings.RockPaperScissors);
+				break;
+			}
+			case MainMenu_Roulette:
+			{
+				Roulette::PlayRoulette(player, stats, earnings.Roulette);
 				break;
 			}
             case MainMenu_Statistics:

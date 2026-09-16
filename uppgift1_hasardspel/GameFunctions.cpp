@@ -21,8 +21,9 @@ namespace GameFunctions
         std::cout << "2. Odd or Even" << std::endl;
         std::cout << "3. Blackjack (lite)" << std::endl;
         std::cout << "4. Rock Paper Scissors" << std::endl;
-        std::cout << "5. Show statistics" << std::endl;
-        std::cout << "6. Leave Casino\n" << std::endl;
+        std::cout << "5. Roulette" << std::endl;
+        std::cout << "6. Show statistics" << std::endl;
+        std::cout << "7. Leave Casino\n" << std::endl;
     }
 
     void ShowGameIntro(int anIntroKey, int aPlayerWallet, int aRewardMult)
@@ -32,7 +33,8 @@ namespace GameFunctions
             IntroKey_DiceGame = 1,
             IntroKey_OddOrEven = 2,
             IntroKey_Blackjack = 3,
-            IntroKey_RockPaperScissors = 4
+            IntroKey_RockPaperScissors = 4,
+            IntroKey_Roulette = 5
         };
 
         system("cls");
@@ -82,6 +84,15 @@ namespace GameFunctions
             std::cout << "You are filled with determination.\n\n";
             break;
         }
+		case IntroKey_Roulette:
+		{
+			std::cout << "A mysterious figure steps forth and reveals a roulette wheel.\n";
+			std::cout << "\"If you can guess where the ball will land...\"\n";
+			std::cout << "\"I'll reward you handsomely.\"\n\n";
+
+			std::cout << "You are filled with determination.\n\n";
+			break;
+		}
         default:
         {
             std::cout << "Key does not exist\n";
@@ -132,7 +143,8 @@ namespace GameFunctions
             Rules_DiceGame = 1,
             Rules_OddOrEven = 2,
             Rules_Blackjack = 3,
-            Rules_RockPaperScissor = 4
+            Rules_RockPaperScissor = 4,
+            Rules_Roulette = 5
         };
 
         while (menu)
@@ -189,6 +201,12 @@ namespace GameFunctions
                     std::cout << "1. Choose rock, paper, or scissors\n";
                     std::cout << "2. The figure will too...\n";
                     std::cout << "3. Rock beats scissors, scissors beats paper, paper beats rock\n\n\n";
+                }
+                else if (aGameNum == Rules_Roulette)
+                {
+                    std::cout << "1. Place your bet on a number, color, or range\n";
+                    std::cout << "2. The wheel is spun and a random number is selected\n";
+                    std::cout << "3. If your bet matches the outcome, you win\n\n\n";
                 }
                 system("pause");
                 break;

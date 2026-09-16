@@ -18,6 +18,7 @@ namespace Player
 		int OddOrEven;
 		int Blackjack;
 		int RockPaperScissors;
+		int Roulette;
 	};
 
     void ClearInputBuffer();

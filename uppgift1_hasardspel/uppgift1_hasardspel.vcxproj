@@ -147,6 +147,7 @@
     <ClCompile Include="OddOrEven.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RockPaperScissors.cpp" />
+    <ClCompile Include="Roulette.cpp" />
     <ClCompile Include="Statistics.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +157,7 @@
     <ClInclude Include="OddOrEven.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RockPaperScissors.h" />
+    <ClInclude Include="Roulette.h" />
     <ClInclude Include="Statistics.h" />
     <ClInclude Include="Misc.h" />
   </ItemGroup>
