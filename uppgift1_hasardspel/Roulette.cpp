@@ -363,6 +363,7 @@ namespace Roulette
 				{
 					const int maxCol = 3;
 					const int minCol = 1;
+					bool inCol = false;
 					aPlayer.betMult = 3;
 
 					std::cout << "You chose to bet on a column.\n";
@@ -374,7 +375,33 @@ namespace Roulette
 					system("pause");
 
 					SpinBall(aBall, 0, wheelSize - 1);
+					for (int i = (0 + playerInput) ; i < wheelSize; i+=3)
+					{
+						if (aBall.ball == i)
+						{
+							std::cout << "\n\nYou win!\n";
+							std::cout << aPlayer.bet * aPlayer.betMult << "kr added to wallet.\n\n";
+							Player::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '+', aPlayer.wallet);
+							Statistics::UpdateStatistics(Statistics::GameResult_Win, someStats);
+							someEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
+							inCol = true;
+							break;
+						}
+						else
+						{
+							continue;
+						}
+					}
 
+					if (inCol != true)
+					{
+						std::cout << "\nYou lose... XD\n";
+						std::cout << "-" << aPlayer.bet << "kr!\n\n";
+						Player::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '-', aPlayer.wallet);
+						Statistics::UpdateStatistics(Statistics::GameResult_Loss, someStats);
+						someEarnings -= aPlayer.bet;
+						system("pause");
+					}
 
 					break;
 				}
