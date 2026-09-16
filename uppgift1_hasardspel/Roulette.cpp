@@ -15,43 +15,43 @@ namespace Roulette
 			aWheel[i][0] = i;
 		}
 
-		aWheel[0][1] = Color_Green;
-		aWheel[1][1] = Color_Red;
-		aWheel[2][1] = Color_Black;
-		aWheel[3][1] = Color_Red;
-		aWheel[4][1] = Color_Black;
-		aWheel[5][1] = Color_Red;
-		aWheel[6][1] = Color_Black;
-		aWheel[7][1] = Color_Red;
-		aWheel[8][1] = Color_Black;
-		aWheel[9][1] = Color_Red;
-		aWheel[10][1] = Color_Black;
-		aWheel[11][1] = Color_Black;
-		aWheel[12][1] = Color_Red;
-		aWheel[13][1] = Color_Black;
-		aWheel[14][1] = Color_Red;
-		aWheel[15][1] = Color_Black;
-		aWheel[16][1] = Color_Red;
-		aWheel[17][1] = Color_Black;
-		aWheel[18][1] = Color_Red;
-		aWheel[19][1] = Color_Red;
-		aWheel[20][1] = Color_Black;
-		aWheel[21][1] = Color_Red;
-		aWheel[22][1] = Color_Black;
-		aWheel[23][1] = Color_Red;
-		aWheel[24][1] = Color_Black;
-		aWheel[25][1] = Color_Red;
-		aWheel[26][1] = Color_Black;
-		aWheel[27][1] = Color_Red;
-		aWheel[28][1] = Color_Black;
-		aWheel[29][1] = Color_Black;
-		aWheel[30][1] = Color_Red;
-		aWheel[31][1] = Color_Black;
-		aWheel[32][1] = Color_Red;
-		aWheel[33][1] = Color_Black;
-		aWheel[34][1] = Color_Red;
-		aWheel[35][1] = Color_Black;
-		aWheel[36][1] = Color_Red;
+		aWheel[0][Column_Color] = Color_Green;
+		aWheel[1][Column_Color] = Color_Red;
+		aWheel[2][Column_Color] = Color_Black;
+		aWheel[3][Column_Color] = Color_Red;
+		aWheel[4][Column_Color] = Color_Black;
+		aWheel[5][Column_Color] = Color_Red;
+		aWheel[6][Column_Color] = Color_Black;
+		aWheel[7][Column_Color] = Color_Red;
+		aWheel[8][Column_Color] = Color_Black;
+		aWheel[9][Column_Color] = Color_Red;
+		aWheel[10][Column_Color] = Color_Black;
+		aWheel[11][Column_Color] = Color_Black;
+		aWheel[12][Column_Color] = Color_Red;
+		aWheel[13][Column_Color] = Color_Black;
+		aWheel[14][Column_Color] = Color_Red;
+		aWheel[15][Column_Color] = Color_Black;
+		aWheel[16][Column_Color] = Color_Red;
+		aWheel[17][Column_Color] = Color_Black;
+		aWheel[18][Column_Color] = Color_Red;
+		aWheel[19][Column_Color] = Color_Red;
+		aWheel[20][Column_Color] = Color_Black;
+		aWheel[21][Column_Color] = Color_Red;
+		aWheel[22][Column_Color] = Color_Black;
+		aWheel[23][Column_Color] = Color_Red;
+		aWheel[24][Column_Color] = Color_Black;
+		aWheel[25][Column_Color] = Color_Red;
+		aWheel[26][Column_Color] = Color_Black;
+		aWheel[27][Column_Color] = Color_Red;
+		aWheel[28][Column_Color] = Color_Black;
+		aWheel[29][Column_Color] = Color_Black;
+		aWheel[30][Column_Color] = Color_Red;
+		aWheel[31][Column_Color] = Color_Black;
+		aWheel[32][Column_Color] = Color_Red;
+		aWheel[33][Column_Color] = Color_Black;
+		aWheel[34][Column_Color] = Color_Red;
+		aWheel[35][Column_Color] = Color_Black;
+		aWheel[36][Column_Color] = Color_Red;
 	}
 
 	void GetColumn(int aWheel[wheelSize][colSize], int aColumn)
@@ -112,7 +112,7 @@ namespace Roulette
 			for (int i = 0; i < wheelSize; i++)
 			{
 				std::cout << wheel[i][0];
-				switch (wheel[i][1])
+				switch (wheel[i][Column_Color])
 				{
 					case Color_Green:
 					{
@@ -274,6 +274,12 @@ namespace Roulette
 					const int minChoice = 1;
 					aPlayer.betMult = 2;
 
+					enum Choice
+					{
+						Choice_Red = 1,
+						Choice_Black = 2
+					};
+
 					std::cout << "You chose to bet on red or black.\n";
 					std::cout << "You're betting " << aPlayer.bet << "kr.\n\n";
 					std::cout << "Two options. Red or black?\n";
@@ -283,7 +289,74 @@ namespace Roulette
 					system("pause");
 
 					SpinBall(aBall, 0, wheelSize - 1);
+					std::cout << '\n' << aBall.ball << " is... ";
+					switch (wheel[aBall.ball][Column_Color])
+					{
+					case Color_Green:
+					{
+						std::cout << "Green!";
+						break;
+					}
+					case Color_Red:
+					{
+						std::cout << "Red!";
+						break;
+					}
+					case Color_Black:
+					{
+						std::cout << "Black!";
+						break;
+					}
+					default:
+						break;
+					}
 
+					switch (playerInput)
+					{
+					case Choice_Red:
+					{
+						if (wheel[aBall.ball][Column_Color] == Color_Red)
+						{
+							std::cout << "\n\nYou win!\n";
+							std::cout << aPlayer.bet * aPlayer.betMult << "kr added to wallet.\n\n";
+							Player::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '+', aPlayer.wallet);
+							Statistics::UpdateStatistics(Statistics::GameResult_Win, someStats);
+							someEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
+						}
+						else
+						{
+							std::cout << "\nYou lose... XD\n";
+							std::cout << "-" << aPlayer.bet << "kr!\n\n";
+							Player::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '-', aPlayer.wallet);
+							Statistics::UpdateStatistics(Statistics::GameResult_Loss, someStats);
+							someEarnings -= aPlayer.bet;
+						}
+						break;
+					}
+					case Choice_Black:
+					{
+						if (wheel[aBall.ball][Column_Color] == Color_Black)
+						{
+							std::cout << "\n\nYou win!\n";
+							std::cout << aPlayer.bet * aPlayer.betMult << "kr added to wallet.\n\n";
+							Player::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '+', aPlayer.wallet);
+							Statistics::UpdateStatistics(Statistics::GameResult_Win, someStats);
+							someEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
+						}
+						else
+						{
+							std::cout << "\nYou lose... XD\n";
+							std::cout << "-" << aPlayer.bet << "kr!\n\n";
+							Player::UpdatePlayerWallet(aPlayer.bet, aPlayer.betMult, '-', aPlayer.wallet);
+							Statistics::UpdateStatistics(Statistics::GameResult_Loss, someStats);
+							someEarnings -= aPlayer.bet;
+						}
+						break;
+					}
+					default:
+						break;
+					}
+					system("pause");
 					break;
 				}
 				case BettingOption_Column:
