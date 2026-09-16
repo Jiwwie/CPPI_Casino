@@ -21,12 +21,6 @@ namespace Roulette
 		BettingOption_Column = 4
 	};
 
-	enum Column
-	{
-		Column_Number = 0,
-		Column_Color = 1,
-	};
-
 	void InitializeWheel(int aWheel[wheelSize][colSize]);
 	void GetColumn(int aWheel[wheelSize][colSize], int aColumn);
 	void SpinBall(Misc::Random& aBall, int aMin, int aMax);

@@ -10,48 +10,50 @@ namespace Roulette
 {
 	void InitializeWheel(int aWheel[wheelSize][colSize])
 	{
+		const int color = 1;
+
 		for (int i = 0; i < wheelSize; i++)
 		{
 			aWheel[i][0] = i;
 		}
 
-		aWheel[0][Column_Color] = Color_Green;
-		aWheel[1][Column_Color] = Color_Red;
-		aWheel[2][Column_Color] = Color_Black;
-		aWheel[3][Column_Color] = Color_Red;
-		aWheel[4][Column_Color] = Color_Black;
-		aWheel[5][Column_Color] = Color_Red;
-		aWheel[6][Column_Color] = Color_Black;
-		aWheel[7][Column_Color] = Color_Red;
-		aWheel[8][Column_Color] = Color_Black;
-		aWheel[9][Column_Color] = Color_Red;
-		aWheel[10][Column_Color] = Color_Black;
-		aWheel[11][Column_Color] = Color_Black;
-		aWheel[12][Column_Color] = Color_Red;
-		aWheel[13][Column_Color] = Color_Black;
-		aWheel[14][Column_Color] = Color_Red;
-		aWheel[15][Column_Color] = Color_Black;
-		aWheel[16][Column_Color] = Color_Red;
-		aWheel[17][Column_Color] = Color_Black;
-		aWheel[18][Column_Color] = Color_Red;
-		aWheel[19][Column_Color] = Color_Red;
-		aWheel[20][Column_Color] = Color_Black;
-		aWheel[21][Column_Color] = Color_Red;
-		aWheel[22][Column_Color] = Color_Black;
-		aWheel[23][Column_Color] = Color_Red;
-		aWheel[24][Column_Color] = Color_Black;
-		aWheel[25][Column_Color] = Color_Red;
-		aWheel[26][Column_Color] = Color_Black;
-		aWheel[27][Column_Color] = Color_Red;
-		aWheel[28][Column_Color] = Color_Black;
-		aWheel[29][Column_Color] = Color_Black;
-		aWheel[30][Column_Color] = Color_Red;
-		aWheel[31][Column_Color] = Color_Black;
-		aWheel[32][Column_Color] = Color_Red;
-		aWheel[33][Column_Color] = Color_Black;
-		aWheel[34][Column_Color] = Color_Red;
-		aWheel[35][Column_Color] = Color_Black;
-		aWheel[36][Column_Color] = Color_Red;
+		aWheel[0][color] = Color_Green;
+		aWheel[1][color] = Color_Red;
+		aWheel[2][color] = Color_Black;
+		aWheel[3][color] = Color_Red;
+		aWheel[4][color] = Color_Black;
+		aWheel[5][color] = Color_Red;
+		aWheel[6][color] = Color_Black;
+		aWheel[7][color] = Color_Red;
+		aWheel[8][color] = Color_Black;
+		aWheel[9][color] = Color_Red;
+		aWheel[10][color] = Color_Black;
+		aWheel[11][color] = Color_Black;
+		aWheel[12][color] = Color_Red;
+		aWheel[13][color] = Color_Black;
+		aWheel[14][color] = Color_Red;
+		aWheel[15][color] = Color_Black;
+		aWheel[16][color] = Color_Red;
+		aWheel[17][color] = Color_Black;
+		aWheel[18][color] = Color_Red;
+		aWheel[19][color] = Color_Red;
+		aWheel[20][color] = Color_Black;
+		aWheel[21][color] = Color_Red;
+		aWheel[22][color] = Color_Black;
+		aWheel[23][color] = Color_Red;
+		aWheel[24][color] = Color_Black;
+		aWheel[25][color] = Color_Red;
+		aWheel[26][color] = Color_Black;
+		aWheel[27][color] = Color_Red;
+		aWheel[28][color] = Color_Black;
+		aWheel[29][color] = Color_Black;
+		aWheel[30][color] = Color_Red;
+		aWheel[31][color] = Color_Black;
+		aWheel[32][color] = Color_Red;
+		aWheel[33][color] = Color_Black;
+		aWheel[34][color] = Color_Red;
+		aWheel[35][color] = Color_Black;
+		aWheel[36][color] = Color_Red;
 	}
 
 	void GetColumn(int aWheel[wheelSize][colSize], int aColumn)
@@ -112,7 +114,7 @@ namespace Roulette
 			for (int i = 0; i < wheelSize; i++)
 			{
 				std::cout << wheel[i][0];
-				switch (wheel[i][Column_Color])
+				switch (wheel[i][1])
 				{
 					case Color_Green:
 					{
@@ -224,7 +226,7 @@ namespace Roulette
 					{
 						case Choice_Even:
 						{
-							if (aBall.ball % 2 == 0)
+							if (aBall.ball % 2 == 0 && aBall.ball != 0)
 							{
 								std::cout << "\n\nYou win! Are you hacking?\n";
 								std::cout << aPlayer.bet * aPlayer.betMult << "kr added to wallet.\n\n";
@@ -244,7 +246,7 @@ namespace Roulette
 						}
 						case Choice_Odd:
 						{
-							if (aBall.ball % 2 != 0)
+							if (aBall.ball % 2 != 0 && aBall.ball != 0)
 							{
 								std::cout << "\n\nYou win!\n";
 								std::cout << aPlayer.bet * aPlayer.betMult << "kr added to wallet.\n\n";
@@ -290,32 +292,32 @@ namespace Roulette
 
 					SpinBall(aBall, 0, wheelSize - 1);
 					std::cout << '\n' << aBall.ball << " is... ";
-					switch (wheel[aBall.ball][Column_Color])
+					switch (wheel[aBall.ball][1])
 					{
-					case Color_Green:
-					{
-						std::cout << "Green!";
-						break;
-					}
-					case Color_Red:
-					{
-						std::cout << "Red!";
-						break;
-					}
-					case Color_Black:
-					{
-						std::cout << "Black!";
-						break;
-					}
-					default:
-						break;
+						case Color_Green:
+						{
+							std::cout << "Green!";
+							break;
+						}
+						case Color_Red:
+						{
+							std::cout << "Red!";
+							break;
+						}
+						case Color_Black:
+						{
+							std::cout << "Black!";
+							break;
+						}
+						default:
+							break;
 					}
 
 					switch (playerInput)
 					{
 					case Choice_Red:
 					{
-						if (wheel[aBall.ball][Column_Color] == Color_Red)
+						if (wheel[aBall.ball][1] == Color_Red)
 						{
 							std::cout << "\n\nYou win!\n";
 							std::cout << aPlayer.bet * aPlayer.betMult << "kr added to wallet.\n\n";
@@ -335,7 +337,7 @@ namespace Roulette
 					}
 					case Choice_Black:
 					{
-						if (wheel[aBall.ball][Column_Color] == Color_Black)
+						if (wheel[aBall.ball][1] == Color_Black)
 						{
 							std::cout << "\n\nYou win!\n";
 							std::cout << aPlayer.bet * aPlayer.betMult << "kr added to wallet.\n\n";
