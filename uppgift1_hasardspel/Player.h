@@ -16,11 +16,11 @@ namespace Player
 
 	struct TotalEarnings
 	{
-		int DiceGame;
-		int OddOrEven;
-		int Blackjack;
-		int RockPaperScissors;
-		int Roulette;
+		int diceGame;
+		int oddOrEven;
+		int blackjack;
+		int rockPaperScissors;
+		int roulette;
 	};
 
     void ClearInputBuffer();

@@ -33,7 +33,6 @@ int main()
     };
 
     int activeGame = 0;
-    
 	Player::PlayerData player = {};
 	Player::TotalEarnings earnings = {};
 
@@ -47,27 +46,27 @@ int main()
         {
             case MainMenu_DiceGame:
             {
-                DiceGame::PlayDiceGame(player, stats, earnings.DiceGame);
+                DiceGame::PlayDiceGame(player, stats, earnings.diceGame);
                 break;
             }
             case MainMenu_OddOrEven:
             {
-                OddOrEven::PlayOddOrEven(player, stats, earnings.OddOrEven);
+                OddOrEven::PlayOddOrEven(player, stats, earnings.oddOrEven);
                 break;
             }
             case MainMenu_Blackjack:
             {
-                Blackjack::PlayBlackjack(player, stats, earnings.Blackjack);
+                Blackjack::PlayBlackjack(player, stats, earnings.blackjack);
                 break;
             }
 			case MainMenu_RockPaperScissors:
 			{
-				RockPaperScissors::PlayRPS(player, stats, earnings.RockPaperScissors);
+				RockPaperScissors::PlayRPS(player, stats, earnings.rockPaperScissors);
 				break;
 			}
 			case MainMenu_Roulette:
 			{
-				Roulette::PlayRoulette(player, stats, earnings.Roulette);
+				Roulette::PlayRoulette(player, stats, earnings.roulette);
 				break;
 			}
             case MainMenu_Statistics:
