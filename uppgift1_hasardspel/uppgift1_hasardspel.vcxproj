@@ -24,6 +24,7 @@
     <ProjectGuid>{89054b2e-ef37-49e1-a207-502e2627e36a}</ProjectGuid>
     <RootNamespace>uppgift1hasardspel</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>CPPI_Casino</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
