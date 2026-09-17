@@ -154,7 +154,7 @@ namespace Roulette
 			
 			std::cout << "What will you do?\n";
 			aPlayer.input = Player::GetPlayerNum(aPlayer.input, consts.ROULETTE_MAX_MENU, consts.ROULETTE_MIN_MENU);
-			aPlayer.bet = Player::GetPlayerBet(aPlayer.bet, aPlayer.wallet, consts.MIN_BET);
+			Player::GetPlayerBet(aPlayer, aPlayer.wallet, consts.MIN_BET);
 
 			system("cls");
 			std::cout << "\nThe figure accepts your offer. \n";

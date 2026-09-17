@@ -51,7 +51,7 @@ namespace OddOrEven
             GameFunctions::ShowGameIntro(Misc::Game_OddOrEven, aPlayer.wallet, aPlayer.betMult);
             GameFunctions::TotalEarningsMessage(someEarnings);
 
-            aPlayer.bet = Player::GetPlayerBet(aPlayer.bet, aPlayer.wallet, consts.MIN_BET);
+            Player::GetPlayerBet(aPlayer, aPlayer.wallet, consts.MIN_BET);
 
             system("cls");
             std::cout << "\nThe figure accepts your offer. \n";

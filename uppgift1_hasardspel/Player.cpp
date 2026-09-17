@@ -28,6 +28,7 @@ namespace Player
         }
     }
 
+   
     int GetPlayerNum(int aPlayerNum, int aMax, int aMin)
     {
         std::cin >> aPlayerNum;
@@ -40,40 +41,37 @@ namespace Player
         ClearInputBuffer();
         return aPlayerNum;
     }
-
-    int GetPlayerBet(int aPlayerNum, int aMax, int aMin)
+    
+    void GetPlayerBet(Player::PlayerData& aPlayer, int aMax, int aMin)
     {
         std::cout << "\n====================================\n";
         std::cout << "The figure approaches you and opens its hand.\n";
-        std::cout << "How much will you bet? \n";
+        std::cout << "You have "  << aPlayer.wallet << "kr. How much will you bet? \n";
 
-        std::cin >> aPlayerNum;
+        std::cin >> aPlayer.bet;
 
-        while (aPlayerNum > aMax || aPlayerNum < aMin || std::cin.fail())
+        while (aPlayer.bet > aMax || aPlayer.bet < aMin || std::cin.fail())
         {
-            if (aPlayerNum > aMax)
+            ClearInputBuffer();
+            if (aPlayer.bet > aMax)
             {
-                ClearInputBuffer();
                 std::cout << "\nYou don't have that much... \n";
                 std::cout << "What is your bet? \n";
-                std::cin >> aPlayerNum;
+                std::cin >> aPlayer.bet;
             }
-            else if (aPlayerNum < aMin)
+            else if (aPlayer.bet < aMin)
             {
-                ClearInputBuffer();
                 std::cout << "\nAre you trying to rip me off? \n";
                 std::cout << "What is your bet? \n";
-                std::cin >> aPlayerNum;
+                std::cin >> aPlayer.bet;
             }
             else
             {
-                ClearInputBuffer();
                 std::cout << "\nInvalid option. ";
-                std::cin >> aPlayerNum;
+                std::cin >> aPlayer.bet;
             }
         }
         ClearInputBuffer();
-        return aPlayerNum;
     }
 
     int CheckIfBanned(int aTotalEarnings)

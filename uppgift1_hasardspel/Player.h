@@ -25,7 +25,7 @@ namespace Player
 
     void ClearInputBuffer();
     int GetPlayerNum(int aPlayerNum, int aMax, int aMin);
-    int GetPlayerBet(int aPlayerNum, int aMax, int aMin);
+	void GetPlayerBet(Player::PlayerData& aPlayer, int aMax, int aMin);
     int CheckIfBanned(int aTotalEarnings);
     void UpdatePlayerWallet(Player::PlayerData& aPlayer, char anOperator);
 }
