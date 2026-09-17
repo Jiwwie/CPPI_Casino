@@ -58,8 +58,10 @@ namespace Roulette
 
 	void GetColumn(int aWheel[wheelSize][colSize], int aColumn)
 	{ 
+		Misc::Const consts = {};
+
 		std::cout << "Your numbers: \n";
-		for (int i = (0 + aColumn); i < wheelSize; i+=3)
+		for (int i = (0 + aColumn); i < wheelSize; i+=consts.ROULETTE_COL_DISTANCE)
 		{
 			std::cout << aWheel[i][0] << " ";
 		}
@@ -83,10 +85,8 @@ namespace Roulette
 	{
 		int wheel[wheelSize][colSize];
 		InitializeWheel(wheel);
-		const int maxNum = 4;
-		const int minNum = 1;
-		const int minBet = 1;
 		bool roulette = true;
+		Misc::Const consts = {};
 		Misc::Random aBall = {};
 		
 		while (roulette)
@@ -102,6 +102,8 @@ namespace Roulette
 			{
 				break;
 			}
+
+			aPlayer.betMult = consts.DEFAULT_BET_MULT;
 
 			GameFunctions::ShowGameIntro(Misc::Game_Roulette, aPlayer.wallet, aPlayer.betMult);
 			GameFunctions::TotalEarningsMessage(someEarnings);
@@ -151,8 +153,8 @@ namespace Roulette
 			std::cout << "4. Column    (3x bet)\n\n";
 			
 			std::cout << "What will you do?\n";
-			aPlayer.input = Player::GetPlayerNum(aPlayer.input, maxNum, minNum);
-			aPlayer.bet = Player::GetPlayerBet(aPlayer.bet, aPlayer.wallet, minBet);
+			aPlayer.input = Player::GetPlayerNum(aPlayer.input, consts.ROULETTE_MAX_MENU, consts.ROULETTE_MIN_MENU);
+			aPlayer.bet = Player::GetPlayerBet(aPlayer.bet, aPlayer.wallet, consts.MIN_BET);
 
 			system("cls");
 			std::cout << "\nThe figure accepts your offer. \n";
@@ -167,17 +169,15 @@ namespace Roulette
 			{
 				case BettingOption_Straight:
 				{
-					aPlayer.maxInput = 36;
-					aPlayer.minInput = 0;
-					aPlayer.betMult = 30;
+					aPlayer.betMult = consts.STRAIGHT_MULT;
 
 					std::cout << "You chose to bet on a straight number.\n";
 					std::cout << "You're betting " << aPlayer.bet << "kr.\n\n";
 					std::cout << "Which number do you want? (0-36) " << "\n";
-					aPlayer.input = Player::GetPlayerNum(aPlayer.input, aPlayer.maxInput, aPlayer.minInput);
+					aPlayer.input = Player::GetPlayerNum(aPlayer.input, consts.ROULETTE_MAX_NUM, consts.ROULETTE_MIN_NUM);
 					system("pause");
 
-					SpinBall(aBall, 0, wheelSize-1);
+					SpinBall(aBall, consts.ROULETTE_MIN_NUM, consts.ROULETTE_MAX_NUM);
 
 					if (aPlayer.input == aBall.ball)
 					{
@@ -201,9 +201,7 @@ namespace Roulette
 				}
 				case BettingOption_OddEven:
 				{
-					const int maxChoice = 2;
-					const int minChoice = 1;
-					aPlayer.betMult = 2;
+					aPlayer.betMult = consts.DEFAULT_BET_MULT;
 
 					enum Choice
 					{
@@ -216,10 +214,10 @@ namespace Roulette
 					std::cout << "Two options. Even or odd?\n";
 					std::cout << "1. Even\n";
 					std::cout << "2. Odd\n";
-					aPlayer.input = Player::GetPlayerNum(aPlayer.input, maxChoice, minChoice);
+					aPlayer.input = Player::GetPlayerNum(aPlayer.input, consts.ROULETTE_MAX_TWO_OPT, consts.ROULETTE_MIN_TWO_OPT);
 					system("pause");
 
-					SpinBall(aBall, 0, wheelSize - 1);
+					SpinBall(aBall, consts.ROULETTE_MIN_NUM, consts.ROULETTE_MAX_NUM);
 
 					switch (aPlayer.input)
 					{
@@ -271,9 +269,7 @@ namespace Roulette
 				}
 				case BettingOption_RedBlack:
 				{
-					const int maxChoice = 2;
-					const int minChoice = 1;
-					aPlayer.betMult = 2;
+					aPlayer.betMult = consts.DEFAULT_BET_MULT;
 
 					enum Choice
 					{
@@ -286,10 +282,10 @@ namespace Roulette
 					std::cout << "Two options. Red or black?\n";
 					std::cout << "1. Red\n";
 					std::cout << "2. Black\n";
-					aPlayer.input = Player::GetPlayerNum(aPlayer.input, maxChoice, minChoice);
+					aPlayer.input = Player::GetPlayerNum(aPlayer.input, consts.ROULETTE_MAX_TWO_OPT, consts.ROULETTE_MIN_TWO_OPT);
 					system("pause");
 
-					SpinBall(aBall, 0, wheelSize - 1);
+					SpinBall(aBall, consts.ROULETTE_MIN_NUM, consts.ROULETTE_MAX_NUM);
 					std::cout << '\n' << aBall.ball << " is... ";
 					switch (wheel[aBall.ball][1])
 					{
@@ -362,21 +358,19 @@ namespace Roulette
 				}
 				case BettingOption_Column:
 				{
-					const int maxCol = 3;
-					const int minCol = 1;
 					bool inCol = false;
-					aPlayer.betMult = 3;
+					aPlayer.betMult = consts.HIGH_STAKES_MULT;
 
 					std::cout << "You chose to bet on a column.\n";
 					std::cout << "You're betting " << aPlayer.bet << "kr.\n\n";
 					std::cout << "Which column do you want? (1-3) " << "\n";
-					aPlayer.input = Player::GetPlayerNum(aPlayer.input, maxCol, minCol);
+					aPlayer.input = Player::GetPlayerNum(aPlayer.input, consts.ROULETTE_MAX_COL, consts.ROULETTE_MIN_COL);
 
 					GetColumn(wheel, aPlayer.input);
 					system("pause");
 
-					SpinBall(aBall, 0, wheelSize - 1);
-					for (int i = (0 + aPlayer.input) ; i < wheelSize; i+=3)
+					SpinBall(aBall, consts.ROULETTE_MIN_NUM, consts.ROULETTE_MAX_NUM);
+					for (int i = (0 + aPlayer.input) ; i < wheelSize; i+=consts.ROULETTE_COL_DISTANCE)
 					{
 						if (aBall.ball == i)
 						{

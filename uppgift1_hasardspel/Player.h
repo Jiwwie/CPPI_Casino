@@ -4,9 +4,6 @@ namespace Player
 {
 	struct PlayerData
 	{
-		//replace all const int to use player data
-		int maxInput;
-		int minInput;
 		int input;
 
 		int wallet = 1000;

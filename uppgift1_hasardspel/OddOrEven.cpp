@@ -20,14 +20,19 @@ namespace OddOrEven
 
     void PlayOddOrEven(Player::PlayerData& aPlayer, int someStats[], int& someEarnings)
     {
-		const int maxGuess = 2;
-		const int minGuess = 1;
-		const int minBet = 1;
-        int rollResult = 0;
+        enum Result
+        {
+			Result_None = 0,
+			Result_Odd = 1,
+			Result_Even = 2
+        };
+
+        int rollResult = Result_None;
         bool oddOrEven = true;
+		Misc::Const consts = {};    
         Misc::Random die = {};
 
-        aPlayer.betMult = 2;
+        aPlayer.betMult = consts.DEFAULT_BET_MULT;
 
         while (oddOrEven)
         {
@@ -46,7 +51,7 @@ namespace OddOrEven
             GameFunctions::ShowGameIntro(Misc::Game_OddOrEven, aPlayer.wallet, aPlayer.betMult);
             GameFunctions::TotalEarningsMessage(someEarnings);
 
-            aPlayer.bet = Player::GetPlayerBet(aPlayer.bet, aPlayer.wallet, minBet);
+            aPlayer.bet = Player::GetPlayerBet(aPlayer.bet, aPlayer.wallet, consts.MIN_BET);
 
             system("cls");
             std::cout << "\nThe figure accepts your offer. \n";
@@ -62,20 +67,20 @@ namespace OddOrEven
             std::cout << "1. Odd\n";
             std::cout << "2. Even\n";
 
-            aPlayer.input = Player::GetPlayerNum(aPlayer.input, maxGuess, minGuess);
-            RollDice(die, 1, 6);
+            aPlayer.input = Player::GetPlayerNum(aPlayer.input, consts.ODDEVEN_MAX_INPUT, consts.ODDEVEN_MIN_INPUT);
+            RollDice(die, consts.DICE_MIN_VAL, consts.DICE_MAX_VAL);
 
             if (die.dieOne % 2 == 0 && die.dieTwo % 2 == 0)
             {
-                rollResult = 2;
+                rollResult = Result_Even;
             }
             else if (die.dieOne % 2 != 0 && die.dieTwo % 2 != 0)
             {
-                rollResult = 1;
+                rollResult = Result_Odd;
             }
             else
             {
-                rollResult = 0;
+                rollResult = Result_None;
             }
 
             system("cls");
@@ -102,7 +107,7 @@ namespace OddOrEven
             }
 
             std::cout << "\n\nYou guessed: ";
-            if (aPlayer.input == 1)
+            if (aPlayer.input == Result_Odd)
             {
                 std::cout << "Odd\n";
             }
@@ -114,7 +119,7 @@ namespace OddOrEven
             if (aPlayer.input == rollResult)
             {
                 std::cout << "The figure nods slowly while handing over your reward.\n\n";
-                std::cout << aPlayer.bet << "X" << aPlayer.betMult << "kr added to wallet.\n";
+                std::cout << aPlayer.bet * aPlayer.betMult << "kr added to wallet.\n";
                 std::cout << "Reward multiplier increased by 1.\n";
                 Player::UpdatePlayerWallet(aPlayer, '+');
                 Statistics::UpdateStatistics(Statistics::GameResult_Win, someStats);
@@ -127,7 +132,7 @@ namespace OddOrEven
             else
             {
                 Player::UpdatePlayerWallet(aPlayer, '-');
-                aPlayer.betMult = 2;
+                aPlayer.betMult = consts.DEFAULT_BET_MULT;
 
                 if (aPlayer.wallet <= 0)
                 {

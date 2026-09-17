@@ -18,10 +18,8 @@ namespace RockPaperScissors
 
 	void PlayRPS(Player::PlayerData& aPlayer, int someStats[], int& someEarnings)
 	{
-		const int maxNum = 3;
-		const int minNum = 1;
-		const int minBet = 1;
 		Misc::Random figureInput = {};
+		Misc::Const consts = {};
 		bool rockPaperScissors = true;
 
 		enum RPS
@@ -48,7 +46,7 @@ namespace RockPaperScissors
             GameFunctions::ShowGameIntro(Misc::Game_RockPaperScissors, aPlayer.wallet, aPlayer.betMult);
             GameFunctions::TotalEarningsMessage(someEarnings);
 
-            aPlayer.bet = Player::GetPlayerBet(aPlayer.bet, aPlayer.wallet, minBet);
+            aPlayer.bet = Player::GetPlayerBet(aPlayer.bet, aPlayer.wallet, consts.MIN_BET);
 
             system("cls");
             std::cout << "\nThe figure accepts your offer. \n";
@@ -65,8 +63,8 @@ namespace RockPaperScissors
             std::cout << "1. Rock\n";
             std::cout << "2. Paper\n";
             std::cout << "3. Scissors\n";
-            aPlayer.input = Player::GetPlayerNum(aPlayer.input, maxNum, minNum);
-            RollRPS(figureInput, minNum, maxNum);
+            aPlayer.input = Player::GetPlayerNum(aPlayer.input, consts.RPS_MAX_INPUT, consts.RPS_MIN_INPUT);
+            RollRPS(figureInput, consts.RPS_MIN_INPUT, consts.RPS_MAX_INPUT);
 
 
 			system("cls");
@@ -103,7 +101,6 @@ namespace RockPaperScissors
 			}
 
 			system("pause");
-
 
             switch (aPlayer.input)
             {

@@ -43,6 +43,9 @@
     <ClCompile Include="GameFunctions.cpp">
       <Filter>Source Files\cpp files</Filter>
     </ClCompile>
+    <ClCompile Include="Roulette.cpp">
+      <Filter>Source Files\cpp files\game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Blackjack.h">
@@ -69,5 +72,6 @@
     <ClInclude Include="Statistics.h">
       <Filter>Source Files\header files</Filter>
     </ClInclude>
+    <ClInclude Include="Roulette.h" />
   </ItemGroup>
 </Project>

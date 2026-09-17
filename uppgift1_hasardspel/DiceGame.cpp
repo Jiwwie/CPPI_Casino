@@ -20,10 +20,8 @@ namespace DiceGame
 
     void PlayDiceGame(Player::PlayerData& aPlayer, int someStats[], int& someEarnings)
     {
-		const int maxGuess = 12;
-		const int minGuess = 2;
-		const int minBet = 1;
         bool diceGame = true;
+		Misc::Const consts = {};
         Misc::Random die = {};
 
         while (diceGame)
@@ -40,12 +38,12 @@ namespace DiceGame
                 break;
             }
 
-            aPlayer.betMult = 2;
+            aPlayer.betMult = consts.DEFAULT_BET_MULT;
 
             GameFunctions::ShowGameIntro(Misc::Game_DiceGame, aPlayer.wallet, aPlayer.betMult);
             GameFunctions::TotalEarningsMessage(someEarnings);
 
-            aPlayer.bet = Player::GetPlayerBet(aPlayer.bet, aPlayer.wallet, minBet);
+            aPlayer.bet = Player::GetPlayerBet(aPlayer.bet, aPlayer.wallet, consts.MIN_BET);
 
             system("cls");
             std::cout << "\nThe figure accepts your offer. \n";
@@ -53,12 +51,12 @@ namespace DiceGame
             {
                 std::cout << "\n***HIGH STAKES***\n";
                 std::cout << "Betting your whole wallet increases your reward multiplier to X3.\n";
-                aPlayer.betMult = 3;
+                aPlayer.betMult = consts.HIGH_STAKES_MULT;
             }
             std::cout << "_______________________________ \n";
-            std::cout << "What is your guess? (2-12)  ";
-            aPlayer.input = Player::GetPlayerNum(aPlayer.input, maxGuess, minGuess);
-            RollDice(die, 1, 6);
+            std::cout << "What is your guess? (" << consts.DICE_MIN_GUESS << "-" << consts.DICE_MAX_GUESS << ")  ";
+            aPlayer.input = Player::GetPlayerNum(aPlayer.input, consts.DICE_MAX_GUESS, consts.DICE_MIN_GUESS);
+            RollDice(die, consts.DICE_MIN_VAL, consts.DICE_MAX_VAL);
 
             system("cls");
             std::cout << "\nThe figure throws the dice dramatically...\n\n";

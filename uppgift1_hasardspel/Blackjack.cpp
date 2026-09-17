@@ -18,13 +18,13 @@ namespace Blackjack
 
     void PlayBlackjack(Player::PlayerData& aPlayer, int someStats[], int& someEarnings)
     {
-		const int minBet = 1;
         int hitOrStand = 0;
         int drawnCard = 0;
         int cardCount = 0;
         int cardSum = 0;
         bool blackjack = true;
         bool drawingCards = true;
+		Misc::Const consts;
 
         enum HitOrStand
         {
@@ -55,7 +55,7 @@ namespace Blackjack
             GameFunctions::ShowGameIntro(Misc::Game_Blackjack, aPlayer.wallet, aPlayer.betMult);
             GameFunctions::TotalEarningsMessage(someEarnings);
 
-            aPlayer.bet = Player::GetPlayerBet(aPlayer.bet, aPlayer.wallet, minBet);
+            aPlayer.bet = Player::GetPlayerBet(aPlayer.bet, aPlayer.wallet, consts.MIN_BET);
 
             system("cls");
             std::cout << "\nThe figure accepts your offer. \n";
@@ -71,7 +71,7 @@ namespace Blackjack
             std::cout << "\nThe figure draws your first card...\n\n";
             system("pause");
 
-            drawnCard = DrawCard(1, 11);
+            drawnCard = DrawCard(consts.BLACKJACK_MIN_VAL, consts.BLACKJACK_MAX_VAL);
             cardSum += drawnCard;
             system("cls");
             std::cout << "You drew: " << drawnCard << std::endl;
@@ -89,7 +89,7 @@ namespace Blackjack
                 {
                 case HitOrStand_Hit:
                 {
-                    drawnCard = DrawCard(1, 11);
+                    drawnCard = DrawCard(consts.BLACKJACK_MIN_VAL, consts.BLACKJACK_MAX_VAL);
                     cardSum += drawnCard;
                     cardCount += 1;
 
@@ -119,7 +119,7 @@ namespace Blackjack
                         drawingCards = false;
                     }
 
-                    if (cardCount > 3)
+                    if (cardCount > consts.BLACKJACK_MIN_COUNT)
                     {
                         aPlayer.betMult += 1;
                         std::cout << "\nReward multiplier increased by 1";
