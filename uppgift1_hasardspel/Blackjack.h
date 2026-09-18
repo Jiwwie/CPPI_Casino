@@ -5,9 +5,9 @@ class Blackjack
 {
 	public:
 		int DrawCard(int aMin, int aMax);
-		void PlayBlackjack(Player::PlayerData& aPlayer, int someStats[], int& someEarnings);
+		void PlayBlackjack(Player::PlayerData& aPlayer, int someStats[]);
 
 
 	private:
-
+		static int totalEarnings;
 };

@@ -6,6 +6,8 @@
 #include "GameFunctions.h"
 #include "Statistics.h"
 
+int DiceGame::totalEarnings = 0;
+
 void DiceGame::RollDice(Misc::Random& aDie, int aMin, int aMax)
 {
     std::random_device seed;
@@ -16,7 +18,7 @@ void DiceGame::RollDice(Misc::Random& aDie, int aMin, int aMax)
     aDie.dieTwo = rndDist(rndEngine);
 }
 
-void DiceGame::PlayDiceGame(Player::PlayerData& aPlayer, int someStats[], int& someEarnings)
+void DiceGame::PlayDiceGame(Player::PlayerData& aPlayer, int someStats[])
 {
     bool diceGame = true;
 	Misc::Const consts = {};
@@ -24,14 +26,14 @@ void DiceGame::PlayDiceGame(Player::PlayerData& aPlayer, int someStats[], int& s
 
     while (diceGame)
     {
-        if (!(diceGame = Player::CheckIfBanned(someEarnings)))
+        if (!(diceGame = Player::CheckIfBanned(totalEarnings)))
         {
             system("cls");
             std::cout << "\nYou earned too much at this table. Do something else.\n\n";
             system("pause");
             break;
         }
-        else if (!(diceGame = GameFunctions::GetGameMenu(3, someEarnings, aPlayer.wallet, aPlayer.betMult)))
+        else if (!(diceGame = GameFunctions::GetGameMenu(3, totalEarnings, aPlayer.wallet, aPlayer.betMult)))
         {
             break;
         }
@@ -39,7 +41,7 @@ void DiceGame::PlayDiceGame(Player::PlayerData& aPlayer, int someStats[], int& s
         aPlayer.betMult = consts.DEFAULT_BET_MULT;
 
         GameFunctions::ShowGameIntro(Misc::Game_DiceGame, aPlayer.wallet, aPlayer.betMult);
-        GameFunctions::TotalEarningsMessage(someEarnings);
+        GameFunctions::TotalEarningsMessage(totalEarnings);
 
         Player::GetPlayerBet(aPlayer, aPlayer.wallet, consts.MIN_BET);
 
@@ -69,7 +71,7 @@ void DiceGame::PlayDiceGame(Player::PlayerData& aPlayer, int someStats[], int& s
             std::cout << aPlayer.bet << "X" << aPlayer.betMult << "kr added to wallet.\n";
             Player::UpdatePlayerWallet(aPlayer, '+');
             Statistics::UpdateStatistics(Statistics::GameResult_Win, someStats);
-            someEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
+            totalEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
             std::cout << "New balance: " << aPlayer.wallet << "kr \n\n";
             std::cout << "You are filled with determination.\n\n";
             system("pause");
@@ -80,7 +82,7 @@ void DiceGame::PlayDiceGame(Player::PlayerData& aPlayer, int someStats[], int& s
             Player::UpdatePlayerWallet(aPlayer, '-');
             std::cout << "\nYou watch as your " << aPlayer.bet << "kr dissappear under the table\n";
             std::cout << "New balance: " << aPlayer.wallet << "kr \n\n";
-            someEarnings -= aPlayer.bet;
+            totalEarnings -= aPlayer.bet;
 
             if (aPlayer.wallet <= 0)
             {

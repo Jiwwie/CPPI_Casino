@@ -14,15 +14,6 @@ namespace Player
 		bool banned = false;
 	};
 
-	struct TotalEarnings
-	{
-		int diceGame;
-		int oddOrEven;
-		int blackjack;
-		int rockPaperScissors;
-		int roulette;
-	};
-
     void ClearInputBuffer();
     int GetPlayerNum(int aPlayerNum, int aMax, int aMin);
 	void GetPlayerBet(Player::PlayerData& aPlayer, int aMax, int aMin);

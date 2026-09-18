@@ -34,7 +34,6 @@ int main()
 
     int activeGame = 0;
 	Player::PlayerData player = {};
-	Player::TotalEarnings earnings = {};
 
     Blackjack blackjack;
     DiceGame diceGame;
@@ -52,27 +51,27 @@ int main()
         {
             case MainMenu_DiceGame:
             {
-                diceGame.PlayDiceGame(player, stats, earnings.diceGame);
+                diceGame.PlayDiceGame(player, stats);
                 break;
             }
             case MainMenu_OddOrEven:
             {
-                oddOrEven.PlayOddOrEven(player, stats, earnings.oddOrEven);
+                oddOrEven.PlayOddOrEven(player, stats);
                 break;
             }
             case MainMenu_Blackjack:
             {
-                blackjack.PlayBlackjack(player, stats, earnings.blackjack);
+                blackjack.PlayBlackjack(player, stats);
                 break;
             }
 			case MainMenu_RockPaperScissors:
 			{
-				rockPaperScissors.PlayRPS(player, stats, earnings.rockPaperScissors);
+				rockPaperScissors.PlayRPS(player, stats);
 				break;
 			}
 			case MainMenu_Roulette:
 			{
-				roulette.PlayRoulette(player, stats, earnings.roulette);
+				roulette.PlayRoulette(player, stats);
 				break;
 			}
             case MainMenu_Statistics:

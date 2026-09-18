@@ -27,9 +27,9 @@
 			void InitializeWheel(int aWheel[wheelSize][colSize]);
 			void GetColumn(int aWheel[wheelSize][colSize], int aColumn);
 			void SpinBall(Misc::Random& aBall, int aMin, int aMax);
-			void PlayRoulette(Player::PlayerData& aPlayer, int someStats[], int& someEarnings);
+			void PlayRoulette(Player::PlayerData& aPlayer, int someStats[]);
 
 
 		private:
-
+			static int totalEarnings;
 	};

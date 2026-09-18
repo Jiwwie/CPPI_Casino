@@ -6,6 +6,8 @@
 #include "GameFunctions.h"
 #include "Statistics.h"
 
+int Blackjack::totalEarnings = 0;
+
 int Blackjack::DrawCard(int aMin, int aMax)
 {
     std::random_device seed;
@@ -14,7 +16,7 @@ int Blackjack::DrawCard(int aMin, int aMax)
     return rndDist(rndEngine);
 }
 
-void Blackjack::PlayBlackjack(Player::PlayerData& aPlayer, int someStats[], int& someEarnings)
+void Blackjack::PlayBlackjack(Player::PlayerData& aPlayer, int someStats[])
 {
     int hitOrStand = 0;
     int drawnCard = 0;
@@ -32,14 +34,14 @@ void Blackjack::PlayBlackjack(Player::PlayerData& aPlayer, int someStats[], int&
 
     while (blackjack)
     {
-        if (!(blackjack = Player::CheckIfBanned(someEarnings)))
+        if (!(blackjack = Player::CheckIfBanned(totalEarnings)))
         {
             system("cls");
             std::cout << "\nYou earned too much at this table. Do something else.\n\n";
             system("pause");
             break;
         }
-        else if (!(blackjack = GameFunctions::GetGameMenu(Misc::Game_Blackjack, someEarnings, aPlayer.wallet, aPlayer.betMult)))
+        else if (!(blackjack = GameFunctions::GetGameMenu(Misc::Game_Blackjack, totalEarnings, aPlayer.wallet, aPlayer.betMult)))
         {
             break;
         }
@@ -51,7 +53,7 @@ void Blackjack::PlayBlackjack(Player::PlayerData& aPlayer, int someStats[], int&
         aPlayer.betMult = 1;
 
         GameFunctions::ShowGameIntro(Misc::Game_Blackjack, aPlayer.wallet, aPlayer.betMult);
-        GameFunctions::TotalEarningsMessage(someEarnings);
+        GameFunctions::TotalEarningsMessage(totalEarnings);
 
         Player::GetPlayerBet(aPlayer, aPlayer.wallet, consts.MIN_BET);
 
@@ -102,7 +104,7 @@ void Blackjack::PlayBlackjack(Player::PlayerData& aPlayer, int someStats[], int&
                     std::cout << "You lose.\n";
                     Player::UpdatePlayerWallet(aPlayer, '-');
                     Statistics::UpdateStatistics(Statistics::GameResult_Loss, someStats);
-                    someEarnings -= aPlayer.bet;
+                    totalEarnings -= aPlayer.bet;
                     if (aPlayer.wallet <= 0)
                     {
                         std::cout << "\nJust as you gambled away your last kr, you were suddenly dragged out of the casino. \nDetermination won't help you this time\n\n\n";
@@ -151,7 +153,7 @@ void Blackjack::PlayBlackjack(Player::PlayerData& aPlayer, int someStats[], int&
                     std::cout << "New balance: " << aPlayer.wallet << "kr \n\n";
                     Statistics::UpdateStatistics(Statistics::GameResult_Win, someStats);
                 }
-                someEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
+                totalEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
                 system("pause");
                 Statistics::ShowStatistics(someStats);
                 drawingCards = false;
