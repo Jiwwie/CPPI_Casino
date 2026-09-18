@@ -72,6 +72,8 @@
     <ClInclude Include="Statistics.h">
       <Filter>Source Files\header files</Filter>
     </ClInclude>
-    <ClInclude Include="Roulette.h" />
+    <ClInclude Include="Roulette.h">
+      <Filter>Source Files\header files\game</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

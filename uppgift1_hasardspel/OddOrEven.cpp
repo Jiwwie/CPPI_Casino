@@ -8,7 +8,7 @@
 
 namespace OddOrEven
 {
-    void RollDice(Misc::Random& aDie, int aMin, int aMax)
+    void OddEven::RollDice(Misc::Random& aDie, int aMin, int aMax)
     {
         std::random_device seed;
         std::mt19937 rndEngine(seed());
@@ -18,7 +18,7 @@ namespace OddOrEven
         aDie.dieTwo = rndDist(rndEngine);
     }
 
-    void PlayOddOrEven(Player::PlayerData& aPlayer, int someStats[], int& someEarnings)
+    void OddEven::PlayOddOrEven(Player::PlayerData& aPlayer, int someStats[], int& someEarnings)
     {
         enum Result
         {

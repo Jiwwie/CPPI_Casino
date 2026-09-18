@@ -8,7 +8,8 @@
 
 namespace Blackjack
 {
-    int DrawCard(int aMin, int aMax)
+
+    int Blackjack::DrawCard(int aMin, int aMax)
     {
         std::random_device seed;
         std::mt19937 rndEngine(seed());
@@ -16,7 +17,7 @@ namespace Blackjack
         return rndDist(rndEngine);
     }
 
-    void PlayBlackjack(Player::PlayerData& aPlayer, int someStats[], int& someEarnings)
+    void Blackjack::PlayBlackjack(Player::PlayerData& aPlayer, int someStats[], int& someEarnings)
     {
         int hitOrStand = 0;
         int drawnCard = 0;

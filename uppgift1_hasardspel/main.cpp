@@ -36,6 +36,12 @@ int main()
 	Player::PlayerData player = {};
 	Player::TotalEarnings earnings = {};
 
+    Blackjack::Blackjack blackjack;
+    DiceGame::DiceGame diceGame;
+    OddOrEven::OddEven oddOrEven;
+    RockPaperScissors::RPS rockPaperScissors;
+    Roulette::Roulette roulette;
+
     while (player.playing)
     {
         GameFunctions::ShowMainMenu();
@@ -46,27 +52,27 @@ int main()
         {
             case MainMenu_DiceGame:
             {
-                DiceGame::PlayDiceGame(player, stats, earnings.diceGame);
+                diceGame.PlayDiceGame(player, stats, earnings.diceGame);
                 break;
             }
             case MainMenu_OddOrEven:
             {
-                OddOrEven::PlayOddOrEven(player, stats, earnings.oddOrEven);
+                oddOrEven.PlayOddOrEven(player, stats, earnings.oddOrEven);
                 break;
             }
             case MainMenu_Blackjack:
             {
-                Blackjack::PlayBlackjack(player, stats, earnings.blackjack);
+                blackjack.PlayBlackjack(player, stats, earnings.blackjack);
                 break;
             }
 			case MainMenu_RockPaperScissors:
 			{
-				RockPaperScissors::PlayRPS(player, stats, earnings.rockPaperScissors);
+				rockPaperScissors.PlayRPS(player, stats, earnings.rockPaperScissors);
 				break;
 			}
 			case MainMenu_Roulette:
 			{
-				Roulette::PlayRoulette(player, stats, earnings.roulette);
+				roulette.PlayRoulette(player, stats, earnings.roulette);
 				break;
 			}
             case MainMenu_Statistics:

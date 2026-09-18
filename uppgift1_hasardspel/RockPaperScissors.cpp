@@ -8,7 +8,7 @@
 
 namespace RockPaperScissors
 {
-	void RollRPS(Misc::Random& aRPS, int aMin, int aMax)
+	void RPS::RollRPS(Misc::Random& aRPS, int aMin, int aMax)
 	{
 		std::random_device seed;
 		std::mt19937 rndEngine(seed());
@@ -16,7 +16,7 @@ namespace RockPaperScissors
 		aRPS.rps = rndDist(rndEngine);
 	}
 
-	void PlayRPS(Player::PlayerData& aPlayer, int someStats[], int& someEarnings)
+	void RPS::PlayRPS(Player::PlayerData& aPlayer, int someStats[], int& someEarnings)
 	{
 		Misc::Random figureInput = {};
 		Misc::Const consts = {};

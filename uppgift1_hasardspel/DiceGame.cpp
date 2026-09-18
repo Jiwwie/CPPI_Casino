@@ -8,7 +8,7 @@
 
 namespace DiceGame
 {
-    void RollDice(Misc::Random& aDie, int aMin, int aMax)
+    void DiceGame::RollDice(Misc::Random& aDie, int aMin, int aMax)
     {
         std::random_device seed;
         std::mt19937 rndEngine(seed());
@@ -18,7 +18,7 @@ namespace DiceGame
         aDie.dieTwo = rndDist(rndEngine);
     }
 
-    void PlayDiceGame(Player::PlayerData& aPlayer, int someStats[], int& someEarnings)
+    void DiceGame::PlayDiceGame(Player::PlayerData& aPlayer, int someStats[], int& someEarnings)
     {
         bool diceGame = true;
 		Misc::Const consts = {};

@@ -3,6 +3,15 @@
 
 namespace Blackjack
 {
-	int DrawCard(int aMin, int aMax);
-	void PlayBlackjack(Player::PlayerData& aPlayer, int someStats[], int& someEarnings);
+	class Blackjack
+	{
+		public:
+			int DrawCard(int aMin, int aMax);
+			void PlayBlackjack(Player::PlayerData& aPlayer, int someStats[], int& someEarnings);
+
+
+		private:
+
+	};
 }
+

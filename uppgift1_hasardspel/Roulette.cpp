@@ -8,7 +8,7 @@
 
 namespace Roulette
 {
-	void InitializeWheel(int aWheel[wheelSize][colSize])
+	void Roulette::InitializeWheel(int aWheel[wheelSize][colSize])
 	{
 		const int color = 1;
 
@@ -56,7 +56,7 @@ namespace Roulette
 		aWheel[36][color] = Color_Red;
 	}
 
-	void GetColumn(int aWheel[wheelSize][colSize], int aColumn)
+	void Roulette::GetColumn(int aWheel[wheelSize][colSize], int aColumn)
 	{ 
 		Misc::Const consts = {};
 
@@ -68,7 +68,7 @@ namespace Roulette
 		std::cout << "\n";
 	}
 
-	void SpinBall(Misc::Random& aBall, int aMin, int aMax)
+	void Roulette::SpinBall(Misc::Random& aBall, int aMin, int aMax)
 	{
 		std::random_device seed;
 		std::mt19937 rndEngine(seed());
@@ -81,7 +81,7 @@ namespace Roulette
 		system("pause");
 	}
 
-	void PlayRoulette(Player::PlayerData& aPlayer, int someStats[], int& someEarnings)
+	void Roulette::PlayRoulette(Player::PlayerData& aPlayer, int someStats[], int& someEarnings)
 	{
 		int wheel[wheelSize][colSize];
 		InitializeWheel(wheel);

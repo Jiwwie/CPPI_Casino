@@ -4,6 +4,13 @@
 
 namespace DiceGame
 {
-	void RollDice(Misc::Random& aDie, int aMin, int aMax);
-	void PlayDiceGame(Player::PlayerData& aPlayer, int someStats[], int& someEarnings);
+	class DiceGame
+	{
+	public:
+		void RollDice(Misc::Random& aDie, int aMin, int aMax);
+		void PlayDiceGame(Player::PlayerData& aPlayer, int someStats[], int& someEarnings);	
+
+	private:
+
+	};
 }
