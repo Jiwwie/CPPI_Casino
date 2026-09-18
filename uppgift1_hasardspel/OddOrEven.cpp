@@ -6,7 +6,7 @@
 #include "GameFunctions.h"
 #include "Statistics.h"
 
-int OddEven::totalEarnings = 0;
+int OddEven::myTotalEarnings = 0;
 
 void OddEven::RollDice(Misc::Random& aDie, int aMin, int aMax)
 {
@@ -36,20 +36,20 @@ void OddEven::PlayOddOrEven(Player::PlayerData& aPlayer, int someStats[])
 
     while (oddOrEven)
     {
-        if (!(oddOrEven = Player::CheckIfBanned(totalEarnings)))
+        if (!(oddOrEven = Player::CheckIfBanned(myTotalEarnings)))
         {
             system("cls");
             std::cout << "\nYou earned too much at this table. Do something else.\n\n";
             system("pause");
             break;
         }
-        else if (!(oddOrEven = GameFunctions::GetGameMenu(3, totalEarnings, aPlayer.wallet, aPlayer.betMult)))
+        else if (!(oddOrEven = GameFunctions::GetGameMenu(3, myTotalEarnings, aPlayer.wallet, aPlayer.betMult)))
         {
             break;
         }
 
         GameFunctions::ShowGameIntro(Misc::Game_OddOrEven, aPlayer.wallet, aPlayer.betMult);
-        GameFunctions::TotalEarningsMessage(totalEarnings);
+        GameFunctions::TotalEarningsMessage(myTotalEarnings);
 
         Player::GetPlayerBet(aPlayer, aPlayer.wallet, consts.MIN_BET);
 
@@ -123,7 +123,7 @@ void OddEven::PlayOddOrEven(Player::PlayerData& aPlayer, int someStats[])
             std::cout << "Reward multiplier increased by 1.\n";
             Player::UpdatePlayerWallet(aPlayer, '+');
             Statistics::UpdateStatistics(Statistics::GameResult_Win, someStats);
-            totalEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
+            myTotalEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
             aPlayer.betMult += 1;
             std::cout << "New balance: " << aPlayer.wallet << "kr \n\n";
             system("pause");
@@ -149,7 +149,7 @@ void OddEven::PlayOddOrEven(Player::PlayerData& aPlayer, int someStats[])
                 std::cout << "\nYou watch as your " << aPlayer.bet << "kr dissappear under the table\n";
                 std::cout << "New balance: " << aPlayer.wallet << "kr \n\n";
                 Statistics::UpdateStatistics(Statistics::GameResult_Loss, someStats);
-                totalEarnings -= aPlayer.bet;
+                myTotalEarnings -= aPlayer.bet;
                 std::cout << "\nYou're having a bad time... Stay determined.\n\n";
                 system("pause");
                 Statistics::ShowStatistics(someStats);

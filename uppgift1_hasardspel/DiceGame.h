@@ -10,9 +10,9 @@ class DiceGame
 
 		int getTotalEarnings()
 		{
-			return totalEarnings;
+			return myTotalEarnings;
 		}
 
 	private:
-		static int totalEarnings;
+		static int myTotalEarnings;
 };

@@ -6,7 +6,7 @@
 #include "GameFunctions.h"
 #include "Statistics.h"
 
-int RPS::totalEarnings = 0;
+int RPS::myTotalEarnings = 0;
 
 void RPS::RollRPS(Misc::Random& aRPS, int aMin, int aMax)
 {
@@ -31,20 +31,20 @@ void RPS::PlayRPS(Player::PlayerData& aPlayer, int someStats[])
 
 	while (rockPaperScissors)
 	{
-        if (!(rockPaperScissors = Player::CheckIfBanned(totalEarnings)))
+        if (!(rockPaperScissors = Player::CheckIfBanned(myTotalEarnings)))
         {
             system("cls");
             std::cout << "\nYou earned too much at this table. Do something else.\n\n";
             system("pause");
             break;
         }
-        else if (!(rockPaperScissors = GameFunctions::GetGameMenu(Misc::Game_RockPaperScissors, totalEarnings, aPlayer.wallet, aPlayer.betMult)))
+        else if (!(rockPaperScissors = GameFunctions::GetGameMenu(Misc::Game_RockPaperScissors, myTotalEarnings, aPlayer.wallet, aPlayer.betMult)))
         {
             break;
         }
 
         GameFunctions::ShowGameIntro(Misc::Game_RockPaperScissors, aPlayer.wallet, aPlayer.betMult);
-        GameFunctions::TotalEarningsMessage(totalEarnings);
+        GameFunctions::TotalEarningsMessage(myTotalEarnings);
 
         Player::GetPlayerBet(aPlayer, aPlayer.wallet, consts.MIN_BET);
 
@@ -110,14 +110,14 @@ void RPS::PlayRPS(Player::PlayerData& aPlayer, int someStats[])
 					std::cout << "\nYou win! Your bet was doubled.\n";
 					Player::UpdatePlayerWallet(aPlayer, '+');
 					Statistics::UpdateStatistics(Statistics::GameResult_Win, someStats);
-					totalEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
+					myTotalEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
 				}
 				else if (figureInput.rps == RPS_Paper)
 				{
 					std::cout << "\nYou lose! -" << aPlayer.bet << "kr\n";
 					Player::UpdatePlayerWallet(aPlayer, '-');
 					Statistics::UpdateStatistics(Statistics::GameResult_Loss, someStats);
-					totalEarnings -= aPlayer.bet;
+					myTotalEarnings -= aPlayer.bet;
 				}
 				else
 				{
@@ -131,14 +131,14 @@ void RPS::PlayRPS(Player::PlayerData& aPlayer, int someStats[])
 					std::cout << "\nYou win! Your bet was doubled.\n";
 					Player::UpdatePlayerWallet(aPlayer, '+');
 					Statistics::UpdateStatistics(Statistics::GameResult_Win, someStats);
-					totalEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
+					myTotalEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
 				}
 				else if (figureInput.rps == RPS_Scissors)
 				{
 					std::cout << "\nYou lose! -" << aPlayer.bet << "kr\n";
 					Player::UpdatePlayerWallet(aPlayer, '-');
 					Statistics::UpdateStatistics(Statistics::GameResult_Loss, someStats);
-					totalEarnings -= aPlayer.bet;
+					myTotalEarnings -= aPlayer.bet;
 				}
 				else
 				{
@@ -152,14 +152,14 @@ void RPS::PlayRPS(Player::PlayerData& aPlayer, int someStats[])
 					std::cout << "\nYou win! Your bet was doubled.\n";
 					Player::UpdatePlayerWallet(aPlayer, '+');
 					Statistics::UpdateStatistics(Statistics::GameResult_Win, someStats);
-					totalEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
+					myTotalEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
 				}
 				else if (figureInput.rps == RPS_Rock)
 				{
 					std::cout << "\nYou lose! -" << aPlayer.bet << "kr\n";
 					Player::UpdatePlayerWallet(aPlayer, '-');
 					Statistics::UpdateStatistics(Statistics::GameResult_Loss, someStats);
-					totalEarnings -= aPlayer.bet;
+					myTotalEarnings -= aPlayer.bet;
 				}
 				else
 				{

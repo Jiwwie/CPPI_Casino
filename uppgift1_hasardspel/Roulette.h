@@ -1,8 +1,8 @@
 #pragma once
 #include "Player.h"
 
-	const int wheelSize = 37;
-	const int colSize = 2;
+const int wheelSize = 37;
+const int colSize = 2;
 
 	class Roulette
 	{
@@ -31,5 +31,5 @@
 
 
 		private:
-			static int totalEarnings;
+			static int myTotalEarnings;
 	};

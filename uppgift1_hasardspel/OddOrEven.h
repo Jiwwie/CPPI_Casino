@@ -8,5 +8,5 @@ class OddEven
 		void PlayOddOrEven(Player::PlayerData& aPlayer, int someStats[]);
 
 	private:
-		static int totalEarnings;
+		static int myTotalEarnings;
 };

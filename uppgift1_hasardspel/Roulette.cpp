@@ -6,7 +6,7 @@
 #include "GameFunctions.h"
 #include "Statistics.h"
 
-int Roulette::totalEarnings = 0;
+int Roulette::myTotalEarnings = 0;
 
 void Roulette::InitializeWheel(int aWheel[wheelSize][colSize])
 {
@@ -91,14 +91,14 @@ void Roulette::PlayRoulette(Player::PlayerData& aPlayer, int someStats[])
 		
 	while (roulette)
 	{
-		if (!(roulette = Player::CheckIfBanned(totalEarnings)))
+		if (!(roulette = Player::CheckIfBanned(myTotalEarnings)))
 		{
 			system("cls");
 			std::cout << "\nYou earned too much at this table. Do something else.\n\n";
 			system("pause");
 			break;
 		}
-		else if (!(roulette = GameFunctions::GetGameMenu(Misc::Game_Roulette, totalEarnings, aPlayer.wallet, aPlayer.betMult)))
+		else if (!(roulette = GameFunctions::GetGameMenu(Misc::Game_Roulette, myTotalEarnings, aPlayer.wallet, aPlayer.betMult)))
 		{
 			break;
 		}
@@ -106,7 +106,7 @@ void Roulette::PlayRoulette(Player::PlayerData& aPlayer, int someStats[])
 		aPlayer.betMult = consts.DEFAULT_BET_MULT;
 
 		GameFunctions::ShowGameIntro(Misc::Game_Roulette, aPlayer.wallet, aPlayer.betMult);
-		GameFunctions::TotalEarningsMessage(totalEarnings);
+		GameFunctions::TotalEarningsMessage(myTotalEarnings);
 
 		std::cout << "_______________________________ \n";
 		system("pause");
@@ -185,7 +185,7 @@ void Roulette::PlayRoulette(Player::PlayerData& aPlayer, int someStats[])
 					std::cout << aPlayer.bet * aPlayer.betMult << "kr added to wallet.\n\n";
 					Player::UpdatePlayerWallet(aPlayer, '+');
 					Statistics::UpdateStatistics(Statistics::GameResult_Win, someStats);
-					totalEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
+					myTotalEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
 				}
 				else
 				{
@@ -193,7 +193,7 @@ void Roulette::PlayRoulette(Player::PlayerData& aPlayer, int someStats[])
 					std::cout << "-" << aPlayer.bet << "kr!\n\n";
 					Player::UpdatePlayerWallet(aPlayer, '-');
 					Statistics::UpdateStatistics(Statistics::GameResult_Loss, someStats);
-					totalEarnings -= aPlayer.bet;
+					myTotalEarnings -= aPlayer.bet;
 				}
 				system("pause");
 
@@ -229,7 +229,7 @@ void Roulette::PlayRoulette(Player::PlayerData& aPlayer, int someStats[])
 							std::cout << aPlayer.bet * aPlayer.betMult << "kr added to wallet.\n\n";
 							Player::UpdatePlayerWallet(aPlayer, '+');
 							Statistics::UpdateStatistics(Statistics::GameResult_Win, someStats);
-							totalEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
+							myTotalEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
 						}
 						else
 						{
@@ -237,7 +237,7 @@ void Roulette::PlayRoulette(Player::PlayerData& aPlayer, int someStats[])
 							std::cout << "-" << aPlayer.bet << "kr!\n\n";
 							Player::UpdatePlayerWallet(aPlayer, '-');
 							Statistics::UpdateStatistics(Statistics::GameResult_Loss, someStats);
-							totalEarnings -= aPlayer.bet;
+							myTotalEarnings -= aPlayer.bet;
 						}
 						break;
 					}
@@ -249,7 +249,7 @@ void Roulette::PlayRoulette(Player::PlayerData& aPlayer, int someStats[])
 							std::cout << aPlayer.bet * aPlayer.betMult << "kr added to wallet.\n\n";
 							Player::UpdatePlayerWallet(aPlayer, '+');
 							Statistics::UpdateStatistics(Statistics::GameResult_Win, someStats);
-							totalEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
+							myTotalEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
 						}
 						else
 						{
@@ -257,7 +257,7 @@ void Roulette::PlayRoulette(Player::PlayerData& aPlayer, int someStats[])
 							std::cout << "-" << aPlayer.bet << "kr!\n\n";
 							Player::UpdatePlayerWallet(aPlayer, '-');
 							Statistics::UpdateStatistics(Statistics::GameResult_Loss, someStats);
-							totalEarnings -= aPlayer.bet;
+							myTotalEarnings -= aPlayer.bet;
 						}
 						break;
 					}
@@ -318,7 +318,7 @@ void Roulette::PlayRoulette(Player::PlayerData& aPlayer, int someStats[])
 						std::cout << aPlayer.bet * aPlayer.betMult << "kr added to wallet.\n\n";
 						Player::UpdatePlayerWallet(aPlayer, '+');
 						Statistics::UpdateStatistics(Statistics::GameResult_Win, someStats);
-						totalEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
+						myTotalEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
 					}
 					else
 					{
@@ -326,7 +326,7 @@ void Roulette::PlayRoulette(Player::PlayerData& aPlayer, int someStats[])
 						std::cout << "-" << aPlayer.bet << "kr!\n\n";
 						Player::UpdatePlayerWallet(aPlayer, '-');
 						Statistics::UpdateStatistics(Statistics::GameResult_Loss, someStats);
-						totalEarnings -= aPlayer.bet;
+						myTotalEarnings -= aPlayer.bet;
 					}
 					break;
 				}
@@ -338,7 +338,7 @@ void Roulette::PlayRoulette(Player::PlayerData& aPlayer, int someStats[])
 						std::cout << aPlayer.bet * aPlayer.betMult << "kr added to wallet.\n\n";
 						Player::UpdatePlayerWallet(aPlayer, '+');
 						Statistics::UpdateStatistics(Statistics::GameResult_Win, someStats);
-						totalEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
+						myTotalEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
 					}
 					else
 					{
@@ -346,7 +346,7 @@ void Roulette::PlayRoulette(Player::PlayerData& aPlayer, int someStats[])
 						std::cout << "-" << aPlayer.bet << "kr!\n\n";
 						Player::UpdatePlayerWallet(aPlayer, '-');
 						Statistics::UpdateStatistics(Statistics::GameResult_Loss, someStats);
-						totalEarnings -= aPlayer.bet;
+						myTotalEarnings -= aPlayer.bet;
 					}
 					break;
 				}
@@ -378,7 +378,7 @@ void Roulette::PlayRoulette(Player::PlayerData& aPlayer, int someStats[])
 						std::cout << aPlayer.bet * aPlayer.betMult << "kr added to wallet.\n\n";
 						Player::UpdatePlayerWallet(aPlayer, '+');
 						Statistics::UpdateStatistics(Statistics::GameResult_Win, someStats);
-						totalEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
+						myTotalEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
 						inCol = true;
 						break;
 					}
@@ -394,7 +394,7 @@ void Roulette::PlayRoulette(Player::PlayerData& aPlayer, int someStats[])
 					std::cout << "-" << aPlayer.bet << "kr!\n\n";
 					Player::UpdatePlayerWallet(aPlayer, '-');
 					Statistics::UpdateStatistics(Statistics::GameResult_Loss, someStats);
-					totalEarnings -= aPlayer.bet;
+					myTotalEarnings -= aPlayer.bet;
 					system("pause");
 				}
 

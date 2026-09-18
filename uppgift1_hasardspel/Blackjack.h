@@ -7,7 +7,6 @@ class Blackjack
 		int DrawCard(int aMin, int aMax);
 		void PlayBlackjack(Player::PlayerData& aPlayer, int someStats[]);
 
-
 	private:
-		static int totalEarnings;
+		static int myTotalEarnings;
 };
