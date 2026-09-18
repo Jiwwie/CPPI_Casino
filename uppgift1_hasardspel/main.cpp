@@ -36,11 +36,11 @@ int main()
 	Player::PlayerData player = {};
 	Player::TotalEarnings earnings = {};
 
-    Blackjack::Blackjack blackjack;
-    DiceGame::DiceGame diceGame;
-    OddOrEven::OddEven oddOrEven;
-    RockPaperScissors::RPS rockPaperScissors;
-    Roulette::Roulette roulette;
+    Blackjack blackjack;
+    DiceGame diceGame;
+    OddEven oddOrEven;
+    RPS rockPaperScissors;
+    Roulette roulette;
 
     while (player.playing)
     {

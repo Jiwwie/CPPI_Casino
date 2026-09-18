@@ -42,6 +42,7 @@ namespace Misc
 		const int RPS_MIN_INPUT = 1;
 		const int RPS_MAX_INPUT = 3;
 
+		const int ROULETTE_WHEEL_SIZE = 37;
 		const int ROULETTE_MAX_NUM = 36;
 		const int ROULETTE_MIN_NUM = 0;
 		const int ROULETTE_COL_DISTANCE = 3;

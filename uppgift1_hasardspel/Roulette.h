@@ -1,8 +1,6 @@
 #pragma once
 #include "Player.h"
 
-namespace Roulette
-{
 	const int wheelSize = 37;
 	const int colSize = 2;
 
@@ -35,6 +33,3 @@ namespace Roulette
 		private:
 
 	};
-
-
-}

@@ -2,15 +2,12 @@
 #include "Player.h"
 #include "Misc.h"
 
-namespace DiceGame
+class DiceGame
 {
-	class DiceGame
-	{
-	public:
-		void RollDice(Misc::Random& aDie, int aMin, int aMax);
-		void PlayDiceGame(Player::PlayerData& aPlayer, int someStats[], int& someEarnings);	
+public:
+	void RollDice(Misc::Random& aDie, int aMin, int aMax);
+	void PlayDiceGame(Player::PlayerData& aPlayer, int someStats[], int& someEarnings);	
 
-	private:
+private:
 
-	};
-}
+};

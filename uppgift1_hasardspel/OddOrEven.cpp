@@ -6,156 +6,152 @@
 #include "GameFunctions.h"
 #include "Statistics.h"
 
-namespace OddOrEven
+void OddEven::RollDice(Misc::Random& aDie, int aMin, int aMax)
 {
-    void OddEven::RollDice(Misc::Random& aDie, int aMin, int aMax)
+    std::random_device seed;
+    std::mt19937 rndEngine(seed());
+    std::uniform_int_distribution<int> rndDist(aMin, aMax);
+
+    aDie.dieOne = rndDist(rndEngine);
+    aDie.dieTwo = rndDist(rndEngine);
+}
+
+void OddEven::PlayOddOrEven(Player::PlayerData& aPlayer, int someStats[], int& someEarnings)
+{
+    enum Result
     {
-        std::random_device seed;
-        std::mt19937 rndEngine(seed());
-        std::uniform_int_distribution<int> rndDist(aMin, aMax);
+		Result_None = 0,
+		Result_Odd = 1,
+		Result_Even = 2
+    };
 
-        aDie.dieOne = rndDist(rndEngine);
-        aDie.dieTwo = rndDist(rndEngine);
-    }
+    int rollResult = Result_None;
+    bool oddOrEven = true;
+	Misc::Const consts = {};    
+    Misc::Random die = {};
 
-    void OddEven::PlayOddOrEven(Player::PlayerData& aPlayer, int someStats[], int& someEarnings)
+    aPlayer.betMult = consts.DEFAULT_BET_MULT;
+
+    while (oddOrEven)
     {
-        enum Result
+        if (!(oddOrEven = Player::CheckIfBanned(someEarnings)))
         {
-			Result_None = 0,
-			Result_Odd = 1,
-			Result_Even = 2
-        };
-
-        int rollResult = Result_None;
-        bool oddOrEven = true;
-		Misc::Const consts = {};    
-        Misc::Random die = {};
-
-        aPlayer.betMult = consts.DEFAULT_BET_MULT;
-
-        while (oddOrEven)
+            system("cls");
+            std::cout << "\nYou earned too much at this table. Do something else.\n\n";
+            system("pause");
+            break;
+        }
+        else if (!(oddOrEven = GameFunctions::GetGameMenu(3, someEarnings, aPlayer.wallet, aPlayer.betMult)))
         {
-            if (!(oddOrEven = Player::CheckIfBanned(someEarnings)))
-            {
-                system("cls");
-                std::cout << "\nYou earned too much at this table. Do something else.\n\n";
-                system("pause");
-                break;
-            }
-            else if (!(oddOrEven = GameFunctions::GetGameMenu(3, someEarnings, aPlayer.wallet, aPlayer.betMult)))
-            {
-                break;
-            }
+            break;
+        }
 
-            GameFunctions::ShowGameIntro(Misc::Game_OddOrEven, aPlayer.wallet, aPlayer.betMult);
-            GameFunctions::TotalEarningsMessage(someEarnings);
+        GameFunctions::ShowGameIntro(Misc::Game_OddOrEven, aPlayer.wallet, aPlayer.betMult);
+        GameFunctions::TotalEarningsMessage(someEarnings);
 
-            Player::GetPlayerBet(aPlayer, aPlayer.wallet, consts.MIN_BET);
+        Player::GetPlayerBet(aPlayer, aPlayer.wallet, consts.MIN_BET);
 
-            system("cls");
-            std::cout << "\nThe figure accepts your offer. \n";
-            if (aPlayer.bet == aPlayer.wallet)
-            {
-                std::cout << "\n***HIGH STAKES***\n";
-                std::cout << "Betting your whole wallet fills you with determination.\n";
-            }
-            std::cout << "_______________________________ \n";
+        system("cls");
+        std::cout << "\nThe figure accepts your offer. \n";
+        if (aPlayer.bet == aPlayer.wallet)
+        {
+            std::cout << "\n***HIGH STAKES***\n";
+            std::cout << "Betting your whole wallet fills you with determination.\n";
+        }
+        std::cout << "_______________________________ \n";
 
 
-            std::cout << "\nTwo options. What is your bet?\n";
-            std::cout << "1. Odd\n";
-            std::cout << "2. Even\n";
+        std::cout << "\nTwo options. What is your bet?\n";
+        std::cout << "1. Odd\n";
+        std::cout << "2. Even\n";
 
-            aPlayer.input = Player::GetPlayerNum(aPlayer.input, consts.ODDEVEN_MAX_INPUT, consts.ODDEVEN_MIN_INPUT);
-            RollDice(die, consts.DICE_MIN_VAL, consts.DICE_MAX_VAL);
+        aPlayer.input = Player::GetPlayerNum(aPlayer.input, consts.ODDEVEN_MAX_INPUT, consts.ODDEVEN_MIN_INPUT);
+        RollDice(die, consts.DICE_MIN_VAL, consts.DICE_MAX_VAL);
 
-            if (die.dieOne % 2 == 0 && die.dieTwo % 2 == 0)
-            {
-                rollResult = Result_Even;
-            }
-            else if (die.dieOne % 2 != 0 && die.dieTwo % 2 != 0)
-            {
-                rollResult = Result_Odd;
-            }
-            else
-            {
-                rollResult = Result_None;
-            }
+        if (die.dieOne % 2 == 0 && die.dieTwo % 2 == 0)
+        {
+            rollResult = Result_Even;
+        }
+        else if (die.dieOne % 2 != 0 && die.dieTwo % 2 != 0)
+        {
+            rollResult = Result_Odd;
+        }
+        else
+        {
+            rollResult = Result_None;
+        }
 
-            system("cls");
-            std::cout << "\nThe figure throws the dice dramatically...\n\n";
+        system("cls");
+        std::cout << "\nThe figure throws the dice dramatically...\n\n";
 
-            std::cout << "Die 1: " << die.dieOne;
-            if (die.dieOne % 2 == 0)
-            {
-                std::cout << "  -> Even";
-            }
-            else
-            {
-                std::cout << "  -> Odd";
-            }
+        std::cout << "Die 1: " << die.dieOne;
+        if (die.dieOne % 2 == 0)
+        {
+            std::cout << "  -> Even";
+        }
+        else
+        {
+            std::cout << "  -> Odd";
+        }
 
-            std::cout << "\nDie 2: " << die.dieTwo;
-            if (die.dieTwo % 2 == 0)
-            {
-                std::cout << "  -> Even";
-            }
-            else
-            {
-                std::cout << "  -> Odd";
-            }
+        std::cout << "\nDie 2: " << die.dieTwo;
+        if (die.dieTwo % 2 == 0)
+        {
+            std::cout << "  -> Even";
+        }
+        else
+        {
+            std::cout << "  -> Odd";
+        }
 
-            std::cout << "\n\nYou guessed: ";
-            if (aPlayer.input == Result_Odd)
-            {
-                std::cout << "Odd\n";
-            }
-            else
-            {
-                std::cout << "Even\n";
-            }
+        std::cout << "\n\nYou guessed: ";
+        if (aPlayer.input == Result_Odd)
+        {
+            std::cout << "Odd\n";
+        }
+        else
+        {
+            std::cout << "Even\n";
+        }
 
-            if (aPlayer.input == rollResult)
+        if (aPlayer.input == rollResult)
+        {
+            std::cout << "The figure nods slowly while handing over your reward.\n\n";
+            std::cout << aPlayer.bet * aPlayer.betMult << "kr added to wallet.\n";
+            std::cout << "Reward multiplier increased by 1.\n";
+            Player::UpdatePlayerWallet(aPlayer, '+');
+            Statistics::UpdateStatistics(Statistics::GameResult_Win, someStats);
+            someEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
+            aPlayer.betMult += 1;
+            std::cout << "New balance: " << aPlayer.wallet << "kr \n\n";
+            system("pause");
+            Statistics::ShowStatistics(someStats);
+        }
+        else
+        {
+            Player::UpdatePlayerWallet(aPlayer, '-');
+            aPlayer.betMult = consts.DEFAULT_BET_MULT;
+
+            if (aPlayer.wallet <= 0)
             {
-                std::cout << "The figure nods slowly while handing over your reward.\n\n";
-                std::cout << aPlayer.bet * aPlayer.betMult << "kr added to wallet.\n";
-                std::cout << "Reward multiplier increased by 1.\n";
-                Player::UpdatePlayerWallet(aPlayer, '+');
-                Statistics::UpdateStatistics(Statistics::GameResult_Win, someStats);
-                someEarnings += (aPlayer.bet * aPlayer.betMult) - aPlayer.bet;
-                aPlayer.betMult += 1;
+                std::cout << "\nYou watch as your " << aPlayer.bet << "kr slip away from you...\n";
                 std::cout << "New balance: " << aPlayer.wallet << "kr \n\n";
+                std::cout << "\nJust as you gambled away your last kr, you were suddenly dragged out of the casino. \nDetermination won't help you this time\n\n\n";
+                system("pause");
+                aPlayer.playing = false;
+                oddOrEven = false;
+                break;
+            }
+            else
+            {
+                std::cout << "\nYou watch as your " << aPlayer.bet << "kr dissappear under the table\n";
+                std::cout << "New balance: " << aPlayer.wallet << "kr \n\n";
+                Statistics::UpdateStatistics(Statistics::GameResult_Loss, someStats);
+                someEarnings -= aPlayer.bet;
+                std::cout << "\nYou're having a bad time... Stay determined.\n\n";
                 system("pause");
                 Statistics::ShowStatistics(someStats);
             }
-            else
-            {
-                Player::UpdatePlayerWallet(aPlayer, '-');
-                aPlayer.betMult = consts.DEFAULT_BET_MULT;
-
-                if (aPlayer.wallet <= 0)
-                {
-                    std::cout << "\nYou watch as your " << aPlayer.bet << "kr slip away from you...\n";
-                    std::cout << "New balance: " << aPlayer.wallet << "kr \n\n";
-                    std::cout << "\nJust as you gambled away your last kr, you were suddenly dragged out of the casino. \nDetermination won't help you this time\n\n\n";
-                    system("pause");
-                    aPlayer.playing = false;
-                    oddOrEven = false;
-                    break;
-                }
-                else
-                {
-                    std::cout << "\nYou watch as your " << aPlayer.bet << "kr dissappear under the table\n";
-                    std::cout << "New balance: " << aPlayer.wallet << "kr \n\n";
-                    Statistics::UpdateStatistics(Statistics::GameResult_Loss, someStats);
-                    someEarnings -= aPlayer.bet;
-                    std::cout << "\nYou're having a bad time... Stay determined.\n\n";
-                    system("pause");
-                    Statistics::ShowStatistics(someStats);
-                }
-            }
         }
     }
-
 }
