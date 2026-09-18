@@ -44,6 +44,7 @@ void Casino::GetMainMenu(Player::PlayerData& player)
         {
         case MainMenu_DiceGame:
         {
+
             myDiceGame.PlayDiceGame(player, stats);
             break;
         }

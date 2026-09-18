@@ -22,6 +22,5 @@ class Casino
 		OddEven myOddOrEven;
 		RPS myRockPaperScissors;
 		Roulette myRoulette;
-
 };
 

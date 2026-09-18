@@ -34,7 +34,7 @@ void DiceGame::PlayDiceGame(Player::PlayerData& aPlayer, int someStats[])
             system("pause");
             break;
         }
-        else if (!(diceGame = GameFunctions::GetGameMenu(3, myTotalEarnings, aPlayer.wallet, aPlayer.betMult)))
+        else if (!(diceGame = GameFunctions::GetGameMenu(Misc::Game_DiceGame, myTotalEarnings, aPlayer.wallet, aPlayer.betMult)))
         {
             break;
         }
@@ -44,7 +44,12 @@ void DiceGame::PlayDiceGame(Player::PlayerData& aPlayer, int someStats[])
         GameFunctions::ShowGameIntro(Misc::Game_DiceGame, aPlayer.wallet, aPlayer.betMult);
         GameFunctions::TotalEarningsMessage(myTotalEarnings);
 
-        Player::GetPlayerBet(aPlayer, aPlayer.wallet, consts.MIN_BET);
+        if (aPlayer.wallet < myMaxBet)
+        {
+            SetMaxBet(aPlayer.wallet);
+        }
+
+        Player::GetPlayerBet(aPlayer, myMaxBet, myMinBet);
 
         system("cls");
         std::cout << "\nThe figure accepts your offer. \n";

@@ -7,6 +7,14 @@ const int colSize = 2;
 	class Roulette
 	{
 		public:
+			void InitializeWheel(int aWheel[wheelSize][colSize]);
+			void GetColumn(int aWheel[wheelSize][colSize], int aColumn);
+			void SpinBall(Misc::Random& aBall, int aMin, int aMax);
+			void PlayRoulette(Player::PlayerData& aPlayer, int someStats[]);
+
+
+		private:
+			static int myTotalEarnings;
 
 			enum Color
 			{
@@ -23,13 +31,4 @@ const int colSize = 2;
 				BettingOption_Column = 4
 			};
 
-
-			void InitializeWheel(int aWheel[wheelSize][colSize]);
-			void GetColumn(int aWheel[wheelSize][colSize], int aColumn);
-			void SpinBall(Misc::Random& aBall, int aMin, int aMax);
-			void PlayRoulette(Player::PlayerData& aPlayer, int someStats[]);
-
-
-		private:
-			static int myTotalEarnings;
 	};

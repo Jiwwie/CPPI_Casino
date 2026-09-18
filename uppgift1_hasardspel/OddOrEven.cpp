@@ -43,7 +43,7 @@ void OddEven::PlayOddOrEven(Player::PlayerData& aPlayer, int someStats[])
             system("pause");
             break;
         }
-        else if (!(oddOrEven = GameFunctions::GetGameMenu(3, myTotalEarnings, aPlayer.wallet, aPlayer.betMult)))
+        else if (!(oddOrEven = GameFunctions::GetGameMenu(Misc::Game_OddOrEven, myTotalEarnings, aPlayer.wallet, aPlayer.betMult)))
         {
             break;
         }

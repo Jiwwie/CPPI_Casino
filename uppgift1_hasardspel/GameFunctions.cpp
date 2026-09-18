@@ -47,57 +47,57 @@ namespace GameFunctions
 
         switch (anIntroKey)
         {
-        case IntroKey_DiceGame:
-        {
-            std::cout << "A mysterious figure steps forth and reveals a pair of dice.\n";
-            std::cout << "\"If you can guess the sum of these when I throw them...\"\n";
-            std::cout << "\"I'll reward you handsomely.\"\n\n";
+            case IntroKey_DiceGame:
+            {
+                std::cout << "A mysterious figure steps forth and reveals a pair of dice.\n";
+                std::cout << "\"If you can guess the sum of these when I throw them...\"\n";
+                std::cout << "\"I'll reward you handsomely.\"\n\n";
 
-            std::cout << "You are filled with determination.\n\n";
-            break;
-        }
-        case IntroKey_OddOrEven:
-        {
-            std::cout << "A mysterious figure steps forth and reveals a pair of dice.\n";
-            std::cout << "\"If you can guess if these will roll odd or even\"\n";
-            std::cout << "\"I'll reward you handsomely.\"\n\n";
+                std::cout << "You are filled with determination.\n\n";
+                break;
+            }
+            case IntroKey_OddOrEven:
+            {
+                std::cout << "A mysterious figure steps forth and reveals a pair of dice.\n";
+                std::cout << "\"If you can guess if these will roll odd or even\"\n";
+                std::cout << "\"I'll reward you handsomely.\"\n\n";
 
-            std::cout << "You are filled with determination.\n\n";
-            break;
-        }
-        case IntroKey_Blackjack:
-        {
-            std::cout << "A mysterious figure steps forth and reveals a stack of cards.\n";
-            std::cout << "\"Your goal is to get as close to 21 as possible.\"\n";
-            std::cout << "\"I'll increase your reward for each card.\"\n";
-            std::cout << "\"Go over 21, and your money is mine.\"\n\n";
+                std::cout << "You are filled with determination.\n\n";
+                break;
+            }
+            case IntroKey_Blackjack:
+            {
+                std::cout << "A mysterious figure steps forth and reveals a stack of cards.\n";
+                std::cout << "\"Your goal is to get as close to 21 as possible.\"\n";
+                std::cout << "\"I'll increase your reward for each card.\"\n";
+                std::cout << "\"Go over 21, and your money is mine.\"\n\n";
 
-            std::cout << "You are filled with determination.\n\n";
-            break;
-        }
-        case IntroKey_RockPaperScissors:
-        {
-            std::cout << "A mysterious figure steps forth and reveals a hand.\n";
-            std::cout << "\"If you can guess what I will throw...\"\n";
-            std::cout << "\"I'll reward you handsomely.\"\n\n";
+                std::cout << "You are filled with determination.\n\n";
+                break;
+            }
+            case IntroKey_RockPaperScissors:
+            {
+                std::cout << "A mysterious figure steps forth and reveals a hand.\n";
+                std::cout << "\"If you can guess what I will throw...\"\n";
+                std::cout << "\"I'll reward you handsomely.\"\n\n";
 
-            std::cout << "You are filled with determination.\n\n";
-            break;
-        }
-		case IntroKey_Roulette:
-		{
-			std::cout << "A mysterious figure steps forth and reveals a roulette wheel.\n";
-			std::cout << "\"If you can guess where the ball will land...\"\n";
-			std::cout << "\"I'll reward you handsomely.\"\n\n";
+                std::cout << "You are filled with determination.\n\n";
+                break;
+            }
+		    case IntroKey_Roulette:
+		    {
+			    std::cout << "A mysterious figure steps forth and reveals a roulette wheel.\n";
+			    std::cout << "\"If you can guess where the ball will land...\"\n";
+			    std::cout << "\"I'll reward you handsomely.\"\n\n";
 
-			std::cout << "You are filled with determination.\n\n";
-			break;
-		}
-        default:
-        {
-            std::cout << "Key does not exist\n";
-            break;
-        }
+			    std::cout << "You are filled with determination.\n\n";
+			    break;
+		    }
+            default:
+            {
+                std::cout << "Key does not exist\n";
+                break;
+            }
         }
     }
     
