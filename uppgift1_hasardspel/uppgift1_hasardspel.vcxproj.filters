@@ -46,6 +46,9 @@
     <ClCompile Include="Roulette.cpp">
       <Filter>Source Files\cpp files\game</Filter>
     </ClCompile>
+    <ClCompile Include="Casino.cpp">
+      <Filter>Source Files\cpp files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Blackjack.h">
@@ -74,6 +77,9 @@
     </ClInclude>
     <ClInclude Include="Roulette.h">
       <Filter>Source Files\header files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="Casino.h">
+      <Filter>Source Files\header files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -18,6 +18,7 @@ void DiceGame::RollDice(Misc::Random& aDie, int aMin, int aMax)
     aDie.dieTwo = rndDist(rndEngine);
 }
 
+
 void DiceGame::PlayDiceGame(Player::PlayerData& aPlayer, int someStats[])
 {
     bool diceGame = true;

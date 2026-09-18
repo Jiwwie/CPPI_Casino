@@ -8,6 +8,11 @@ class DiceGame
 		void RollDice(Misc::Random& aDie, int aMin, int aMax);
 		void PlayDiceGame(Player::PlayerData& aPlayer, int someStats[]);	
 
+		int getTotalEarnings()
+		{
+			return totalEarnings;
+		}
+
 	private:
 		static int totalEarnings;
 };

@@ -3,7 +3,7 @@
 
 namespace GameFunctions
 {
-    void ShowMainMenu()
+    void ShowMainMenuText()
     {
         system("cls");
         std::cout << " =======================\n";

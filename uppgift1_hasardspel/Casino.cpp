@@ -1,0 +1,12 @@
+#include <iostream>
+#include <random>
+#include "Casino.h"
+#include "DiceGame.h"
+#include "OddOrEven.h"
+#include "Blackjack.h"
+#include "RockPaperScissors.h"
+#include "Roulette.h"
+#include "Misc.h"
+#include "Player.h"
+#include "GameFunctions.h"
+#include "Statistics.h"
