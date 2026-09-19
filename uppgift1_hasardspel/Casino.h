@@ -18,7 +18,8 @@ class Casino
 
 	private:
 		Blackjack myBlackjack;
-		DiceGame myDiceGame;
+		DiceGame myDiceGameLow{1, 500};
+		DiceGame myDiceGameHigh{500, 1000};
 		OddEven myOddOrEven;
 		RPS myRockPaperScissors;
 		Roulette myRoulette;

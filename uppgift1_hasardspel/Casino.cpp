@@ -44,8 +44,24 @@ void Casino::GetMainMenu(Player::PlayerData& player)
         {
         case MainMenu_DiceGame:
         {
+            std::cout << "\nWill you play high or low stakes?\n";
+            std::cout << "1. Low\n";
+            std::cout << "2. High\n";
 
-            myDiceGame.PlayDiceGame(player, stats);
+            player.input = Player::GetPlayerNum(player.input, 2, 1);
+            switch (player.input)
+            {
+                case 1: 
+                {
+                    myDiceGameLow.PlayDiceGame(player, stats);
+                }
+                case 2:
+                {
+                    myDiceGameHigh.PlayDiceGame(player, stats);
+                }
+                default:
+                    break;
+            }
             break;
         }
         case MainMenu_OddOrEven:
