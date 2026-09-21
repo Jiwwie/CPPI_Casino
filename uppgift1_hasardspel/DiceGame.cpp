@@ -55,14 +55,7 @@ void DiceGame::PlayDiceGame(Player::PlayerData& aPlayer, int someStats[])
         std::cout << "\n====================================\n";
         std::cout << "The figure approaches you and opens its hand.\n";
         std::cout << "You have " << aPlayer.wallet << "kr\n";
-        if (myMinBet == aPlayer.wallet)
-        {
-            std::cout << "You can bet " << myMinBet << "kr. No more, no less.\n";
-        }
-        else
-        {
-            std::cout << "You can bet between " << myMinBet << "-" << myMaxBet << " How much will you bet? \n";
-        }
+        std::cout << "You can bet between " << myMinBet << "-" << myMaxBet << "kr. How much will you bet? \n";
 
         std::cin >> aPlayer.bet;
         while (aPlayer.bet > myMaxBet || aPlayer.bet > aPlayer.wallet || aPlayer.bet < myMinBet || std::cin.fail())
@@ -80,7 +73,6 @@ void DiceGame::PlayDiceGame(Player::PlayerData& aPlayer, int someStats[])
             else
             {
                 std::cout << "\nGive a number between " << myMinBet << "-" << myMaxBet << '\n';
-
             }
             std::cout << "You have " << aPlayer.wallet << "kr. What is your bet?\n";
             std::cin >> aPlayer.bet;
