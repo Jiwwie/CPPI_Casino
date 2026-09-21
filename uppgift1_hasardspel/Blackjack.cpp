@@ -8,7 +8,7 @@
 
 int Blackjack::myTotalEarnings = 0;
 
-int Blackjack::DrawCard(int aMin, int aMax)
+int Blackjack::DrawCard(int aMin, int aMax) const
 {
     std::random_device seed;
     std::mt19937 rndEngine(seed());

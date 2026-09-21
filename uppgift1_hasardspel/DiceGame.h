@@ -11,11 +11,11 @@ class DiceGame
 			SetMaxBet(aMax);
 		}
 
-		int GetTotalEarnings();
+		int GetTotalEarnings() const;
 		void SetMinBet(int aMin);
 		void SetMaxBet(int aMax);
 
-		void RollDice(Misc::Random& aDie, int aMin, int aMax);
+		void RollDice(Misc::Random& aDie, int aMin, int aMax) const;
 		void PlayDiceGame(Player::PlayerData& aPlayer, int someStats[]);	
 
 	private:

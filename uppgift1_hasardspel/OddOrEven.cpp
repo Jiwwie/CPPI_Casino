@@ -8,7 +8,7 @@
 
 int OddEven::myTotalEarnings = 0;
 
-void OddEven::RollDice(Misc::Random& aDie, int aMin, int aMax)
+void OddEven::RollDice(Misc::Random& aDie, int aMin, int aMax) const
 {
     std::random_device seed;
     std::mt19937 rndEngine(seed());

@@ -5,7 +5,7 @@
 class RPS
 {
 	public:
-		void RollRPS(Misc::Random& aRPS, int aMin, int aMax);
+		void RollRPS(Misc::Random& aRPS, int aMin, int aMax) const;
 		void PlayRPS(Player::PlayerData& aPlayer, int someStats[]);
 
 	private:

@@ -8,7 +8,7 @@
 
 int Roulette::myTotalEarnings = 0;
 
-void Roulette::InitializeWheel(int aWheel[wheelSize][colSize])
+void Roulette::InitializeWheel(int aWheel[wheelSize][colSize]) const
 {
 	const int color = 1;
 
@@ -56,7 +56,7 @@ void Roulette::InitializeWheel(int aWheel[wheelSize][colSize])
 	aWheel[36][color] = Color_Red;
 }
 
-void Roulette::GetColumn(int aWheel[wheelSize][colSize], int aColumn)
+void Roulette::GetColumn(int aWheel[wheelSize][colSize], int aColumn) const
 { 
 	Misc::Const consts = {};
 
@@ -68,7 +68,7 @@ void Roulette::GetColumn(int aWheel[wheelSize][colSize], int aColumn)
 	std::cout << "\n";
 }
 
-void Roulette::SpinBall(Misc::Random& aBall, int aMin, int aMax)
+void Roulette::SpinBall(Misc::Random& aBall, int aMin, int aMax) const
 {
 	std::random_device seed;
 	std::mt19937 rndEngine(seed());

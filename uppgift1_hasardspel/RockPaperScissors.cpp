@@ -8,7 +8,7 @@
 
 int RPS::myTotalEarnings = 0;
 
-void RPS::RollRPS(Misc::Random& aRPS, int aMin, int aMax)
+void RPS::RollRPS(Misc::Random& aRPS, int aMin, int aMax) const
 {
 	std::random_device seed;
 	std::mt19937 rndEngine(seed());

@@ -8,7 +8,7 @@
 
 int DiceGame::myTotalEarnings = 0;
 
-int DiceGame::GetTotalEarnings()
+int DiceGame::GetTotalEarnings() const
 {
     return myTotalEarnings;
 }
@@ -23,7 +23,7 @@ void DiceGame::SetMaxBet(int aMax)
     myMaxBet = aMax;
 }
 
-void DiceGame::RollDice(Misc::Random& aDie, int aMin, int aMax)
+void DiceGame::RollDice(Misc::Random& aDie, int aMin, int aMax) const
 {
     std::random_device seed;
     std::mt19937 rndEngine(seed());
