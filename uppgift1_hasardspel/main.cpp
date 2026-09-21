@@ -9,7 +9,16 @@ int main()
     Casino casino;
 
     bool validName = false;
-    char readName[17] = {'\0'};
+    int nameLength = 0;
+    char readName[17] = {0};
+
+    for (int i = 0; i < sizeof(readName); i++)
+    {
+        if (readName[i] == '\0')
+        {
+            nameLength = i;
+        }
+    }
 
     do
     {
@@ -19,7 +28,7 @@ int main()
         std::cout << "Enter your name: ";
         std::cin.get(readName, 17);
 
-        for (int i = 0; i < sizeof(readName); i++)
+        for (int i = 0; i < nameLength; i++)
         {
             if (readName[i] == '\0' && i < 2)
             {
