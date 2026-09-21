@@ -8,10 +8,17 @@ int main()
 	Player::PlayerData player = {};
     Casino casino;
 
-    char readName[17];
+    bool validName = false;
+    char readName[];
 
-    std::cout << "What's your name?\n";
-    std::cin.get(readName, 17);
+    do
+    {
+        std::cout << "Enter your name: ";
+        std::cin.get(readName, 17);
+        std::cout << sizeof(readName) << '\n';
+        system("pause");
+
+    } while (validName);
 
     const char* username = readName;
 
