@@ -9,7 +9,7 @@ int main()
     Casino casino;
 
     bool validName = false;
-    char readName[];
+    char readName[17];
 
     do
     {
