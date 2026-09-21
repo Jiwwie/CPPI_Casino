@@ -8,6 +8,21 @@
 
 int DiceGame::myTotalEarnings = 0;
 
+int DiceGame::GetTotalEarnings()
+{
+    return myTotalEarnings;
+}
+
+void DiceGame::SetMinBet(int aMin)
+{
+    myMinBet = aMin;
+}
+
+void DiceGame::SetMaxBet(int aMax)
+{
+    myMaxBet = aMax;
+}
+
 void DiceGame::RollDice(Misc::Random& aDie, int aMin, int aMax)
 {
     std::random_device seed;

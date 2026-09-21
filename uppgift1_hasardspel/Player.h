@@ -4,6 +4,8 @@ namespace Player
 {
 	struct PlayerData
 	{
+		char username[17];
+
 		int input = -1;
 
 		int wallet = 1000;
@@ -13,6 +15,11 @@ namespace Player
 		bool playing = true;
 		bool banned = false;
 	};
+
+	void GetUsername()
+	{
+
+	}
 
     void ClearInputBuffer();
     int GetPlayerNum(int aPlayerNum, int aMax, int aMin);
