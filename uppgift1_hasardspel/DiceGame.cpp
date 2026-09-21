@@ -56,11 +56,22 @@ void DiceGame::PlayDiceGame(Player::PlayerData& aPlayer, int someStats[])
         {
             SetMaxBet(aPlayer.wallet);
         }
+        else if (aPlayer.wallet > myMaxBet && myMinBet > 1)
+        {
+            myMaxBet = aPlayer.wallet;
+        }
 
         std::cout << "\n====================================\n";
         std::cout << "The figure approaches you and opens its hand.\n";
         std::cout << "You have " << aPlayer.wallet << "kr\n";
-        std::cout << "You can bet between " << myMinBet << "-" << myMaxBet << " How much will you bet? \n";
+        if (myMinBet == aPlayer.wallet)
+        {
+            std::cout << "You can bet " << myMinBet << "kr. No more, no less.\n";
+        }
+        else
+        {
+            std::cout << "You can bet between " << myMinBet << "-" << myMaxBet << " How much will you bet? \n";
+        }
 
         std::cin >> aPlayer.bet;
         while (aPlayer.bet > myMaxBet || aPlayer.bet < myMinBet || std::cin.fail())
@@ -115,7 +126,7 @@ void DiceGame::PlayDiceGame(Player::PlayerData& aPlayer, int someStats[])
         else
         {
             Player::UpdatePlayerWallet(aPlayer, '-');
-            std::cout << "\nYou watch as your " << aPlayer.bet << "kr dissappear under the table\n";
+            std::cout << "\nYou watch as your " << aPlayer.bet << "kr disappear under the table\n";
             std::cout << "New balance: " << aPlayer.wallet << "kr \n\n";
             myTotalEarnings -= aPlayer.bet;
 

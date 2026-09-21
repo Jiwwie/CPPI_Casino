@@ -166,61 +166,61 @@ namespace GameFunctions
 
             switch (menuChoice)
             {
-            case MenuChoice_PlayGame:
-            {
-                startGame = true;
-                menu = false;
-                break;
-            }
-            case MenuChoice_ShowRules:
-            {
-                system("cls");
-                std::cout << "RULES:\n";
-                if (aGameNum == Rules_DiceGame)
+                case MenuChoice_PlayGame:
                 {
-                    std::cout << "1. Guess any number between 2-12\n";
-                    std::cout << "2. Two six-sided dice are rolled\n";
-                    std::cout << "3. If you guessed the sum, you win\n\n";
+                    startGame = true;
+                    menu = false;
+                    break;
                 }
-                else if (aGameNum == Rules_OddOrEven)
+                case MenuChoice_ShowRules:
                 {
-                    std::cout << "1. Place your bet, odd or even\n";
-                    std::cout << "2. Two six-sided dice are rolled\n";
-                    std::cout << "3. If both sides show odd/even, you win\n";
-                    std::cout << "3. Winning multiple times in a row will increase your reward multiplier\n\n\n";
-                }
-                else if (aGameNum == Rules_Blackjack)
-                {
-                    std::cout << "1. The deck contains cards with values 1-11.\n";
-                    std::cout << "2. Hit to draw a card, stand to end round.\n";
-                    std::cout << "3. Each card after your third increases reward.\n";
-                    std::cout << "3. If your sum oversteps 21, you lose.\n\n\n";
-                }
-                else if (aGameNum == Rules_RockPaperScissor)
-                {
-                    std::cout << "1. Choose rock, paper, or scissors\n";
-                    std::cout << "2. The figure will too...\n";
-                    std::cout << "3. Rock beats scissors, scissors beats paper, paper beats rock\n\n\n";
-                }
-                else if (aGameNum == Rules_Roulette)
-                {
-                    std::cout << "1. Place your bet on a number, color, or range\n";
-                    std::cout << "2. The wheel is spun and a random number is selected\n";
-                    std::cout << "3. If your bet matches the outcome, you win\n\n\n";
-                }
-                system("pause");
-                break;
+                    system("cls");
+                    std::cout << "RULES:\n";
+                    if (aGameNum == Rules_DiceGame)
+                    {
+                        std::cout << "1. Guess any number between 2-12\n";
+                        std::cout << "2. Two six-sided dice are rolled\n";
+                        std::cout << "3. If you guessed the sum, you win\n\n";
+                    }
+                    else if (aGameNum == Rules_OddOrEven)
+                    {
+                        std::cout << "1. Place your bet, odd or even\n";
+                        std::cout << "2. Two six-sided dice are rolled\n";
+                        std::cout << "3. If both sides show odd/even, you win\n";
+                        std::cout << "3. Winning multiple times in a row will increase your reward multiplier\n\n\n";
+                    }
+                    else if (aGameNum == Rules_Blackjack)
+                    {
+                        std::cout << "1. The deck contains cards with values 1-11.\n";
+                        std::cout << "2. Hit to draw a card, stand to end round.\n";
+                        std::cout << "3. Each card after your third increases reward.\n";
+                        std::cout << "3. If your sum oversteps 21, you lose.\n\n\n";
+                    }
+                    else if (aGameNum == Rules_RockPaperScissor)
+                    {
+                        std::cout << "1. Choose rock, paper, or scissors\n";
+                        std::cout << "2. The figure will too...\n";
+                        std::cout << "3. Rock beats scissors, scissors beats paper, paper beats rock\n\n\n";
+                    }
+                    else if (aGameNum == Rules_Roulette)
+                    {
+                        std::cout << "1. Place your bet on a number, color, or range\n";
+                        std::cout << "2. The wheel is spun and a random number is selected\n";
+                        std::cout << "3. If your bet matches the outcome, you win\n\n\n";
+                    }
+                    system("pause");
+                    break;
 
-            }
-            case MenuChoice_BackToMain:
-            {
-                menu = false;
-                break;
-            }
-            default:
-            {
-                break;
-            }
+                }
+                case MenuChoice_BackToMain:
+                {
+                    menu = false;
+                    break;
+                }
+                default:
+                {
+                    break;
+                }
             }
         }
         return startGame;

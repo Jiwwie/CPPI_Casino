@@ -54,10 +54,12 @@ void Casino::GetMainMenu(Player::PlayerData& player)
                 case 1: 
                 {
                     myDiceGameLow.PlayDiceGame(player, stats);
+                    break;
                 }
                 case 2:
                 {
                     myDiceGameHigh.PlayDiceGame(player, stats);
+                    break;
                 }
                 default:
                     break;

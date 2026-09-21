@@ -146,7 +146,7 @@ void OddEven::PlayOddOrEven(Player::PlayerData& aPlayer, int someStats[])
             }
             else
             {
-                std::cout << "\nYou watch as your " << aPlayer.bet << "kr dissappear under the table\n";
+                std::cout << "\nYou watch as your " << aPlayer.bet << "kr disappear under the table\n";
                 std::cout << "New balance: " << aPlayer.wallet << "kr \n\n";
                 Statistics::UpdateStatistics(Statistics::GameResult_Loss, someStats);
                 myTotalEarnings -= aPlayer.bet;
