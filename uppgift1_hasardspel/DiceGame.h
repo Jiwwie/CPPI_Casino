@@ -5,29 +5,18 @@
 class DiceGame
 {
 	public:
-		DiceGame(int aMin, int aMax) 
+		DiceGame(int aMin, int aMax)
 		{
 			SetMinBet(aMin);
 			SetMaxBet(aMax);
 		}
 
+		int GetTotalEarnings();
+		void SetMinBet(int aMin);
+		void SetMaxBet(int aMax);
+
 		void RollDice(Misc::Random& aDie, int aMin, int aMax);
 		void PlayDiceGame(Player::PlayerData& aPlayer, int someStats[]);	
-
-		int GetTotalEarnings()
-		{
-			return myTotalEarnings;
-		}
-
-		void SetMinBet(int aMin)
-		{
-			myMinBet = aMin;
-		}
-
-		void SetMaxBet(int aMax)
-		{
-			myMaxBet = aMax;
-		}
 
 	private:
 		static int myTotalEarnings;
