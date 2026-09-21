@@ -34,7 +34,7 @@ void DiceGame::PlayDiceGame(Player::PlayerData& aPlayer, int someStats[])
             system("pause");
             break;
         }
-        else if (!(diceGame = GameFunctions::GetGameMenu(Misc::Game_DiceGame, myTotalEarnings, aPlayer.wallet, aPlayer.betMult)))
+        else if (!(diceGame = GameFunctions::GetGameMenu(Misc::Game_DiceGame, myTotalEarnings, aPlayer)))
         {
             break;
         }
@@ -47,18 +47,9 @@ void DiceGame::PlayDiceGame(Player::PlayerData& aPlayer, int someStats[])
         if (aPlayer.wallet < myMinBet)
         {
             system("cls");
-            std::cout << "\nYou dont have enough kr to play. (minimum " << myMinBet << ")\n\n";
+            std::cout << "\nYou dont have enough kr to play. (minimum " << myMinBet << "kr)\n\n";
             system("pause");
             break;
-        }
-
-        if (aPlayer.wallet < myMaxBet && aPlayer.wallet > myMinBet)
-        {
-            SetMaxBet(aPlayer.wallet);
-        }
-        else if (aPlayer.wallet > myMaxBet && myMinBet > 1)
-        {
-            myMaxBet = aPlayer.wallet;
         }
 
         std::cout << "\n====================================\n";
@@ -74,7 +65,7 @@ void DiceGame::PlayDiceGame(Player::PlayerData& aPlayer, int someStats[])
         }
 
         std::cin >> aPlayer.bet;
-        while (aPlayer.bet > myMaxBet || aPlayer.bet < myMinBet || std::cin.fail())
+        while (aPlayer.bet > myMaxBet || aPlayer.bet > aPlayer.wallet || aPlayer.bet < myMinBet || std::cin.fail())
         {
             Player::ClearInputBuffer();
             system("cls");
@@ -85,6 +76,11 @@ void DiceGame::PlayDiceGame(Player::PlayerData& aPlayer, int someStats[])
             else if (aPlayer.bet < myMinBet)
             {
                 std::cout << "\nYou need to bet more. Give a number between " << myMinBet << "-" << myMaxBet << '\n';
+            }
+            else
+            {
+                std::cout << "\nGive a number between " << myMinBet << "-" << myMaxBet << '\n';
+
             }
             std::cout << "You have " << aPlayer.wallet << "kr. What is your bet?\n";
             std::cin >> aPlayer.bet;

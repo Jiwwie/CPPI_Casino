@@ -123,7 +123,7 @@ namespace GameFunctions
         }
     }
 
-    int GetGameMenu(int aGameNum, int aTotalEarnings, int aPlayerWallet, int aRewardMult)
+    int GetGameMenu(int aGameNum, int aTotalEarnings, Player::PlayerData& aPlayer)
     {
         const int maxMenu = 3;
         const int minMenu = 1;
@@ -151,8 +151,8 @@ namespace GameFunctions
         {
 
             system("cls");
-            std::cout << "You have " << aPlayerWallet << "kr \n";
-            std::cout << "Reward multiplier: X" << aRewardMult << "\n";
+            std::cout << "You have " << aPlayer.wallet << "kr \n";
+            std::cout << "Reward multiplier: X" << aPlayer.betMult << "\n";
             TotalEarningsMessage(aTotalEarnings);
 
             std::cout << "\n\nGAME MENU\n";

@@ -4,10 +4,10 @@ namespace Player
 {
 	struct PlayerData
 	{
-		int input;
+		int input = -1;
 
 		int wallet = 1000;
-		int bet;
+		int bet = -1;
 		int betMult = 2;
 		
 		bool playing = true;

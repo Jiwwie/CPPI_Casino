@@ -98,7 +98,7 @@ void Roulette::PlayRoulette(Player::PlayerData& aPlayer, int someStats[])
 			system("pause");
 			break;
 		}
-		else if (!(roulette = GameFunctions::GetGameMenu(Misc::Game_Roulette, myTotalEarnings, aPlayer.wallet, aPlayer.betMult)))
+		else if (!(roulette = GameFunctions::GetGameMenu(Misc::Game_Roulette, myTotalEarnings, aPlayer)))
 		{
 			break;
 		}

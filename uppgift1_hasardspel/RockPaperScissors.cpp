@@ -38,7 +38,7 @@ void RPS::PlayRPS(Player::PlayerData& aPlayer, int someStats[])
             system("pause");
             break;
         }
-        else if (!(rockPaperScissors = GameFunctions::GetGameMenu(Misc::Game_RockPaperScissors, myTotalEarnings, aPlayer.wallet, aPlayer.betMult)))
+        else if (!(rockPaperScissors = GameFunctions::GetGameMenu(Misc::Game_RockPaperScissors, myTotalEarnings, aPlayer)))
         {
             break;
         }

@@ -41,7 +41,7 @@ void Blackjack::PlayBlackjack(Player::PlayerData& aPlayer, int someStats[])
             system("pause");
             break;
         }
-        else if (!(blackjack = GameFunctions::GetGameMenu(Misc::Game_Blackjack, myTotalEarnings, aPlayer.wallet, aPlayer.betMult)))
+        else if (!(blackjack = GameFunctions::GetGameMenu(Misc::Game_Blackjack, myTotalEarnings, aPlayer)))
         {
             break;
         }
