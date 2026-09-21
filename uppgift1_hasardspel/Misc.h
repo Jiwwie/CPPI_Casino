@@ -27,6 +27,11 @@ namespace Misc
 		const int HIGH_STAKES_MULT = 3;
 		const int STRAIGHT_MULT = 30;
 
+		const int LOW_STAKES_MIN = 1;
+		const int LOW_STAKES_MAX = 500;
+		const int HIGH_STAKES_MIN = 500;
+		const int HIGH_STAKES_MAX = 10000;
+
 		const int DICE_MIN_GUESS = 2;
 		const int DICE_MAX_GUESS = 12;
 		const int DICE_MIN_VAL = 1;

@@ -44,12 +44,41 @@ void DiceGame::PlayDiceGame(Player::PlayerData& aPlayer, int someStats[])
         GameFunctions::ShowGameIntro(Misc::Game_DiceGame, aPlayer.wallet, aPlayer.betMult);
         GameFunctions::TotalEarningsMessage(myTotalEarnings);
 
-        if (aPlayer.wallet < myMaxBet)
+        if (aPlayer.wallet < myMinBet)
+        {
+            system("cls");
+            std::cout << "\nYou dont have enough kr to play. (minimum " << myMinBet << ")\n\n";
+            system("pause");
+            break;
+        }
+
+        if (aPlayer.wallet < myMaxBet && aPlayer.wallet > myMinBet)
         {
             SetMaxBet(aPlayer.wallet);
         }
 
-        Player::GetPlayerBet(aPlayer, myMaxBet, myMinBet);
+        std::cout << "\n====================================\n";
+        std::cout << "The figure approaches you and opens its hand.\n";
+        std::cout << "You have " << aPlayer.wallet << "kr\n";
+        std::cout << "You can bet between " << myMinBet << "-" << myMaxBet << " How much will you bet? \n";
+
+        std::cin >> aPlayer.bet;
+        while (aPlayer.bet > myMaxBet || aPlayer.bet < myMinBet || std::cin.fail())
+        {
+            Player::ClearInputBuffer();
+            system("cls");
+            if (aPlayer.bet > myMaxBet)
+            {
+                std::cout << "\nYou can't bet that much. Give a number between " << myMinBet << "-" << myMaxBet << '\n';
+            }
+            else if (aPlayer.bet < myMinBet)
+            {
+                std::cout << "\nYou need to bet more. Give a number between " << myMinBet << "-" << myMaxBet << '\n';
+            }
+            std::cout << "You have " << aPlayer.wallet << "kr. What is your bet?\n";
+            std::cin >> aPlayer.bet;
+        }
+        Player::ClearInputBuffer();
 
         system("cls");
         std::cout << "\nThe figure accepts your offer. \n";

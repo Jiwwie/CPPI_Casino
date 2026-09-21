@@ -31,6 +31,6 @@ class DiceGame
 
 	private:
 		static int myTotalEarnings;
-		int myMinBet = 1;
-		int myMaxBet = 1000;
+		int myMinBet = 0;
+		int myMaxBet = 0;
 };

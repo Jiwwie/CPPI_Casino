@@ -17,11 +17,14 @@ class Casino
 		void GetMainMenu(Player::PlayerData& player);
 
 	private:
+		Misc::Const consts;
+
 		Blackjack myBlackjack;
-		DiceGame myDiceGameLow{1, 500};
-		DiceGame myDiceGameHigh{500, 1000};
+		DiceGame myDiceGameLow{consts.LOW_STAKES_MIN, consts.LOW_STAKES_MAX};
+		DiceGame myDiceGameHigh{consts.HIGH_STAKES_MIN, consts.HIGH_STAKES_MAX};
 		OddEven myOddOrEven;
 		RPS myRockPaperScissors;
 		Roulette myRoulette;
+
 };
 
