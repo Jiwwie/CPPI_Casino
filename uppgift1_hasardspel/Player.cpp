@@ -27,7 +27,6 @@ namespace Player
             break;
         }
     }
-
    
     int GetPlayerNum(int aPlayerNum, int aMax, int aMin)
     {

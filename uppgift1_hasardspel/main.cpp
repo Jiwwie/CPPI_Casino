@@ -3,18 +3,33 @@
 #include "Player.h"
 #include "Casino.h"
 
+const char* GetUsername();
+
 int main()
 {
 	Player::PlayerData player = {};
     Casino casino;
 
+    GetUsername();
+
+    system("cls");
+    std::cout << "Welcome " << GetUsername() << '\n';
+    system("pause");
+
+
+    casino.GetMainMenu(player);
+}
+
+const char* GetUsername()
+{
     static bool validName = false;
     const int arrayLength = 18;
 
-    char readName[arrayLength] = {0};
+    static char readName[arrayLength] = { 0 };
+    
     int nameLength = 0;
 
-    while(!validName)
+    while (!validName)
     {
         validName = true;
         system("cls");
@@ -29,7 +44,7 @@ int main()
                 validName = false;
                 break;
             }
-            else if (readName[i] == '\0' && i >= arrayLength-1)
+            else if (readName[i] == '\0' && i >= arrayLength - 1)
             {
                 std::cout << "name too long" << '\n';
                 validName = false;
@@ -39,19 +54,27 @@ int main()
             if (readName[i] == '\0')
             {
                 nameLength = i;
-                std::cout << nameLength << '\n';
+                //std::cout << nameLength << '\n';
                 break;
             }
         }
 
         for (int i = 0; i < nameLength; i++)
         {
-            if ((readName[i] > 'z' || readName[i] < 'A') && readName[i] != '\0')
+            if ((readName[i] > 'z' || readName[i] < 'a') && readName[i] != '\0')
             {
-                std::cout << "invalid character." << '\n';
-                validName = false;
-                break;
+                if ((readName[i] > 'Z' || readName[i] < 'A'))
+                {
+                    std::cout << "invalid character." << '\n';
+                    validName = false;
+                    break;
+                }
             }
+        }
+
+        if (validName == true)
+        {
+            std::cout << "Username accepted. " << '\n';
         }
 
         system("pause");
@@ -59,10 +82,5 @@ int main()
         std::cin.ignore(10000, '\n');
     }
 
-    system("cls");
-    std::cout << "Welcome " << '\n';
-    system("pause");
-
-
-    casino.GetMainMenu(player);
+    return readName;
 }
