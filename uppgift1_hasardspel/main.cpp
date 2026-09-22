@@ -8,60 +8,59 @@ int main()
 	Player::PlayerData player = {};
     Casino casino;
 
-    bool validName = false;
+    static bool validName = false;
+    const int arrayLength = 18;
+
+    char readName[arrayLength] = {0};
     int nameLength = 0;
-    char readName[17] = {0};
 
-    for (int i = 0; i < sizeof(readName); i++)
+    while(!validName)
     {
-        if (readName[i] == '\0')
-        {
-            nameLength = i;
-        }
-    }
-
-    do
-    {
-        validName = false;
+        validName = true;
         system("cls");
-        Player::ClearInputBuffer();
         std::cout << "Enter your name: ";
-        std::cin.get(readName, 17);
+        std::cin.get(readName, arrayLength);
 
-        for (int i = 0; i < nameLength; i++)
+        for (int i = 0; i < arrayLength; i++)
         {
             if (readName[i] == '\0' && i < 2)
             {
                 std::cout << "name too short" << '\n';
+                validName = false;
                 break;
             }
-            else if (readName[i] == '\0')
-            {
-                validName = true;
-            }
-
-            if (readName[i] != '\0' && i == 16)
+            else if (readName[i] == '\0' && i >= arrayLength-1)
             {
                 std::cout << "name too long" << '\n';
+                validName = false;
                 break;
             }
 
+            if (readName[i] == '\0')
+            {
+                nameLength = i;
+                std::cout << nameLength << '\n';
+                break;
+            }
+        }
+
+        for (int i = 0; i < nameLength; i++)
+        {
             if ((readName[i] > 'z' || readName[i] < 'A') && readName[i] != '\0')
             {
-                validName = false;
                 std::cout << "invalid character." << '\n';
+                validName = false;
                 break;
             }
         }
 
         system("pause");
-
-    } while (!validName);
-
-    const char* username = readName;
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+    }
 
     system("cls");
-    std::cout << "Welcome " << username << '\n';
+    std::cout << "Welcome " << '\n';
     system("pause");
 
 
