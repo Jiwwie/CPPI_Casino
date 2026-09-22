@@ -16,6 +16,7 @@ namespace Player
 		bool banned = false;
 	};
 
+	const char* GetUsername();
     void ClearInputBuffer();
     int GetPlayerNum(int aPlayerNum, int aMax, int aMin);
 	void GetPlayerBet(Player::PlayerData& aPlayer, int aMax, int aMin);
