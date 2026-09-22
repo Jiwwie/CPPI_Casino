@@ -138,7 +138,8 @@ void OddEven::PlayOddOrEven(Player::PlayerData& aPlayer, int someStats[])
             {
                 std::cout << "\nYou watch as your " << aPlayer.bet << "kr slip away from you...\n";
                 std::cout << "New balance: " << aPlayer.wallet << "kr \n\n";
-                std::cout << "\nJust as you gambled away your last kr, you were suddenly dragged out of the casino. \nDetermination won't help you this time\n\n\n";
+                std::cout << "\nJust as you gambled away your last kr, you were suddenly dragged out of the casino.\n";
+                std::cout << Player::GetUsername() << "! Stay determined! The casino will let you back in next CSN.\n\n\n";
                 system("pause");
                 aPlayer.playing = false;
                 oddOrEven = false;
@@ -150,7 +151,7 @@ void OddEven::PlayOddOrEven(Player::PlayerData& aPlayer, int someStats[])
                 std::cout << "New balance: " << aPlayer.wallet << "kr \n\n";
                 Statistics::UpdateStatistics(Statistics::GameResult_Loss, someStats);
                 myTotalEarnings -= aPlayer.bet;
-                std::cout << "\nYou're having a bad time... Stay determined.\n\n";
+                std::cout << "\nYou're having a bad time... "  << Player::GetUsername() <<  "! Stay determined.\n\n";
                 system("pause");
                 Statistics::ShowStatistics(someStats);
             }

@@ -175,7 +175,8 @@ void RPS::PlayRPS(Player::PlayerData& aPlayer, int someStats[])
 
 		if (aPlayer.wallet <= 0)
 		{
-			std::cout << "\nJust as you gambled away your last kr, you were suddenly dragged out of the casino. \nDetermination won't help you this time\n\n\n";
+			std::cout << "\nJust as you gambled away your last kr, you were suddenly dragged out of the casino.\n";
+			std::cout << Player::GetUsername() << "! Stay determined! The casino will let you back in next CSN.\n\n\n";
 			aPlayer.playing = false;
 			rockPaperScissors = false;
 			system("pause");

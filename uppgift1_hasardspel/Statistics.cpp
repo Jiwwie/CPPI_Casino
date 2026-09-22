@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Player.h"
 
 namespace Statistics
 {
@@ -40,7 +41,7 @@ namespace Statistics
     {
         system("cls");
         std::cout << "======================" << std::endl;
-        std::cout << "Recent game logs:" << std::endl;
+        std::cout << Player::GetUsername() << "'s game logs:" << std::endl;
         WriteStat(0, someStats);
         WriteStat(1, someStats);
         WriteStat(2, someStats);

@@ -16,7 +16,7 @@ namespace GameFunctions
         std::cout << " On days like these,\n";
         std::cout << " Kids like you should be spending your CSN\"\n\n";
 
-        std::cout << "What do you want to do? (1-5) " << std::endl;
+        std::cout << "Hi " << Player::GetUsername() << "! What do you want to do? (1-5) " << std::endl;
         std::cout << "1. Dice Game" << std::endl;
         std::cout << "2. Odd or Even" << std::endl;
         std::cout << "3. Blackjack (lite)" << std::endl;
@@ -42,6 +42,7 @@ namespace GameFunctions
         std::cout << "||       CASINO        ||\n";
         std::cout << " =======================\n\n";
 
+        std::cout << "You are " << Player::GetUsername() << '\n';
         std::cout << "You have " << aPlayerWallet << "kr \n";
         std::cout << "Reward multiplier: X" << aRewardMult << "\n\n";
 
@@ -161,7 +162,7 @@ namespace GameFunctions
             std::cout << "3. Back to main menu\n";
             std::cout << "===================================\n\n";
 
-            std::cout << "What will you do? ";
+            std::cout << Player::GetUsername() << ". What will you do? ";
             menuChoice = Player::GetPlayerNum(menuChoice, maxMenu, minMenu);
 
             switch (menuChoice)

@@ -63,6 +63,7 @@ void Blackjack::PlayBlackjack(Player::PlayerData& aPlayer, int someStats[])
         {
             std::cout << "\n***HIGH STAKES***\n";
             std::cout << "Betting your whole wallet fills you with determination.\n";
+            std::cout << "Your name is" << Player::GetUsername() << ".\n";
         }
         std::cout << "_______________________________ \n";
         system("pause");
@@ -107,7 +108,8 @@ void Blackjack::PlayBlackjack(Player::PlayerData& aPlayer, int someStats[])
                     myTotalEarnings -= aPlayer.bet;
                     if (aPlayer.wallet <= 0)
                     {
-                        std::cout << "\nJust as you gambled away your last kr, you were suddenly dragged out of the casino. \nDetermination won't help you this time\n\n\n";
+                        std::cout << "\nJust as you gambled away your last kr, you were suddenly dragged out of the casino.\n";
+                        std::cout << Player::GetUsername() << "! Stay determined! The casino will let you back in next CSN.\n\n\n";
                         aPlayer.playing = false;
                         drawingCards = false;
                         blackjack = false;

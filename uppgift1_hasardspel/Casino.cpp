@@ -94,7 +94,7 @@ void Casino::GetMainMenu(Player::PlayerData& player)
         case MainMenu_LeaveCasino:
         {
             system("cls");
-            std::cout << "\nYou left the casino with " << player.wallet << "kr to your name.\n\n\n";
+            std::cout << Player::GetUsername() << "\n left the casino with " << player.wallet << "kr.\n\n\n";
             system("pause");
             player.playing = false;
             break;
