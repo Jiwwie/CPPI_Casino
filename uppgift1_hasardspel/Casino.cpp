@@ -11,7 +11,7 @@
 #include "GameFunctions.h"
 #include "Statistics.h"
 
-void Casino::GetMainMenu(Player::PlayerData& player)
+void Casino::GetMainMenu(Player::PlayerData& aPlayer)
 {
     enum MainMenu
     {
@@ -34,7 +34,7 @@ void Casino::GetMainMenu(Player::PlayerData& player)
     };
 
     int activeGame = 0;
-    while (player.playing)
+    while (aPlayer.playing)
     {
         GameFunctions::ShowMainMenuText();
         std::cin >> activeGame;
@@ -48,17 +48,17 @@ void Casino::GetMainMenu(Player::PlayerData& player)
             std::cout << "1. Low\n";
             std::cout << "2. High\n";
 
-            player.input = Player::GetPlayerNum(player.input, 2, 1);
-            switch (player.input)
+            aPlayer.input = Player::GetPlayerNum(aPlayer.input, 2, 1);
+            switch (aPlayer.input)
             {
                 case 1: 
                 {
-                    myDiceGameLow.PlayDiceGame(player, stats);
+                    myDiceGameLow.PlayDiceGame(aPlayer, stats);
                     break;
                 }
                 case 2:
                 {
-                    myDiceGameHigh.PlayDiceGame(player, stats);
+                    myDiceGameHigh.PlayDiceGame(aPlayer, stats);
                     break;
                 }
                 default:
@@ -68,22 +68,22 @@ void Casino::GetMainMenu(Player::PlayerData& player)
         }
         case MainMenu_OddOrEven:
         {
-            myOddOrEven.PlayOddOrEven(player, stats);
+            myOddOrEven.PlayOddOrEven(aPlayer, stats);
             break;
         }
         case MainMenu_Blackjack:
         {
-            myBlackjack.PlayBlackjack(player, stats);
+            myBlackjack.PlayBlackjack(aPlayer, stats);
             break;
         }
         case MainMenu_RockPaperScissors:
         {
-            myRockPaperScissors.PlayRPS(player, stats);
+            myRockPaperScissors.PlayRPS(aPlayer, stats);
             break;
         }
         case MainMenu_Roulette:
         {
-            myRoulette.PlayRoulette(player, stats);
+            myRoulette.PlayRoulette(aPlayer, stats);
             break;
         }
         case MainMenu_Statistics:
@@ -94,9 +94,9 @@ void Casino::GetMainMenu(Player::PlayerData& player)
         case MainMenu_LeaveCasino:
         {
             system("cls");
-            std::cout << Player::GetUsername() << "\n left the casino with " << player.wallet << "kr.\n\n\n";
+            std::cout << Player::GetUsername() << "\n left the casino with " << aPlayer.wallet << "kr.\n\n\n";
             system("pause");
-            player.playing = false;
+            aPlayer.playing = false;
             break;
         }
         default:

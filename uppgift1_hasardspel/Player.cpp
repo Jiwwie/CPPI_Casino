@@ -36,7 +36,6 @@ namespace Player
                 if (readName[i] == '\0')
                 {
                     nameLength = i;
-                    //std::cout << nameLength << '\n';
                     break;
                 }
             }
