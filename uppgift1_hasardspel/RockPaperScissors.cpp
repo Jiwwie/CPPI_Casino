@@ -31,6 +31,17 @@ void RPS::PlayRPS(Player::PlayerData& aPlayer, int someStats[])
 
 	while (rockPaperScissors)
 	{
+		if (myFirst == true)
+		{
+			system("cls");
+			std::cout << "1. Choose rock, paper, or scissors\n";
+			std::cout << "2. The figure will too...\n";
+			std::cout << "3. Rock beats scissors, scissors beats paper, paper beats rock\n\n\n";
+			system("pause");
+			system("cls");
+			SetMyFirst();
+		}
+
         if (!(rockPaperScissors = Player::CheckIfBanned(myTotalEarnings)))
         {
             system("cls");

@@ -34,6 +34,18 @@ void Blackjack::PlayBlackjack(Player::PlayerData& aPlayer, int someStats[])
 
     while (blackjack)
     {
+        if (myFirst == true)
+        {
+            system("cls");
+            std::cout << "1. The deck contains cards with values 1-11.\n";
+            std::cout << "2. Hit to draw a card, stand to end round.\n";
+            std::cout << "3. Each card after your third increases reward.\n";
+            std::cout << "3. If your sum oversteps 21, you lose.\n\n\n";
+            system("pause");
+            system("cls");
+            SetMyFirst();
+        }
+
         if (!(blackjack = Player::CheckIfBanned(myTotalEarnings)))
         {
             system("cls");

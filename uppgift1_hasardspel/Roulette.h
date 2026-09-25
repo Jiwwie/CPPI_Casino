@@ -12,9 +12,11 @@ const int colSize = 2;
 			void SpinBall(Misc::Random& aBall, int aMin, int aMax) const;
 			void PlayRoulette(Player::PlayerData& aPlayer, int someStats[]);
 
+			void SetMyFirst() { myFirst = false; }
 
 		private:
 			static int myTotalEarnings;
+			bool myFirst = true;
 
 			enum Color
 			{

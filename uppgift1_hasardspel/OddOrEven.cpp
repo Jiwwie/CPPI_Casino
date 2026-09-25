@@ -36,6 +36,18 @@ void OddEven::PlayOddOrEven(Player::PlayerData& aPlayer, int someStats[])
 
     while (oddOrEven)
     {
+        if (myFirst == true)
+        {
+            system("cls");
+            std::cout << "1. Place your bet, odd or even\n";
+            std::cout << "2. Two six-sided dice are rolled\n";
+            std::cout << "3. If both sides show odd/even, you win\n";
+            std::cout << "3. Winning multiple times in a row will increase your reward multiplier\n\n\n";
+            system("pause");
+            system("cls");
+            SetMyFirst();
+        }
+
         if (!(oddOrEven = Player::CheckIfBanned(myTotalEarnings)))
         {
             system("cls");

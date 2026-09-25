@@ -91,6 +91,17 @@ void Roulette::PlayRoulette(Player::PlayerData& aPlayer, int someStats[])
 		
 	while (roulette)
 	{
+		if (myFirst == true)
+		{
+			system("cls");
+			std::cout << "1. Place your bet on a number, color, or range\n";
+			std::cout << "2. The wheel is spun and a random number is selected\n";
+			std::cout << "3. If your bet matches the outcome, you win\n\n\n";
+			system("pause");
+			system("cls");
+			SetMyFirst();
+		}
+
 		if (!(roulette = Player::CheckIfBanned(myTotalEarnings)))
 		{
 			system("cls");

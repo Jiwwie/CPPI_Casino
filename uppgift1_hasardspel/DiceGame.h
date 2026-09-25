@@ -18,8 +18,11 @@ class DiceGame
 		void RollDice(Misc::Random& aDie, int aMin, int aMax) const;
 		void PlayDiceGame(Player::PlayerData& aPlayer, int someStats[]);	
 
+		void SetMyFirst() { myFirst = false; }
+
 	private:
 		static int myTotalEarnings;
+		bool myFirst = true;
 		int myMinBet = 0;
 		int myMaxBet = 0;
 };

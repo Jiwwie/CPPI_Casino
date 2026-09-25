@@ -42,6 +42,17 @@ void DiceGame::PlayDiceGame(Player::PlayerData& aPlayer, int someStats[])
 
     while (diceGame)
     {
+        if (myFirst == true)
+        {
+            system("cls");
+            std::cout << "1. Guess any number between 2-12\n";
+            std::cout << "2. Two six-sided dice are rolled\n";
+            std::cout << "3. If you guessed the sum, you win\n\n";
+            system("pause");
+            system("cls");
+            SetMyFirst();
+        }
+
         if (!(diceGame = Player::CheckIfBanned(myTotalEarnings)))
         {
             system("cls");
