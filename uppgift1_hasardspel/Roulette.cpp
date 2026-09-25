@@ -61,7 +61,7 @@ void Roulette::GetColumn(int aWheel[wheelSize][colSize], int aColumn) const
 	Misc::Const consts = {};
 
 	std::cout << "Your numbers: \n";
-	for (int i = (0 + aColumn); i < wheelSize; i+=consts.ROULETTE_COL_DISTANCE)
+	for (int i = aColumn; i < wheelSize; i+=consts.ROULETTE_COL_DISTANCE)
 	{
 		std::cout << aWheel[i][0] << " ";
 	}
